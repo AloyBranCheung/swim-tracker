@@ -1,6 +1,7 @@
 Development Notes:
 
 - Use `yarn` for package management
+- Run `./logs.sh` for container logs
 
 Setup:
 
