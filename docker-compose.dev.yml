@@ -9,3 +9,4 @@ services:
       - ./.env.local
     volumes:
       - ./:/app/
+      - /app/node_modules
