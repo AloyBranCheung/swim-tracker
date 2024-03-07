@@ -284,18 +284,6 @@
   dependencies:
     tslib "^2.4.0"
 
-"@tanstack/query-core@5.25.0":
-  version "5.25.0"
-  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.25.0.tgz#e08ed0a9fad34c8005d1a282e57280031ac50cdc"
-  integrity sha512-vlobHP64HTuSE68lWF1mEhwSRC5Q7gaT+a/m9S+ItuN+ruSOxe1rFnR9j0ACWQ314BPhBEVKfBQ6mHL0OWfdbQ==
-
-"@tanstack/react-query@^5.25.0":
-  version "5.25.0"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.25.0.tgz#f4dac794cf10dd956aa56dbbdf67049a5ba2669d"
-  integrity sha512-u+n5R7mLO7RmeiIonpaCRVXNRWtZEef/aVZ/XGWRPa7trBIvGtzlfo0Ah7ZtnTYfrKEVwnZ/tzRCBcoiqJ/tFw==
-  dependencies:
-    "@tanstack/query-core" "5.25.0"
-
 "@testing-library/dom@^9.0.0":
   version "9.3.4"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-9.3.4.tgz#50696ec28376926fec0a1bf87d9dbac5e27f60ce"
@@ -323,26 +311,6 @@
   version "14.5.2"
   resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-14.5.2.tgz#db7257d727c891905947bd1c1a99da20e03c2ebd"
   integrity sha512-YAh82Wh4TIrxYLmfGcixwD18oIjyC1pFQC2Y01F2lzV2HTMiYrI0nze0FD0ocB//CKS/7jIUgae+adPqxK5yCQ==
-
-"@trpc/client@^11.0.0-next-beta.311":
-  version "11.0.0-next-beta.311"
-  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-11.0.0-next-beta.311.tgz#184ab2d2b4f4279d4274f4589d310d5d363dccef"
-  integrity sha512-B0etk3kt2fdFV/flvEjW3ettd9LDf084vQNvY41vyNXeljXUmYix6EnF8AO31yx0Dx9dSf8mic/5q64gX6pFvQ==
-
-"@trpc/next@^11.0.0-next-beta.311":
-  version "11.0.0-next-beta.311"
-  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-11.0.0-next-beta.311.tgz#9de2d0a560ecc62f3d0daf5380766893bf626572"
-  integrity sha512-Tvy4PKFuqB8OTTkhr4skEuTy5FNnypHtiWeu2Hms1c5ysXvaBd7CjQIhcrjxfc1NNlpHJl+6dlStLLgbIgRdnA==
-
-"@trpc/react-query@^11.0.0-next-beta.311":
-  version "11.0.0-next-beta.311"
-  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-11.0.0-next-beta.311.tgz#1ebd916d5ffc7728660b7a1e4b75fbded7eee250"
-  integrity sha512-J+sHi/4A9rOsbCri32aPt9HdO3Z80oSJ2p/JuGQlDUPXFkTV0dmkDnh6m6mzwj9Ct12QRaMe9Z4DT069HbrGGQ==
-
-"@trpc/server@^11.0.0-next-beta.311":
-  version "11.0.0-next-beta.311"
-  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-11.0.0-next-beta.311.tgz#cd1192f185875f75276dc8d1543bb4fba44d75a2"
-  integrity sha512-8NucyaXTpeOJC9qZ9fe6R074tBzlkUMhw4mUPRAFU9OvVZVn/4OT1L0siDxiX5PqxDnNo7ywhDGQPwkhmXFl8A==
 
 "@types/aria-query@^5.0.1":
   version "5.0.4"
