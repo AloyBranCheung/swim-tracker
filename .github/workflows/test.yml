@@ -1,11 +1,11 @@
-name: Lint
+name: Test
 on:
   push:
     branches: [main, master]
   pull_request:
     branches: [main, master]
 jobs:
-  Lint:
+  Test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,4 +17,4 @@ jobs:
       - name: Build
         run: yarn build
       - name: Lint
-        run: yarn lint
+        run: yarn vitest
