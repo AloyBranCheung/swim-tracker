@@ -11,12 +11,13 @@ export default function Navbar() {
       <Gutter>
         <div className="flex justify-between items-center p-2">
           <div>brand logo</div>
-          <Image
+          <a href="/api/auth/logout">Logout</a>
+          {/* <Image
             src="https://cdn-icons-png.flaticon.com/512/1144/1144709.png"
             alt="profile-pic.png"
             width={64}
             height={64}
-          />
+          /> */}
         </div>
       </Gutter>
     </div>
