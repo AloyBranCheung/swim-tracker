@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 import { ClassNameValue, twMerge } from 'tailwind-merge';
 
 interface ButtonProps {
@@ -10,6 +11,6 @@ interface ButtonProps {
 
 export default function Button({ children, onClick, type = 'button', className }: ButtonProps) {
     return (
-        <button className={twMerge('transition-all duration-300 bg-loading-gradient p-2 rounded-2xl shadow-lg text-gray-300 font-medium hover:bg-403-btn-gradient-hover hover:transition-all hover:duration-300', className)} onClick={onClick} type={type}>{children}</button>
+        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} className={twMerge('bg-loading-gradient p-2 rounded-2xl shadow-lg text-gray-300 font-medium hover:bg-403-btn-gradient-hover', className)} onClick={onClick} type={type}>{children}</motion.button>
     )
 }
