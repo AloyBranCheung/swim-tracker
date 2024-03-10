@@ -6,7 +6,7 @@ export default function Page403() {
     <div className="flex justify-center items-center w-[100vw] h-[100vh] bg-403-gradient">
       <Gutter className="overflow-hidden relative p-4">
         <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-">
-          {new Array(5).fill(0).map((i) => (
+          {new Array(5).fill(0).map((_, i) => (
             <h1
               key={i}
               className="text-5xl text-gray-200 opacity-35 text-center"
