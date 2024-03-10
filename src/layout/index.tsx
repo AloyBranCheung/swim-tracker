@@ -5,9 +5,9 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 // components
 import Navbar from "./Navbar";
 import Gutter from "@/components/Gutter";
-import Page403 from "@/pages/403";
-import Loading from "@/pages/Loading";
-import Page500 from "@/pages/500";
+import Page403 from "@/generic-pages/403";
+import Loading from "@/generic-pages/Loading";
+import Page500 from "@/generic-pages/500";
 
 interface MainLayoutProps {
   children: React.ReactNode;
