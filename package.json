@@ -12,7 +12,7 @@
     "generate-client": "npx prisma generate",
     "migrate:dev": "dotenv -e .env.local -- npx prisma migrate dev --name",
     "docker:dev": "docker compose -f docker-compose.dev.yml up -d --build",
-    "docker:logs": "docker compose logs",
+    "docker:logs": "docker compose -f docker-compose.dev.yml logs -f",
     "docker:dev-stop": "docker compose -f docker-compose.dev.yml down",
     "docker:restart": "yarn docker:dev-stop && yarn docker:dev"
   },

@@ -1,5 +1,5 @@
 services:
-  nextjs-app:
+  swim-app:
     container_name: swim-app
     build:
       dockerfile: ./Dockerfile.dev
