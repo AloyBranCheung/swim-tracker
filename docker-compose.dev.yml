@@ -21,4 +21,4 @@ services:
     ports:
       - "5001:5001"
     volumes:
-      - ./databases/core-db:/var/lib/postgresql/data
+      - /databases/core-db:/var/lib/postgresql/data
