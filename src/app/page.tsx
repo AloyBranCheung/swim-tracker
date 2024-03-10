@@ -1,12 +1,10 @@
 import Link from "next/link";
+import StatusUpdate from "../components/main-page/StatusUpdate";
 
 export default function HomePage() {
   return (
-    <div>
-      <div>
-        <label htmlFor="status-update">post a status update here</label>
-        <input name="status-update" placeholder="type here" />
-      </div>
+    <div className="flex flex-col w-full gap-2 p-2">
+      <StatusUpdate />
       <p>main page here</p>
       <Link href="/profile" className="border-2 border-solid border-black">
         Navigate to Profile Page
