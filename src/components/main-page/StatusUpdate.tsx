@@ -22,10 +22,6 @@ export default function StatusUpdate() {
   const [state, formAction] = useFormState<FormState>(createPost, { msg: '', errors: {} })
   const [msgLimit, setMsgLimit] = useState('')
 
-  const handleSubmit = () => {
-    setMsgLimit('');
-  }
-
   const handleChange: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setMsgLimit(e.target.value);
   }
@@ -36,10 +32,17 @@ export default function StatusUpdate() {
     }
   }, [isOutsideClick])
 
+  useEffect(() => {
+    if (state.success) {
+      setMsgLimit('')
+      state.success = false;
+    }
+  }, [state, state.success])
+
 
   return (
     <CardContainer className='transition-all duration-300' ref={containerRef} onMouseDown={() => setIsFocused(true)}>
-      <form action={formAction} ref={formRef} onSubmit={handleSubmit}>
+      <form action={formAction} ref={formRef}>
         <div className="w-full h-full flex flex-col gap-2">
           <Textarea onChange={handleChange} value={msgLimit} name="msg" label="Say something witty..." className={isFocused ? '' : "p-0 min-h-0 h-9 overflow-hidden text-opacity-0"} labelClassName={isFocused ? '' : "peer-placeholder-shown:top-1 text-lg top-1"} />
           {state.errors.msg && <div className="self-end text-red-500 text-opacity-80">{state.errors.msg.join(';')}</div>}
