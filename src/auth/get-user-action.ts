@@ -18,7 +18,7 @@ const getUserAction = async () => {
                 auth0Id: user.sub
             }
         })
-        return dbUsr
+        return { dbUsr, auth0Usr: session.user }
     } catch (error) {
         logger.error(error)
     }
