@@ -36,6 +36,7 @@ export default function StatusUpdate() {
     if (state.success) {
       setMsgLimit('')
       state.success = false;
+      setIsFocused(false)
     }
   }, [state, state.success])
 
