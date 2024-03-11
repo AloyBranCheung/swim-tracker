@@ -15,6 +15,10 @@ What to do when you update the prisma schema:
 2. Run `yarn generate-client` re-generate api client
 3. Restart containers
 
+To add users (for now):
+1. Add in Auth0 Dashboard
+2. Run `yarn migrate:data`
+
 TODO:
 
 - [ ] Setup Supabase
