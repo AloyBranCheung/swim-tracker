@@ -1,5 +1,6 @@
 import React from 'react'
 import prisma from '@/libs/prisma-client';
+import Link from 'next/link';
 // utils
 import { dateFormatter } from '@/utils/dayjs'
 // actions
@@ -39,6 +40,7 @@ export default async function RecentFeed() {
                     </Card>
                 ) : <p className='self-center text-gray-200 text-opacity-65'>Say something witty to get started :&#41;</p>}
             </div>
+            <Link className='self-end text-sm text-gray-300 text-opacity-75 font-medium' href="/posts">See more</Link>
         </CardContainer>
     )
 }
