@@ -7,6 +7,8 @@ on:
 jobs:
   Test:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -15,8 +17,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Build
-        run: yarn build
+        run: yarn build 
       - name: Lint
         run: yarn vitest
-        env:
-          DATABASE_URL: None
+       

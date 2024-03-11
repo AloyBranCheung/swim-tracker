@@ -7,6 +7,8 @@ on:
 jobs:
   Lint:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -18,7 +20,5 @@ jobs:
         run: yarn build
       - name: Lint
         run: yarn lint
-        env:
-          DATABASE_URL: None
           
           
