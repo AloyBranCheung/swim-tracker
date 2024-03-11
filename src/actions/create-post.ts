@@ -1,5 +1,8 @@
 'use server'
 import { PostStatusSchema } from "@/validators/status-post"
+import Pino from 'pino';
+
+const logger = Pino();
 
 export type FormState = {
     msg: FormDataEntryValue | null;
@@ -22,10 +25,20 @@ export default async function createPost(prevState: FormState, formData: FormDat
     }
 
     // TODO: user authentication pre-mutate data 
+    try {
 
-    // mutate data
-    console.log('success 200 \n', { validatedField }) // will be in the server logs  
+    } catch (error) {
+        logger.error(error);
+        return {
+            msg: formData.get('msg'),
+            errors: {
+                msg: ['Error creating post.']
+            }
+        }
+    }
+
+    // reset
     return {
-        ...validatedField.data, errors: {}
+        msg: '', errors: {}
     }
 }
