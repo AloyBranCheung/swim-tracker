@@ -29,7 +29,7 @@ const CardContainer = forwardRef<HTMLDivElement, CardContainerProps>((
       onFocus={onFocus}
       onBlur={onBlur}
       className={twMerge(
-        "p-2 bg-403-btn-gradient-hover rounded-2xl bg-opacity-15 shadow-lg",
+        "p-4 bg-403-btn-gradient-hover rounded-2xl bg-opacity-15 shadow-lg",
         className,
       )}
     >
