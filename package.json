@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "yarn migrate:deploy && yarn generate-client && next build",
+    "build": "yarn prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
