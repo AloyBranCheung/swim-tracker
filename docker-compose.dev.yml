@@ -10,6 +10,8 @@ services:
     volumes:
       - ./:/app/
       - /app/node_modules
+    depends_on:
+      - local-db
   local-db:
     container_name: local-db
     image: postgres
@@ -17,8 +19,8 @@ services:
       - POSTGRES_PASSWORD=local
       - POSTGRES_USER=local
       - POSTGRES_DB=local
-      - PGPORT=5001
+      - PGPORT=5432
     ports:
-      - "5001:5001"
+      - "5432:5432"
     volumes:
-      - /databases/core-db:/var/lib/postgresql/data
+      - ./databases/core-db:/var/lib/postgresql/data
