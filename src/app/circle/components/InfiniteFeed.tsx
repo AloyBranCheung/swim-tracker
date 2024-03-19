@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { StatusPost, User } from "@prisma/client";
 // actions
 import { fetchPosts } from "@/actions/fetch-posts";
@@ -13,6 +13,7 @@ interface InfiniteFeedProps {
 }
 
 export default function InfiniteFeed({ initialPosts }: InfiniteFeedProps) {
+  const serverInitialPosts = useRef(initialPosts);
   const [isLoading, setIsLoading] = useState(false);
   const [hasNext, setHasNext] = useState(true);
   const [currPage, setCurrPage] = useState(0);
@@ -26,9 +27,8 @@ export default function InfiniteFeed({ initialPosts }: InfiniteFeedProps) {
       setPosts([...posts, ...nextPosts]);
       setCurrPage(nextPage);
       setIsLoading(false);
-      if (nextPosts.length < 10) setHasNext(false);
       const nextNextPosts = await fetchPosts(nextPage + 1);
-      if (nextNextPosts.length < 10) setHasNext(false);
+      if (nextNextPosts.length < 1) setHasNext(false);
     } catch (error) {
       console.error("Error fetching posts.");
       setIsLoading(false);
@@ -49,6 +49,20 @@ export default function InfiniteFeed({ initialPosts }: InfiniteFeedProps) {
       setHasNext(false);
     }
   }, [initialPosts.length]);
+
+  useEffect(() => {
+    const isEqualArr = (arr1: Post[], arr2: Post[]) =>
+      arr1.length === arr2.length &&
+      arr1.every((value, index) => value.id === arr2[index].id);
+
+    if (!isEqualArr(serverInitialPosts.current, initialPosts)) {
+      // reset page if add new post
+      setPosts(initialPosts);
+      setHasNext(true);
+      setCurrPage(0);
+      serverInitialPosts.current = initialPosts;
+    }
+  }, [initialPosts]);
 
   return (
     <div className="flex flex-col gap-2">
