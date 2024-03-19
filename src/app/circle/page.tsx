@@ -1,10 +1,24 @@
 import React from "react";
-import StatusUpdate from "@/components/main-page/StatusUpdate";
+import prisma from "@/libs/prisma-client";
+// components
+import InfiniteFeed from "./components/InfiniteFeed";
+import StatusUpdate from "@/components/StatusUpdate";
 
-export default function PostsPage() {
+export default async function PostsPage() {
+  const initialPosts = await prisma.statusPost.findMany({
+    include: {
+      user: true,
+    },
+    take: 10,
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       <StatusUpdate />
+      <InfiniteFeed initialPosts={initialPosts} />
     </div>
   );
 }

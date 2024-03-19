@@ -1,17 +1,12 @@
 import React from "react";
 import prisma from "@/libs/prisma-client";
 import Link from "next/link";
-// utils
-import { dateFormatter } from "@/utils/dayjs";
-// actions
-import getUserAction from "@/auth/get-user-action";
 // components
-import CardContainer from "../CardContainer";
-import Card from "../Card";
+import CardContainer from "../../components/CardContainer";
+import ReadPost from "@/components/ReadPost";
 
 // last 3 posts
 export default async function RecentFeed() {
-  await getUserAction(); // also an auth check
   const latestPosts = await prisma.statusPost.findMany({
     include: {
       user: true,
@@ -29,16 +24,13 @@ export default async function RecentFeed() {
       </h2>
       <div className="flex flex-col gap-2">
         {latestPosts.length > 0 ? (
-          latestPosts.map((post) => (
-            <Card key={post.id} className="flex flex-col gap-2">
-              <div className="flex items-center justify-between text-sm">
-                <p className="font-medium text-header-font">{post.user.name}</p>
-                <p className="font-medium text-header-font">
-                  {dateFormatter(post.createdAt)}
-                </p>
-              </div>
-              <p className="break-words text-primary-font">{post.msg}</p>
-            </Card>
+          latestPosts.map(({ id, user, msg, createdAt }) => (
+            <ReadPost
+              key={id}
+              username={user.name}
+              msg={msg}
+              createdAt={createdAt}
+            />
           ))
         ) : (
           <p className="self-center text-secondary-font">
