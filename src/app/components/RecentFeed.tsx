@@ -1,12 +1,15 @@
 import React from "react";
 import prisma from "@/libs/prisma-client";
 import Link from "next/link";
+// auth
+import getUserAction from "@/auth/get-user-action";
 // components
 import CardContainer from "../../components/CardContainer";
 import ReadPost from "@/components/ReadPost";
 
 // last 3 posts
 export default async function RecentFeed() {
+  await getUserAction();
   const latestPosts = await prisma.statusPost.findMany({
     include: {
       user: true,
