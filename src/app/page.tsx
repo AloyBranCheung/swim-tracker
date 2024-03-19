@@ -1,6 +1,6 @@
 import Link from "next/link";
 import StatusUpdate from "../components/StatusUpdate";
-import RecentFeed from "./components/RecentFeed";
+import RecentFeed from "../containers/main-page/RecentFeed";
 
 export default function HomePage() {
   return (
