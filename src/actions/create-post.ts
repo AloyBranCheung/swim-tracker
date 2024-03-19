@@ -1,10 +1,9 @@
 'use server'
 import { PostStatusSchema } from "@/validators/status-post"
-import Pino from 'pino';
+import logger from "@/libs/logger"
 import prisma from '@/libs/prisma-client'
 import { getSession } from '@auth0/nextjs-auth0'
 
-const logger = Pino();
 
 export type FormState = {
     msg: FormDataEntryValue | null;

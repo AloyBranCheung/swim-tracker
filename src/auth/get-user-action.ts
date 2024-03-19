@@ -1,9 +1,8 @@
 'use server'
 import { getSession } from "@auth0/nextjs-auth0"
 import prisma from '@/libs/prisma-client'
-import Pino from 'pino';
+import logger from "@/libs/logger";
 
-const logger = Pino();
 
 /** This is also an auth check for server components and return the user row
  * from the db table (not auth0 db) */
