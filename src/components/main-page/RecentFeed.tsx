@@ -24,23 +24,23 @@ export default async function RecentFeed() {
 
     return (
         <CardContainer className="flex flex-col gap-2">
-            <h2 className='text-lg font-semibold text-gray-200 text-opacity-80'>
+            <h2 className='text-lg font-semibold text-header-font text-opacity-80'>
                 Latest Posts
             </h2>
             <div className='flex flex-col gap-2'>
                 {latestPosts.length > 0 ? latestPosts.map((post) =>
                     <Card key={post.id} className="flex flex-col gap-2">
                         <div className='flex justify-between items-center text-sm'>
-                            <p className='text-gray-600'>{post.user.name}</p>
-                            <p className='text-gray-600'>{dateFormatter(post.createdAt)}</p>
+                            <p className='text-header-font font-medium'>{post.user.name}</p>
+                            <p className='text-header-font font-medium'>{dateFormatter(post.createdAt)}</p>
                         </div>
-                        <p className='break-words'>
+                        <p className='break-words text-primary-font'>
                             {post.msg}
                         </p>
                     </Card>
-                ) : <p className='self-center text-gray-200 text-opacity-65'>Say something witty to get started :&#41;</p>}
+                ) : <p className='self-center text-secondary-font'>Say something witty to get started :&#41;</p>}
             </div>
-            <Link className='self-end text-sm text-gray-300 text-opacity-75 font-medium' href="/posts">See more</Link>
+            <Link className='self-end text-sm text-header-font font-medium' href="/circle">See more</Link>
         </CardContainer>
     )
 }

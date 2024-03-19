@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 'use client'
 import React, { useState, useRef, useEffect } from "react";
 import { useFormState } from "react-dom";

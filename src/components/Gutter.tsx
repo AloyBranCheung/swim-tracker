@@ -4,9 +4,10 @@ import { ClassNameValue, twMerge } from "tailwind-merge";
 interface GutterProps {
   children: React.ReactNode;
   className?: ClassNameValue;
+  containerClassName?: ClassNameValue
 }
 
-export default function Gutter({ children, className }: GutterProps) {
+export default function Gutter({ children, className, containerClassName }: GutterProps) {
   return (
     <div
       className={twMerge(
@@ -14,7 +15,7 @@ export default function Gutter({ children, className }: GutterProps) {
         className,
       )}
     >
-      <div className="w-full max-w-5xl p-4">{children}</div>
+      <div className={twMerge("w-full max-w-5xl p-4", containerClassName)}>{children}</div>
     </div>
   );
 }

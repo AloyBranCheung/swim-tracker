@@ -12,7 +12,7 @@ export default function Page403() {
 
         <a
           href="/api/auth/login"
-          className="text-white hover:text-gray-400 font-bold absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] bg-loading-gradient hover:bg-403-btn-gradient-hover p-2 px-16 rounded-2xl shadow-2xl hover:transition-all hover:scale-110"
+          className="text-white hover:text-gray-400 font-bold absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] bg-loading-gradient hover:bg-primary-ui p-2 px-16 rounded-2xl shadow-2xl hover:transition-all hover:scale-110"
         >
           Login
         </a>
