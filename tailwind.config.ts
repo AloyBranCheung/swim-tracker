@@ -25,6 +25,9 @@ const config: Config = {
         "secondary-font": "rgb(149,149,157)",
         "primary-font": "rgb(47,47,49)",
         "header-font": "rgba(250, 250, 250,1)"
+      },
+      borderColor: {
+        "secondary": "rgba(250, 250, 250,1)"
       }
     },
   },
