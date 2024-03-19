@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from "react";
+import React from "react";
 import { ClassNameValue, twMerge } from "tailwind-merge";
 
 interface WaveProps {
@@ -11,7 +11,7 @@ export default function Wave({ className, style }: WaveProps) {
     <div
       style={style}
       className={twMerge(
-        "w-2 h-20 animate-pulse bg-loading-gradient rounded-2xl",
+        "h-20 w-2 animate-pulse rounded-2xl bg-loading-gradient",
         className,
       )}
     />
