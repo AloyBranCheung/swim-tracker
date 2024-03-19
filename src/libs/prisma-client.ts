@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 import { PrismaClient } from '@prisma/client'
 
 const prismaClientSingleton = () => {
@@ -5,6 +6,7 @@ const prismaClientSingleton = () => {
 }
 
 declare global {
+    // eslint ignore var as global variable
     var prismaGlobal: undefined | ReturnType<typeof prismaClientSingleton>
 }
 

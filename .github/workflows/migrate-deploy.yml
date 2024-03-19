@@ -2,8 +2,6 @@ name: Prisma Migrate Deploy
 on:
   push:
     branches: [main, master]
-  pull_request:
-    branches: [main, master]
 jobs:
   Prisma-Migrate-Deploy:
     runs-on: ubuntu-latest
@@ -18,5 +16,3 @@ jobs:
         run: yarn prisma migrate deploy
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          
-          
