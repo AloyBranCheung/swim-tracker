@@ -29,7 +29,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
   }
 
   return (
-    <div className="w-full bg-app-gradient min-h-screen flex justify-between flex-col">
+    <div className="min-h-screen w-full bg-app-gradient pb-20">
       <Gutter>{children}</Gutter>
       <Navbar />
     </div>

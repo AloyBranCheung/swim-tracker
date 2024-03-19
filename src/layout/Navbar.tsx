@@ -4,7 +4,6 @@ import Link from "next/link";
 // config
 import { NAVBAR_CONFIG } from "./config";
 // components
-import Gutter from "@/components/Gutter";
 import NavbarIconContainer from "./NavbarIconContainer";
 
 // https://cdn-icons-png.flaticon.com/512/1144/1144709.png
@@ -28,14 +27,12 @@ export default function Navbar() {
   ));
 
   return (
-    <div>
-      <Gutter containerClassName="p-0">
-        <div className="flex h-20 w-full items-center justify-center rounded-t-2xl bg-primary-ui bg-opacity-0 px-8 py-4">
-          <div className="flex h-full w-full items-center justify-between">
-            {navbar}
-          </div>
+    <div className="fixed bottom-0 w-full">
+      <div className="flex h-20 w-full items-center justify-center rounded-t-2xl bg-primary-ui bg-opacity-0 px-8 py-4">
+        <div className="flex h-full w-full items-center justify-between">
+          {navbar}
         </div>
-      </Gutter>
+      </div>
     </div>
   );
 }
