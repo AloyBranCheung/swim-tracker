@@ -14,7 +14,7 @@ export default function Navbar() {
   const FOCUSED_BORDER = "border-b-2 border-solid border-secondary";
 
   const navbar = NAVBAR_CONFIG.map((item, index) => (
-    <Link key={`${item.title}-${index}`} href={item.path}>
+    <Link key={`${item.title}-${index}`} href={item.path} className="min-w-20">
       <NavbarIconContainer
         className={pathname === item.path ? FOCUSED_BORDER : ""}
       >
