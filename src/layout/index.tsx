@@ -13,6 +13,7 @@ interface MainLayoutProps {
   children: React.ReactNode;
 }
 
+// auth guard
 export default function MainLayout({ children }: MainLayoutProps) {
   const { user, error, isLoading } = useUser();
 
