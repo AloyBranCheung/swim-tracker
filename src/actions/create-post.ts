@@ -1,6 +1,5 @@
 'use server'
 import { PostStatusSchema } from "@/validators/status-post"
-import logger from "@/libs/logger"
 import prisma from '@/libs/prisma-client'
 import { getSession } from '@auth0/nextjs-auth0'
 
@@ -41,7 +40,7 @@ export default async function createPost(prevState: FormState, formData: FormDat
             data: { msg: validatedField.data.msg, userId: user.id }
         })
     } catch (error) {
-        logger.error(error);
+        console.error(error);
         return {
             msg: formData.get('msg'),
             errors: {

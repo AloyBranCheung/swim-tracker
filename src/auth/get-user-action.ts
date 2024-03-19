@@ -1,7 +1,6 @@
 'use server'
 import { getSession } from "@auth0/nextjs-auth0"
 import prisma from '@/libs/prisma-client'
-import logger from "@/libs/logger";
 
 
 /** This is also an auth check for server components and return the user row
@@ -25,7 +24,7 @@ const getUserAction = async () => {
         })
         return { dbUsr, auth0Usr: session.user }
     } catch (error) {
-        logger.error(error)
+        console.error(error)
     }
 }
 

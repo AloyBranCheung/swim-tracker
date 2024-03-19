@@ -1,11 +1,9 @@
 'use server'
-import logger from '@/libs/logger'
 import prisma from '@/libs/prisma-client';
 import getUserAction from '@/auth/get-user-action';
 
 export const fetchPosts = async (cursor: number) => {
     try {
-        logger.info("Fetching 10 posts...")
         await getUserAction();
         const posts = await prisma.statusPost.findMany({
             include: {
@@ -19,7 +17,7 @@ export const fetchPosts = async (cursor: number) => {
         });
         return posts;
     } catch (error) {
-        logger.error(error);
+        console.error(error);
         return []
     }
 }
