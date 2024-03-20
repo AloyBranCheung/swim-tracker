@@ -1,13 +1,21 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /** 
 migrate users from auth0-db to own db (since it will only be the 4 of us) if
 more users will be joining will need some kind of lifecycle to add users to our
 own user table with an auth0id column for now will need to manually trigger this
 script 
 */
-require('dotenv').config({ path: '.env.local' });
-const axios = require('axios');
-const { PrismaClient } = require('@prisma/client')
-const logger = require('pino')();
+import dotenv from 'dotenv'
+dotenv.config({ path: '.env.local' })
+import axios from 'axios';
+import { PrismaClient } from '@prisma/client'
+import Pino from 'pino';
+
+const logger = Pino({
+    transport: {
+        target: 'pino-pretty'
+    }
+})
 
 const prisma = new PrismaClient();
 
@@ -19,6 +27,8 @@ const options = {
 };
 
 const main = async () => {
+    const users = await prisma.user.findMany()
+    if (users.length > 0) return logger.info('Users already in db, stopping migration...')
     try {
         logger.info('Querying Auth0 User DB...')
         const res = await axios.request(options)

@@ -13,6 +13,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ProgramLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum ExerciseType {
+  WARMUP
+  COOLDOWN
+  MAINSET
+}
+
+enum Unit {
+  m // meters
+}
+
+enum Accessory {
+  FINS
+  PULLBUOY
+  KICKBOARD
+}
+
 model User {
   id          Int          @id @default(autoincrement())
   email       String       @unique
@@ -31,4 +53,40 @@ model StatusPost {
 
   user   User @relation(fields: [userId], references: [id])
   userId Int
+}
+
+model SwimCategory {
+  id        Int          @id @default(autoincrement())
+  category  ProgramLevel
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  programs Program[]
+}
+
+model Program {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  swimCategory   SwimCategory @relation(fields: [swimCategoryId], references: [id])
+  swimCategoryId Int
+
+  swimExercise SwimExercise[]
+}
+
+model SwimExercise {
+  id           Int          @id @default(autoincrement())
+  exerciseType ExerciseType
+  sets         Int
+  distance     Int
+  unit         Unit
+  accessory    Accessory?
+  notes        String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  program   Program @relation(fields: [programId], references: [id])
+  programId Int
 }

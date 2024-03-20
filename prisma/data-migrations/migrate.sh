@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
+# to be run in root
 yarn run generate-client
-ts-node ./prisma/data-migrations/migrate-users.ts | pino-pretty
+npx tsx ./prisma/data-migrations/migrate-users.ts
+npx tsx ./prisma/data-migrations/migrate-programs.ts
