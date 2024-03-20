@@ -1,7 +1,10 @@
 import React from "react";
+// components
 import HomeIcon from "@/components/icons/HomeIcon";
 import PeopleIcon from "@/components/icons/PeopleIcon";
 import ProfileIcon from "@/components/icons/ProfileIcon";
+import PlanIcon from "@/components/icons/PlanIcon";
+import JourneyIcon from "@/components/icons/JourneyIcon";
 
 interface NavbarConfig {
   title: string;
@@ -16,9 +19,19 @@ export const NAVBAR_CONFIG: NavbarConfig[] = [
     path: "/",
   },
   {
+    title: "Journey",
+    icon: <JourneyIcon />,
+    path: "/journey",
+  },
+  {
     title: "Circle",
     icon: <PeopleIcon />,
     path: "/circle",
+  },
+  {
+    title: "Swim Plans",
+    icon: <PlanIcon />,
+    path: "/plans",
   },
   {
     title: "Me",
