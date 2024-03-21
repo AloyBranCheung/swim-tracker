@@ -7,6 +7,8 @@ on:
 jobs:
   Prisma-Migrate-Deploy:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -16,5 +18,5 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Prisma Migrate Deploy
         run: yarn prisma migrate deploy
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      - name: Migrate Data
+        run: yarn migrate:data

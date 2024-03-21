@@ -8,7 +8,7 @@ export default async function PlansPage() {
   const userDetails = await getUserAction();
 
   if (!userDetails) {
-    return redirect("/api/auth/login");
+    return redirect("/");
   }
 
   const swimCategories = await prisma.swimCategory.findMany({
