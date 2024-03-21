@@ -12,7 +12,7 @@ import { redirect } from "next/navigation";
 export default async function RecentFeed() {
   const usrDetails = await getUserAction();
   if (!usrDetails) {
-    return redirect("/api/auth/login");
+    return redirect("/");
   }
 
   const latestPosts = await prisma.statusPost.findMany({

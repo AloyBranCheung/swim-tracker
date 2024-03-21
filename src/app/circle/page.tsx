@@ -11,7 +11,7 @@ export default async function PostsPage() {
   const usrDetails = await getUserAction();
 
   if (!usrDetails) {
-    return redirect("/api/auth/login");
+    return redirect("/");
   }
 
   const initialPosts = await prisma.statusPost.findMany({
@@ -23,6 +23,8 @@ export default async function PostsPage() {
       createdAt: "desc",
     },
   });
+
+  console.log({ initialPosts });
 
   return (
     <div className="flex flex-col gap-2">
