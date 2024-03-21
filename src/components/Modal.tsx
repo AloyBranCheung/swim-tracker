@@ -37,7 +37,7 @@ export default function Modal({ children, isOpen, onClose }: ModalProps) {
           initial={{ opacity: 0, scale: 0.5, y: -100 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.5, y: -100 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
+          transition={{ duration: 0.2, ease: "easeInOut" }}
         >
           <Card className="flex h-full w-full flex-col gap-2">
             <div className="self-end">

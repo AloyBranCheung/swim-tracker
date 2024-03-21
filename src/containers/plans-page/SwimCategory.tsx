@@ -27,7 +27,7 @@ export default function SwimCategory({
       onClick={() => setIsOpen(true)}
     >
       <Card
-        className={`flex cursor-pointer flex-col gap-2 duration-300 ${categoryName === ProgramLevel.BEGINNER && "bg-beginner-swim"}`}
+        className={`flex cursor-pointer flex-col gap-2 duration-300 ${categoryName === ProgramLevel.BEGINNER && "bg-beginner-swim"} ${categoryName === ProgramLevel.INTERMEDIATE && "bg-intermediate-swim"} ${categoryName === ProgramLevel.ADVANCED && "bg-advanced-swim"}`}
       >
         <h2 className="text-2xl">{categoryName}</h2>
         {categoryName === ProgramLevel.BEGINNER && (
