@@ -13,11 +13,13 @@ type Programs = Prisma.SwimCategoryGetPayload<{
 interface SwimCategoryProps {
   categoryName: Programs["category"];
   programs: Programs["programs"];
+  categoryDescriptions: Programs["descriptions"];
 }
 
 export default function SwimCategory({
   programs,
   categoryName,
+  categoryDescriptions,
 }: SwimCategoryProps) {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -30,13 +32,12 @@ export default function SwimCategory({
         className={`flex cursor-pointer flex-col gap-2 duration-300 ${categoryName === ProgramLevel.BEGINNER && "bg-beginner-swim"} ${categoryName === ProgramLevel.INTERMEDIATE && "bg-intermediate-swim"} ${categoryName === ProgramLevel.ADVANCED && "bg-advanced-swim"}`}
       >
         <h2 className="text-2xl">{categoryName}</h2>
-        {categoryName === ProgramLevel.BEGINNER && (
-          <ul className="list-disc pl-4">
-            <li>I&apos;m getting back into it</li>
-            <li>I want to build some swim stamina and skills</li>
-            <li>Starting from 500m</li>
-          </ul>
-        )}
+
+        <ul className="list-disc pl-4">
+          {categoryDescriptions.map((description) => (
+            <li key={`${description}-${Math.random()}`}>{description}</li>
+          ))}
+        </ul>
       </Card>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         {categoryName}

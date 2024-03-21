@@ -6,10 +6,15 @@ import getUserAction from "@/auth/get-user-action";
 // components
 import CardContainer from "../../components/CardContainer";
 import ReadPost from "@/components/ReadPost";
+import { redirect } from "next/navigation";
 
 // last 3 posts
 export default async function RecentFeed() {
-  await getUserAction();
+  const usrDetails = await getUserAction();
+  if (!usrDetails) {
+    return redirect("/api/auth/login");
+  }
+
   const latestPosts = await prisma.statusPost.findMany({
     include: {
       user: true,
