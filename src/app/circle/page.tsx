@@ -24,8 +24,6 @@ export default async function PostsPage() {
     },
   });
 
-  console.log({ initialPosts });
-
   return (
     <div className="flex flex-col gap-2">
       <StatusUpdate />
