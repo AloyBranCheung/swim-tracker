@@ -34,10 +34,11 @@ export default function Modal({ children, isOpen, onClose }: ModalProps) {
           key="modal"
           ref={dialogRef}
           onCancel={onClose}
-          initial={{ opacity: 0, scale: 0.5, y: -100 }}
+          initial={{ opacity: 0, scale: 0.5, y: 500 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.5, y: -100 }}
+          exit={{ opacity: 0, scale: 0.5, y: 500 }}
           transition={{ duration: 0.2, ease: "easeInOut" }}
+          className="bg-app-gradient"
         >
           <Card className="flex h-full w-full flex-col gap-2">
             <div className="self-end">

@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import { Prisma, ProgramLevel } from "@prisma/client";
 // components
 import Card from "@/components/Card";
-import Modal from "@/components/Modal";
+import CategoryModal from "./CategoryModal";
 
-type Programs = Prisma.SwimCategoryGetPayload<{
+export type Programs = Prisma.SwimCategoryGetPayload<{
   include: { programs: { include: { swimExercise: true } } };
 }>;
 
@@ -20,6 +20,7 @@ export default function SwimCategory({
   // TODO: add programs navigation
   categoryName,
   categoryDescriptions,
+  programs,
 }: SwimCategoryProps) {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -39,9 +40,12 @@ export default function SwimCategory({
           ))}
         </ul>
       </Card>
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        {categoryName}
-      </Modal>
+      <CategoryModal
+        programs={programs}
+        categoryName={categoryName}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+      />
     </motion.div>
   );
 }
