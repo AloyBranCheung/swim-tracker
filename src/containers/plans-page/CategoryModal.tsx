@@ -1,6 +1,8 @@
 import React from "react";
 // types
 import { Programs } from "./SwimCategory";
+// animations
+import ExitLeft from "@/animations/ExitLeft";
 // components
 import Modal from "@/components/Modal";
 import ProgramNavigation from "./ProgramNavigation";
