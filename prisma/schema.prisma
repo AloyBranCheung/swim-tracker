@@ -56,10 +56,11 @@ model StatusPost {
 }
 
 model SwimCategory {
-  id        Int          @id @default(autoincrement())
-  category  ProgramLevel
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
+  id           Int          @id @default(autoincrement())
+  category     ProgramLevel
+  descriptions String[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 
   programs Program[]
 }
