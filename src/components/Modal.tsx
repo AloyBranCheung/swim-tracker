@@ -24,34 +24,35 @@ export default function Modal({ children, isOpen, onClose }: ModalProps) {
   useEffect(() => {
     if (isOpen) {
       dialogRef.current?.showModal();
-    } else {
-      dialogRef.current?.close();
     }
   }, [isOpen]);
 
   return (
     <AnimatePresence>
-      <StyledDialog
-        ref={dialogRef}
-        onCancel={onClose}
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.5 }}
-        transition={{ duration: 1.3, ease: "easeInOut" }}
-      >
-        <Card className="flex h-full w-full flex-col gap-2">
-          <div className="self-end">
-            <CrossIcon
-              style={{ cursor: "pointer" }}
-              onClick={(e) => {
-                e.stopPropagation();
-                onClose();
-              }}
-            />
-          </div>
-          {children}
-        </Card>
-      </StyledDialog>
+      {isOpen && (
+        <StyledDialog
+          key="modal"
+          ref={dialogRef}
+          onCancel={onClose}
+          initial={{ opacity: 0, scale: 0.5, y: -100 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.5, y: -100 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+        >
+          <Card className="flex h-full w-full flex-col gap-2">
+            <div className="self-end">
+              <CrossIcon
+                style={{ cursor: "pointer" }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onClose();
+                }}
+              />
+            </div>
+            {children}
+          </Card>
+        </StyledDialog>
+      )}
     </AnimatePresence>
   );
 }

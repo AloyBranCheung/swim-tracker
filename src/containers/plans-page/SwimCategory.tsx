@@ -39,7 +39,7 @@ export default function SwimCategory({
         )}
       </Card>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        test
+        {categoryName}
       </Modal>
     </motion.div>
   );
