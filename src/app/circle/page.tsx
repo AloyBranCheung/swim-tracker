@@ -5,9 +5,15 @@ import getUserAction from "@/auth/get-user-action";
 // components
 import InfiniteFeed from "../../containers/circle-page/InfiniteFeed";
 import StatusUpdate from "@/components/StatusUpdate";
+import { redirect } from "next/navigation";
 
 export default async function PostsPage() {
-  await getUserAction();
+  const usrDetails = await getUserAction();
+
+  if (!usrDetails) {
+    return redirect("/api/auth/login");
+  }
+
   const initialPosts = await prisma.statusPost.findMany({
     include: {
       user: true,

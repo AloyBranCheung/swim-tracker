@@ -4,7 +4,8 @@ import getUserAction from '@/auth/get-user-action';
 
 export const fetchPosts = async (cursor: number) => {
     try {
-        await getUserAction();
+        const usrDetails = await getUserAction();
+        if (!usrDetails) throw new Error("Unauthorized")
         const posts = await prisma.statusPost.findMany({
             include: {
                 user: true,
