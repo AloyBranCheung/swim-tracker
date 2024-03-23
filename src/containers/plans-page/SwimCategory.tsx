@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Prisma, ProgramLevel } from "@prisma/client";
 // components
 import Card from "@/components/Card";
-import CategoryModal from "./CategoryModal";
+import ProgramMenu from "./ProgramMenu";
 
 export type Programs = Prisma.SwimCategoryGetPayload<{
   include: { programs: { include: { swimExercise: true } } };
@@ -40,7 +40,7 @@ export default function SwimCategory({
           ))}
         </ul>
       </Card>
-      <CategoryModal
+      <ProgramMenu
         programs={programs}
         categoryName={categoryName}
         isOpen={isOpen}
