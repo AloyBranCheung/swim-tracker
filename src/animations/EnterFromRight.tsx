@@ -1,17 +1,16 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-interface ExitLeftProps {
-  initial?: boolean;
+interface EnterFromRightProps {
   children?: React.ReactNode;
 }
 
-export default function ExitLeft({ children, initial = true }: ExitLeftProps) {
+export default function EnterFromRight({ children }: EnterFromRightProps) {
   return (
-    <AnimatePresence initial={initial}>
+    <AnimatePresence>
       {children && (
         <motion.div
-          initial={{ x: -999 }}
+          initial={{ x: 999 }}
           animate={{ x: 0 }}
           exit={{ x: -999 }}
           transition={{ ease: "linear" }}
