@@ -6,6 +6,7 @@ import ProgramItemNavigation from "./ProgramItemNavigation";
 import Modal from "@/components/Modal";
 import { SwimExercise } from "@prisma/client";
 import ProgramDetails from "./ProgramDetails";
+import Button from "@/components/Button";
 
 interface ProgramMenuProps {
   programs: Programs["programs"];
@@ -46,21 +47,26 @@ export default function ProgramMenu({
         onClose();
       }}
     >
-      <div className="flex flex-col gap-2">
-        <h1 className="mb-8 text-3xl text-header-font">{categoryName}</h1>
-        <div className="overflow-x-hidden">
-          {swimExercises.length < 1 ? (
-            menuItems
-          ) : (
-            <ProgramDetails
-              swimExercises={swimExercises}
-              onClickBack={() => {
-                setSelectedProgramId(null);
-                setSwimExercises([]);
-              }}
-            />
-          )}
+      <div className="flex h-full flex-col gap-2">
+        <div>
+          <h1 className="mb-8 text-3xl text-header-font">{categoryName}</h1>
+          <div className="overflow-x-hidden">
+            {swimExercises.length < 1 ? (
+              menuItems
+            ) : (
+              <ProgramDetails
+                swimExercises={swimExercises}
+                onClickBack={() => {
+                  setSelectedProgramId(null);
+                  setSwimExercises([]);
+                }}
+              />
+            )}
+          </div>
         </div>
+        {swimExercises.length < 1 && (
+          <Button className="w-full">Start Journey</Button>
+        )}
       </div>
     </Modal>
   );
