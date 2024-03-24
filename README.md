@@ -10,13 +10,17 @@ To run in development:
 4. `yarn docker:dev`
 5. Go to `http://localhost:3000/`
 6. `yarn migrate:dev`
-6. `yarn docker:dev-stop` to stop containers
+7. `yarn docker:dev-stop` to stop containers
 
 What to do when you update the prisma schema:
-1. Run `yarn migrate:dev {commit name here}` creates a migration file 
+
+1. Run `yarn migrate:dev {commit name here}` creates a migration file
 2. Run `yarn generate-client` re-generate api client
 3. Restart containers
 
 To add users (for now):
+
 1. Add in Auth0 Dashboard
 2. Run `yarn migrate:data`
+
+Generate ERD:
