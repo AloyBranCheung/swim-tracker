@@ -13,6 +13,7 @@ interface Exercise {
 interface Program {
     programName: string,
     exercises: Exercise[]
+    order: number;
 }
 
 type WorkoutSession = {
@@ -32,6 +33,7 @@ class SwimProgramBuilder {
         this.program = {
             programName: '',
             exercises: [],
+            order: 1
         }
     }
 
@@ -39,13 +41,15 @@ class SwimProgramBuilder {
         this.program = {
             programName: '',
             exercises: [],
+            order: 1
         }
     }
 
-    public startBuildingProgram(programName: string) {
+    public startBuildingProgram(programName: string, order: number) {
         this.program = {
             programName,
-            exercises: []
+            exercises: [],
+            order: order
         }
         return this
     }
