@@ -1,6 +1,8 @@
 FROM node:20
 WORKDIR /app
 COPY . .
+# remove the ERD generator lines (will cause an error otherwise and not needed anyways)
+RUN sed -i '11,16d' prisma/schema.prisma
 RUN yarn install
 RUN yarn prisma generate
 EXPOSE 3000
