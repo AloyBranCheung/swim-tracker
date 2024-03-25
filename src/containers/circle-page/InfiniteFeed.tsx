@@ -7,7 +7,7 @@ import { fetchPosts } from "@/actions/fetch-posts";
 import ReadPost from "@/components/ReadPost";
 import Button from "@/components/Button";
 
-type Post = { user: User } & StatusPost;
+export type Post = { user: User } & StatusPost;
 interface InfiniteFeedProps {
   initialPosts: Post[];
 }
