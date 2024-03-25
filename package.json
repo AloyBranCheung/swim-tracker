@@ -12,7 +12,7 @@
     "test:dev": "vitest --watch",
     "generate-client": "yarn prisma generate",
     "db:push": "dotenv -e .env.local -- yarn prisma db push",
-    "migrate:dev": "dotenv -e .env.local -- yarn prisma migrate dev",
+    "migrate:dev": "yarn generate-client && dotenv -e .env.local -- yarn prisma migrate dev",
     "migrate:deploy": "dotenv -e .env.local -- yarn prisma migrate deploy",
     "migrate:data": "./prisma/data-migrations/migrate.sh",
     "docker:dev": "docker compose -f docker-compose.dev.yml up -d --build",
