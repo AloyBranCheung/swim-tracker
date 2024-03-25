@@ -43,13 +43,15 @@ enum Accessory {
 }
 
 model User {
-  id          Int          @id @default(autoincrement())
-  email       String       @unique
-  name        String?
-  auth0Id     String       @unique
-  statusPosts StatusPost[]
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  id                       Int                        @id @default(autoincrement())
+  email                    String                     @unique
+  name                     String?
+  auth0Id                  String                     @unique
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @updatedAt
+  statusPosts              StatusPost[]
+  journeys                 Journey[]
+  UserSwimCategoryProgress UserSwimCategoryProgress[]
 }
 
 model StatusPost {
@@ -62,6 +64,7 @@ model StatusPost {
   userId Int
 }
 
+// essentially swim programs (with weeks of programs)
 model SwimCategory {
   id           Int          @id @default(autoincrement())
   category     ProgramLevel
@@ -70,20 +73,26 @@ model SwimCategory {
   updatedAt    DateTime     @updatedAt
 
   programs Program[]
+
+  JourneySwimCategory JourneySwimCategory[]
 }
 
+// week plans inside the swim program 
 model Program {
   id        Int      @id @default(autoincrement())
   name      String
+  order     Int // e.g. week 1, 2, 3 etc.
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   swimCategory   SwimCategory @relation(fields: [swimCategoryId], references: [id])
   swimCategoryId Int
 
-  swimExercise SwimExercise[]
+  swimExercise             SwimExercise[]
+  UserSwimCategoryProgress UserSwimCategoryProgress[]
 }
 
+// exercises within each program/week of the week plan 
 model SwimExercise {
   id           Int          @id @default(autoincrement())
   exerciseType ExerciseType
@@ -98,3 +107,33 @@ model SwimExercise {
   program   Program @relation(fields: [programId], references: [id])
   programId Int
 }
+
+model Journey {
+  id        Int      @id @default(autoincrement())
+  isActive  Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+
+  JourneySwimCategory JourneySwimCategory[]
+}
+
+// relation table
+model JourneySwimCategory {
+  id Int @id @default(autoincrement())
+
+  journey   Journey @relation(fields: [journeyId], references: [id])
+  journeyId Int
+
+  swimCategory   SwimCategory @relation(fields: [swimCategoryId], references: [id])
+  swimCategoryId Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// TODO: track SwimCategory program progression  (completed, programs)
+// How many times per week swim for each SwimCategory? 
+// How to track weekly plans completed/reptitions per weekly plan (e.g. week 1 plan done twice)
