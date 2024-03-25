@@ -48,6 +48,7 @@ const main = async () => {
                 const { id: programId } = await prisma.program.create({
                     data: {
                         name: programName,
+                        order: programObj.order,
                         swimCategoryId: categoryId,
                     }
                 })

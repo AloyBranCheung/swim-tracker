@@ -43,15 +43,14 @@ enum Accessory {
 }
 
 model User {
-  id                       Int                        @id @default(autoincrement())
-  email                    String                     @unique
-  name                     String?
-  auth0Id                  String                     @unique
-  createdAt                DateTime                   @default(now())
-  updatedAt                DateTime                   @updatedAt
-  statusPosts              StatusPost[]
-  journeys                 Journey[]
-  UserSwimCategoryProgress UserSwimCategoryProgress[]
+  id          Int          @id @default(autoincrement())
+  email       String       @unique
+  name        String?
+  auth0Id     String       @unique
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  statusPosts StatusPost[]
+  journeys    Journey[]
 }
 
 model StatusPost {
@@ -88,8 +87,7 @@ model Program {
   swimCategory   SwimCategory @relation(fields: [swimCategoryId], references: [id])
   swimCategoryId Int
 
-  swimExercise             SwimExercise[]
-  UserSwimCategoryProgress UserSwimCategoryProgress[]
+  swimExercise SwimExercise[]
 }
 
 // exercises within each program/week of the week plan 

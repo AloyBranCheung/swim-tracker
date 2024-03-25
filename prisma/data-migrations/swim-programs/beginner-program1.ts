@@ -2,7 +2,7 @@ import SwimProgramBuilder from "../util/SwimProgramBuilder"
 import { ExerciseType, Accessory, ProgramLevel } from "@prisma/client"
 
 // TODO: create a web scraper instead to create a JSON?
-export const swimProgram = new SwimProgramBuilder().startBuildingProgram('Week 1').addExerciseToProgram({
+export const swimProgram = new SwimProgramBuilder().startBuildingProgram('Week 1', 1).addExerciseToProgram({
     exerciseType: ExerciseType.WARMUP,
     sets: 4,
     distance: 25,
