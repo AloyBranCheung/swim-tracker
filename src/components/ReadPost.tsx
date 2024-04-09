@@ -16,7 +16,8 @@ export default function ReadPost({ username, createdAt, msg }: ReadPostProps) {
         <p className="font-medium text-header-font">
           {username || "Err: No username found."}
         </p>
-        <p className="font-medium text-header-font">
+        {/* {warning suppressed as time is converted to local browser time from utc 0 server} */}
+        <p className="font-medium text-header-font" suppressHydrationWarning>
           {dateFormatter(createdAt)}
         </p>
       </div>
