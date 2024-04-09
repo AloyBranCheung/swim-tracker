@@ -21,6 +21,7 @@ describe("helloworld test", () => {
     );
 
     await expect(screen.getByText("helloworld")).toBeDefined();
+    await expect(screen.queryAllByText("Access Denied").length).toBe(0);
   });
 
   it("should NOT render helloworld", async () => {

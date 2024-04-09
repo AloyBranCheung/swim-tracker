@@ -14,7 +14,6 @@ export default async function AuthGuard({ children }: AuthGuardProps) {
   const session = await getServerSession();
 
   if (!session) {
-    console.log("403");
     return <Page403 />;
   }
 
