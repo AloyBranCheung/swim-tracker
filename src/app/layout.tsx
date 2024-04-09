@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 // auth
-import { UserProvider } from "@auth0/nextjs-auth0/client";
+import AuthGuard from "@/auth/AuthGuard";
 // components
 import MainLayout from "@/layout";
 
@@ -20,11 +20,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <UserProvider>
-        <body className={inter.className}>
+      <body className={inter.className}>
+        <AuthGuard>
           <MainLayout>{children}</MainLayout>
-        </body>
-      </UserProvider>
+        </AuthGuard>
+      </body>
     </html>
   );
 }

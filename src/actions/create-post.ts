@@ -1,7 +1,7 @@
 'use server'
 import { PostStatusSchema } from "@/validators/status-post"
 import prisma from '@/libs/prisma-client'
-import { getSession } from '@auth0/nextjs-auth0'
+import { auth as getSession } from '@/auth/auth-helper'
 
 
 export type FormState = {
@@ -32,7 +32,7 @@ export default async function createPost(prevState: FormState, formData: FormDat
         // get user from our own db
         const user = await prisma.user.findUnique({
             where: {
-                auth0Id: session.user.sub
+                email: session.user.email || ''
             }
         })
         if (!user) return { errors: { msg: ['Error finding user'] }, msg: formData.get('msg'), success: false }

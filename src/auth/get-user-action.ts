@@ -1,6 +1,6 @@
 'use server'
-import { getSession } from "@auth0/nextjs-auth0"
 import prisma from '@/libs/prisma-client'
+import { auth as getServerSession } from '@/auth/auth-helper'
 
 
 /** This is also an auth check for server components and return the user row
@@ -14,14 +14,15 @@ import prisma from '@/libs/prisma-client'
 
 const getUserAction = async () => {
     try {
-        const session = await getSession();
+        const session = await getServerSession();
         if (!session?.user) throw new Error("Unauthorized")
         const { user } = session;
         const dbUsr = await prisma.user.findUnique({
             where: {
-                auth0Id: user.sub
+                email: user.email || ''
             }
         })
+        if (!dbUsr) throw new Error("User not found in db.")
         return { dbUsr, auth0Usr: session.user }
     } catch (error) {
         console.error(error)
