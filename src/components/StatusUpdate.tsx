@@ -50,7 +50,7 @@ export default function StatusUpdate() {
       ref={containerRef}
       onMouseDown={() => setIsFocused(true)}
     >
-      <form action={formAction} ref={formRef}>
+      <form action={formAction} ref={formRef} data-testid="statusupdateform">
         <div className="flex h-full w-full flex-col gap-2">
           <Textarea
             onChange={handleChange}
