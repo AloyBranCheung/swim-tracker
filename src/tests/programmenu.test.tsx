@@ -31,9 +31,24 @@ describe("test ProgramMenu component", () => {
       />,
     );
 
-    expect(screen.getByText("BEGINNER")).toBeDefined();
-    expect(screen.getByText("Week 1")).toBeDefined();
-    expect(screen.getByText("Start Journey")).toBeDefined();
+    expect(screen.queryByText("BEGINNER")).not.toBeNull();
+    expect(screen.queryByText("Week 1")).not.toBeNull();
+    expect(screen.queryByText("Start Journey")).not.toBeNull();
+  });
+
+  it("should not show programs", () => {
+    render(
+      <ProgramMenu
+        programs={MOCK_PROGRAM_MENU as unknown as Programs["programs"]}
+        categoryName={"BEGINNER"}
+        isOpen={false}
+        onClose={() => {}}
+      />,
+    );
+
+    expect(screen.queryByText("BEGINNER")).toBeNull();
+    expect(screen.queryByText("Week 1")).toBeNull();
+    expect(screen.queryByText("Start Journey")).toBeNull();
   });
 
   it("should navigate to week 1 programs", async () => {
@@ -48,8 +63,8 @@ describe("test ProgramMenu component", () => {
 
     await user.click(screen.getByText("Week 1"));
 
-    expect(screen.getByText("Warmup")).toBeDefined();
-    expect(screen.getByText("Total: 525m")).toBeDefined();
+    expect(screen.queryByText("Warmup")).not.toBeNull();
+    expect(screen.queryByText("Total: 525m")).not.toBeNull();
   });
 
   it("should go back to main menu", async () => {
@@ -63,13 +78,13 @@ describe("test ProgramMenu component", () => {
     );
 
     await user.click(screen.getByText("Week 1"));
-    expect(screen.getByText("Warmup")).toBeDefined();
-    expect(screen.getByText("Total: 525m")).toBeDefined();
+    expect(screen.queryByText("Warmup")).not.toBeNull();
+    expect(screen.queryByText("Total: 525m")).not.toBeNull();
 
     await user.click(screen.getByAltText("back icon"));
 
-    expect(screen.getByText("BEGINNER")).toBeDefined();
-    expect(screen.getByText("Week 1")).toBeDefined();
-    expect(screen.getByText("Start Journey")).toBeDefined();
+    expect(screen.queryByText("BEGINNER")).not.toBeNull();
+    expect(screen.queryByText("Week 1")).not.toBeNull();
+    expect(screen.queryByText("Start Journey")).not.toBeNull();
   });
 });
