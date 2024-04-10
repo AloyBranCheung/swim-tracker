@@ -43,12 +43,13 @@ enum Accessory {
 }
 
 model User {
-  id          Int          @id @default(autoincrement())
-  email       String       @unique
-  name        String?
-  auth0Id     String       @unique
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  auth0Id   String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   statusPosts StatusPost[]
   journeys    Journey[]
 }
@@ -72,8 +73,7 @@ model SwimCategory {
   updatedAt    DateTime     @updatedAt
 
   programs Program[]
-
-  JourneySwimCategory JourneySwimCategory[]
+  Journey  Journey[]
 }
 
 // week plans inside the swim program 
@@ -88,6 +88,7 @@ model Program {
   swimCategoryId Int
 
   swimExercise SwimExercise[]
+  Journey      Journey[]
 }
 
 // exercises within each program/week of the week plan 
@@ -107,29 +108,21 @@ model SwimExercise {
 }
 
 model Journey {
-  id        Int      @id @default(autoincrement())
-  isActive  Boolean
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                  Int      @id @default(autoincrement())
+  isActive            Boolean
+  // completed steps (programIds) of swimCategoryId (swim plan/program)
+  completedProgramIds Int[]    @default([]) // put id of Program (get all Programs related to the SwimCategory for progress (amount in completed/total; calculate at runtime)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 
-  user   User @relation(fields: [userId], references: [id])
-  userId Int
-
-  JourneySwimCategory JourneySwimCategory[]
-}
-
-// relation table
-model JourneySwimCategory {
-  id Int @id @default(autoincrement())
-
-  journey   Journey @relation(fields: [journeyId], references: [id])
-  journeyId Int
-
+  // current program/plan user is following
   swimCategory   SwimCategory @relation(fields: [swimCategoryId], references: [id])
   swimCategoryId Int
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  // current step in the program/plan user is at 
+  program             Program @relation(fields: [currActiveProgramId], references: [id])
+  currActiveProgramId Int
+  User                User[]
 }
 
 // TODO: track SwimCategory program progression  (completed, programs)
