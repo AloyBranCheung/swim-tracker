@@ -16,6 +16,7 @@ interface ProgramMenuProps {
   categoryName: Programs["category"];
   isOpen: boolean;
   onClose: () => void;
+  categoryId: number;
 }
 
 export default function ProgramMenu({
@@ -23,6 +24,7 @@ export default function ProgramMenu({
   isOpen,
   onClose,
   categoryName,
+  categoryId,
 }: ProgramMenuProps) {
   const [selectedProgramId, setSelectedProgramId] = useState<number | null>(
     null,
@@ -68,7 +70,7 @@ export default function ProgramMenu({
           </div>
         </div>
         {swimExercises.length < 1 && (
-          <Button className="w-full" onClick={() => startJourney(1)}>
+          <Button className="w-full" onClick={() => startJourney(categoryId)}>
             Start Journey
           </Button>
         )}
