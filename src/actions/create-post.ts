@@ -1,7 +1,7 @@
 'use server'
 import { PostStatusSchema } from "@/validators/status-post"
 import prisma from '@/libs/prisma-client'
-import { auth as getSession } from '@/auth/auth-helper'
+import { auth } from '@/auth/auth-helper'
 import { revalidatePath } from "next/cache"
 
 
@@ -26,8 +26,10 @@ export default async function createPost(prevState: FormState, formData: FormDat
         }
     }
 
+
     try {
-        const session = await getSession();
+        const session = await auth();
+
         if (!session?.user) return { errors: { msg: ['Unauthorized'] }, msg: formData.get('msg'), success: false }
 
         // get user from our own db
