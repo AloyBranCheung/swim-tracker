@@ -2,6 +2,7 @@
 import { PostStatusSchema } from "@/validators/status-post"
 import prisma from '@/libs/prisma-client'
 import { auth as getSession } from '@/auth/auth-helper'
+import { revalidatePath } from "next/cache"
 
 
 export type FormState = {
@@ -49,6 +50,7 @@ export default async function createPost(prevState: FormState, formData: FormDat
             success: false
         }
     }
+    revalidatePath('/circle')
     // reset
     return {
         msg: '',
