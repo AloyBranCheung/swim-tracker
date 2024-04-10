@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, afterEach } from "vitest";
+import { describe, it, expect, vi, afterEach, beforeAll } from "vitest";
 import { fireEvent, render, screen, cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 // components
@@ -25,6 +25,18 @@ vi.mock("react-dom", () => ({
 }));
 
 describe("test statusupdate component", () => {
+  beforeAll(() => {
+    /* 
+    Silence below warning because jsdom/vitest is not vary compatible testing next14
+    Warning: Invalid value for prop `action` on <form> tag. Either remove it
+    from the element, or pass a string or number value to keep it in the DOM.
+    For details, see https://reactjs.org/link/attribute-behavior
+    */
+    window.global.console = {
+      ...window.global.console,
+      error: vi.fn(),
+    };
+  });
   afterEach(() => {
     cleanup(); // remove duplicate renders
   });
