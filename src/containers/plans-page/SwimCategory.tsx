@@ -14,6 +14,7 @@ interface SwimCategoryProps {
   categoryName: Programs["category"];
   programs: Programs["programs"];
   categoryDescriptions: Programs["descriptions"];
+  categoryId: number;
 }
 
 export default function SwimCategory({
@@ -21,6 +22,7 @@ export default function SwimCategory({
   categoryName,
   categoryDescriptions,
   programs,
+  categoryId,
 }: SwimCategoryProps) {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -41,6 +43,7 @@ export default function SwimCategory({
         </ul>
       </Card>
       <ProgramMenu
+        categoryId={categoryId}
         programs={programs}
         categoryName={categoryName}
         isOpen={isOpen}

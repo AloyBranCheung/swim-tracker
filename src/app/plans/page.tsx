@@ -37,6 +37,7 @@ export default async function PlansPage() {
       {swimCategories.map((category) => (
         <SwimCategory
           key={category.id}
+          categoryId={category.id}
           categoryName={category.category}
           programs={category.programs}
           categoryDescriptions={category.descriptions}
