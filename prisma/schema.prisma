@@ -51,7 +51,8 @@ model User {
   updatedAt DateTime @updatedAt
 
   statusPosts StatusPost[]
-  journeys    Journey[]
+
+  UserOnJourney UserOnJourney[]
 }
 
 model StatusPost {
@@ -122,7 +123,21 @@ model Journey {
   // current step in the program/plan user is at 
   program             Program @relation(fields: [currActiveProgramId], references: [id])
   currActiveProgramId Int
-  User                User[]
+
+  UserOnJourney UserOnJourney[]
+}
+
+model UserOnJourney {
+  id Int @id @default(autoincrement())
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+
+  journey   Journey @relation(fields: [journeyId], references: [id])
+  journeyId Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 // TODO: track SwimCategory program progression  (completed, programs)
