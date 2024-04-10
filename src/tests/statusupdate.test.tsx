@@ -61,7 +61,5 @@ describe("test statusupdate component", () => {
     expect(
       screen.queryByText("String must contain at least 1 character(s)"),
     ).not.toBeNull();
-
-    screen.debug();
   });
 });

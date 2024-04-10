@@ -5,6 +5,8 @@ import Modal from "@/components/Modal";
 
 describe("test Modal component", () => {
   beforeAll(() => {
+    // https://github.com/jsdom/jsdom/issues/3294
+    // not implemented by jsdom
     HTMLDialogElement.prototype.show = vi.fn();
     HTMLDialogElement.prototype.showModal = vi.fn();
     HTMLDialogElement.prototype.close = vi.fn();
