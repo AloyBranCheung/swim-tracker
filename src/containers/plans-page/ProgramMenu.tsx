@@ -1,4 +1,7 @@
+"use client";
 import React, { useState } from "react";
+// action
+import startJourney from "@/actions/start-journey";
 // types
 import { Programs } from "./SwimCategory";
 // components
@@ -65,7 +68,9 @@ export default function ProgramMenu({
           </div>
         </div>
         {swimExercises.length < 1 && (
-          <Button className="w-full">Start Journey</Button>
+          <Button className="w-full" onClick={() => startJourney(1)}>
+            Start Journey
+          </Button>
         )}
       </div>
     </Modal>
