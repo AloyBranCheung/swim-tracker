@@ -26,7 +26,6 @@ export default async function createPost(prevState: FormState, formData: FormDat
         }
     }
 
-
     try {
         const session = await auth();
 
