@@ -1,0 +1,2 @@
+-- AlterEnum
+ALTER TYPE "Accessory" ADD VALUE 'KICKBOARD_FINS';
