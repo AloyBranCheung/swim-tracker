@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Prisma, ProgramLevel } from "@prisma/client";
+import { Journey, Prisma, ProgramLevel } from "@prisma/client";
 // components
 import Card from "@/components/Card";
 import ProgramMenu from "./ProgramMenu";
@@ -15,6 +15,7 @@ interface SwimCategoryProps {
   programs: Programs["programs"];
   categoryDescriptions: Programs["descriptions"];
   categoryId: number;
+  currActiveJourney: Journey | null;
 }
 
 export default function SwimCategory({
@@ -23,8 +24,12 @@ export default function SwimCategory({
   categoryDescriptions,
   programs,
   categoryId,
+  currActiveJourney,
 }: SwimCategoryProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const isActiveJourney =
+    currActiveJourney && currActiveJourney.swimCategoryId == categoryId;
+
   return (
     <motion.div
       whileHover={{ scale: 1.01 }}
@@ -43,6 +48,7 @@ export default function SwimCategory({
         </ul>
       </Card>
       <ProgramMenu
+        isActiveJourney={isActiveJourney}
         categoryId={categoryId}
         programs={programs}
         categoryName={categoryName}
