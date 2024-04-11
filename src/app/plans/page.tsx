@@ -49,6 +49,7 @@ export default async function PlansPage() {
           categoryName={category.category}
           programs={category.programs}
           categoryDescriptions={category.descriptions}
+          url={category.url}
         />
       ))}
     </div>

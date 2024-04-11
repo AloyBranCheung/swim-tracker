@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Journey, Prisma, ProgramLevel } from "@prisma/client";
+import { Journey, Prisma } from "@prisma/client";
 // components
 import Card from "@/components/Card";
 import ProgramMenu from "./ProgramMenu";
@@ -16,6 +16,7 @@ interface SwimCategoryProps {
   categoryDescriptions: Programs["descriptions"];
   categoryId: number;
   currActiveJourney: Journey | null;
+  url: string;
 }
 
 export default function SwimCategory({
@@ -24,6 +25,7 @@ export default function SwimCategory({
   programs,
   categoryId,
   currActiveJourney,
+  url,
 }: SwimCategoryProps) {
   const [isOpen, setIsOpen] = useState(false);
   const isActiveJourney =
@@ -36,7 +38,10 @@ export default function SwimCategory({
       onClick={() => setIsOpen(true)}
     >
       <Card
-        className={`flex cursor-pointer flex-col gap-2 duration-300 ${categoryName === ProgramLevel.BEGINNER && "bg-beginner-swim"} ${categoryName === ProgramLevel.INTERMEDIATE && "bg-intermediate-swim"} ${categoryName === ProgramLevel.ADVANCED && "bg-advanced-swim"}`}
+        className="flex cursor-pointer flex-col gap-2 duration-300"
+        style={{
+          backgroundImage: `url(${url})`,
+        }}
       >
         <h2 className="text-2xl">{categoryName}</h2>
 
