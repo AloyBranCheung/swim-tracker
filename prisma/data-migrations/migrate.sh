@@ -9,3 +9,4 @@ npx tsx ./prisma/data-migrations/migrate-add-intermediate.ts
 npx tsx ./prisma/data-migrations/migrate-add-advanced1.ts
 npx tsx ./prisma/data-migrations/migrate-add-beginner2.ts
 npx tsx ./prisma/data-migrations/migrate-add-beginner3.ts
+npx tsx ./prisma/data-migrations/migrate-add-urls.ts
