@@ -57,7 +57,7 @@ export default function ProgramMenu({
       <div className="flex h-full flex-col gap-2">
         <div>
           <h1 className="mb-8 text-3xl text-header-font">{categoryName}</h1>
-          <div className="overflow-x-hidden">
+          <div className="flex max-h-[80vh] flex-col gap-2 overflow-x-hidden rounded-2xl">
             {swimExercises.length < 1 ? (
               menuItems
             ) : (

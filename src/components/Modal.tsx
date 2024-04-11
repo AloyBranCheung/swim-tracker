@@ -35,12 +35,12 @@ export default function Modal({ children, isOpen, onClose }: ModalProps) {
           ref={dialogRef}
           onCancel={onClose}
           initial={{ opacity: 0, scale: 0.5, y: 500 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
+          animate={{ opacity: 1, scale: 1, y: 0, height: "100vh" }}
           exit={{ opacity: 0, scale: 0.5, y: 500 }}
           transition={{ duration: 0.2, ease: "easeInOut" }}
           className="bg-app-gradient"
         >
-          <Card className="flex h-full w-full flex-col gap-2">
+          <Card className="flex h-full w-full flex-col gap-2 overflow-hidden">
             <div className="self-end">
               <CrossIcon
                 style={{ cursor: "pointer" }}
