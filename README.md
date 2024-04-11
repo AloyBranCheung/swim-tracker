@@ -2,6 +2,10 @@ Development Notes:
 
 - Use `yarn` for package management
 
+Figma:
+
+https://www.figma.com/file/o6hY8o9AzbYe5jtQ11tQga/Untitled?type=design&node-id=0%3A1&mode=design&t=OprzFzjgrOzk9cpn-1
+
 To run in development:
 
 1. `yarn install`
