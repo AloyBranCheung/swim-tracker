@@ -55,13 +55,6 @@ model User {
   journey     Journey[]
 }
 
-model UserSwimActivityLog {
-  id                Int      @id @default(autoincrement())
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-  totalDistanceSwam Int
-}
-
 model StatusPost {
   id        Int      @id @default(autoincrement())
   msg       String
@@ -118,12 +111,13 @@ model SwimExercise {
 }
 
 model Journey {
-  id                  Int      @id @default(autoincrement())
-  isActive            Boolean
+  id                   Int      @id @default(autoincrement())
+  isActive             Boolean
   // completed steps (programIds) of swimCategoryId (swim plan/program)
-  completedProgramIds Int[]    @default([]) // put id of Program (get all Programs related to the SwimCategory for progress (amount in completed/total; calculate at runtime)
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+  completedProgramIds  Int[]    @default([]) // put id of Program (get all Programs related to the SwimCategory for progress (amount in completed/total; calculate at runtime)
+  currActiveProgramRep Int      @default(0)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
 
   // current program/plan user is following
   swimCategory   SwimCategory @relation(fields: [swimCategoryId], references: [id], onDelete: Cascade)
@@ -137,6 +131,9 @@ model Journey {
   userId Int
 }
 
-// TODO: track SwimCategory program progression  (completed, programs)
-// How many times per week swim for each SwimCategory? 
-// How to track weekly plans completed/reptitions per weekly plan (e.g. week 1 plan done twice)
+model UserSwimActivityLog {
+  id                Int      @id @default(autoincrement())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  totalDistanceSwam Int
+}
