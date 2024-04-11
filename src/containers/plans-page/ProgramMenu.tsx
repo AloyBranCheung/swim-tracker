@@ -17,6 +17,7 @@ interface ProgramMenuProps {
   isOpen: boolean;
   onClose: () => void;
   categoryId: number;
+  isActiveJourney: boolean | null;
 }
 
 export default function ProgramMenu({
@@ -25,6 +26,7 @@ export default function ProgramMenu({
   onClose,
   categoryName,
   categoryId,
+  isActiveJourney,
 }: ProgramMenuProps) {
   const [selectedProgramId, setSelectedProgramId] = useState<number | null>(
     null,
@@ -70,8 +72,12 @@ export default function ProgramMenu({
           </div>
         </div>
         {swimExercises.length < 1 && (
-          <Button className="w-full" onClick={() => startJourney(categoryId)}>
-            Start Journey
+          <Button
+            isDisabled={Boolean(isActiveJourney)}
+            className="w-full"
+            onClick={() => startJourney(categoryId)}
+          >
+            {isActiveJourney ? "Journey in progress..." : "Start Journey"}
           </Button>
         )}
       </div>

@@ -18,6 +18,13 @@ export default async function PlansPage() {
     return redirect("/");
   }
 
+  const currActiveJourney = await prisma.journey.findFirst({
+    where: {
+      userId: userDetails.dbUsr.id,
+      isActive: true,
+    },
+  });
+
   const response = await prisma.swimCategory.findMany({
     include: {
       programs: {
@@ -36,6 +43,7 @@ export default async function PlansPage() {
     <div className="flex flex-col gap-2 text-header-font">
       {swimCategories.map((category) => (
         <SwimCategory
+          currActiveJourney={currActiveJourney}
           key={category.id}
           categoryId={category.id}
           categoryName={category.category}
