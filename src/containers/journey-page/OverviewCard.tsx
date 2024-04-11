@@ -13,7 +13,7 @@ export default function OverviewCard({
 }: OverviewCardProps) {
   return (
     <div
-      className="flex items-center justify-between rounded-2xl p-2"
+      className="flex h-24 items-center justify-between rounded-2xl p-2"
       style={{
         backgroundImage: `url(${url})`,
       }}

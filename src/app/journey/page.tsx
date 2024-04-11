@@ -6,6 +6,7 @@ import getUserAction from "@/auth/get-user-action";
 // components
 import OverviewCard from "@/containers/journey-page/OverviewCard";
 import StartJourney from "@/containers/journey-page/StartJourney";
+import ProgramsList from "@/containers/journey-page/ProgramsList";
 
 export default async function JourneyPage() {
   const userDetails = await getUserAction();
@@ -42,6 +43,7 @@ export default async function JourneyPage() {
             url={activeJourney?.swimCategory.url}
             programTotal={programTotal}
           />
+          <ProgramsList programs={activeJourney?.swimCategory.programs} />
         </>
       )}
     </div>
