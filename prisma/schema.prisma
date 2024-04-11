@@ -117,11 +117,11 @@ model Journey {
   updatedAt           DateTime @updatedAt
 
   // current program/plan user is following
-  swimCategory   SwimCategory @relation(fields: [swimCategoryId], references: [id])
+  swimCategory   SwimCategory @relation(fields: [swimCategoryId], references: [id], onDelete: Cascade)
   swimCategoryId Int
 
   // current step in the program/plan user is at 
-  program             Program @relation(fields: [currActiveProgramId], references: [id])
+  program             Program @relation(fields: [currActiveProgramId], references: [id], onDelete: Cascade)
   currActiveProgramId Int
 
   user   User @relation(fields: [userId], references: [id])
