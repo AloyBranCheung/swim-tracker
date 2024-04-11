@@ -40,6 +40,7 @@ enum Accessory {
   FINS
   PULLBUOY
   KICKBOARD
+  KICKBOARD_FINS
 }
 
 model User {
