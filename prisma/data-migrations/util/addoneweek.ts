@@ -30,7 +30,7 @@ const addOneWeek = async (swimProgram: WorkoutSession, category: ProgramLevel) =
 
     for (const program of swimProgram[category]) {
         if (swimCategory.programs.some((swimpro) => swimpro.name === program.programName)) {
-            logger.info("found existing program, skipping...")
+            logger.info(`${category}-${program.programName} already exists, skipping...`)
             continue
         }
 
