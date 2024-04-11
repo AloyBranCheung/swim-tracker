@@ -24,3 +24,6 @@ To add users (for now):
 2. Run `yarn migrate:data`
 
 Generate ERD:
+
+- will automatically generate when generating prisma client
+- disable with env variable `DISABLE_ERD=true`
