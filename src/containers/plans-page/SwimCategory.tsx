@@ -19,7 +19,6 @@ interface SwimCategoryProps {
 }
 
 export default function SwimCategory({
-  // TODO: add programs navigation
   categoryName,
   categoryDescriptions,
   programs,
