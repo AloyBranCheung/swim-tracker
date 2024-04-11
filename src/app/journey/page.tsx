@@ -20,9 +20,16 @@ export default async function JourneyPage() {
       isActive: true,
     },
     include: {
-      swimCategory: true,
+      swimCategory: {
+        include: {
+          programs: true,
+        },
+      },
     },
   });
+
+  const programTotal =
+    activeJourney && activeJourney?.swimCategory.programs.length;
 
   return (
     <div className="flex flex-col gap-2">
@@ -30,7 +37,11 @@ export default async function JourneyPage() {
         <StartJourney />
       ) : (
         <>
-          <OverviewCard url={activeJourney?.swimCategory.url} />
+          <OverviewCard
+            title={activeJourney?.swimCategory.category}
+            url={activeJourney?.swimCategory.url}
+            programTotal={programTotal}
+          />
         </>
       )}
     </div>
