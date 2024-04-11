@@ -16,7 +16,7 @@ interface Program {
     order: number;
 }
 
-type WorkoutSession = {
+export type WorkoutSession = {
     [key in ProgramLevel]: Program[];
 };
 
