@@ -32,6 +32,7 @@ export default function ProgramMenu({
     null,
   );
   const [swimExercises, setSwimExercises] = useState<SwimExercise[]>([]);
+  const [isActive, setIsActive] = useState(isActiveJourney);
 
   const menuItems = programs.map((program) => (
     <ProgramItemNavigation
@@ -73,11 +74,14 @@ export default function ProgramMenu({
         </div>
         {swimExercises.length < 1 && (
           <Button
-            isDisabled={Boolean(isActiveJourney)}
+            isDisabled={Boolean(isActive)}
             className="w-full"
-            onClick={() => startJourney(categoryId)}
+            onClick={() => {
+              setIsActive(true);
+              startJourney(categoryId);
+            }}
           >
-            {isActiveJourney ? "Journey in progress..." : "Start Journey"}
+            {isActive ? "Journey in progress..." : "Start Journey"}
           </Button>
         )}
       </div>
