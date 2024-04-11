@@ -77,6 +77,7 @@ model SwimCategory {
   id           Int          @id @default(autoincrement())
   category     ProgramLevel
   descriptions String[]
+  url          String
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
 
@@ -90,7 +91,6 @@ model Program {
   name      String
   order     Int // e.g. week 1, 2, 3 etc.
   reps      Int      @default(2)
-  url       String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
