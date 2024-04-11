@@ -15,6 +15,7 @@
     "migrate:dev": "yarn generate-client && dotenv -e .env.local -- yarn prisma migrate dev",
     "migrate:deploy": "dotenv -e .env.local -- yarn prisma migrate deploy",
     "migrate:data": "./prisma/data-migrations/migrate.sh",
+    "migrate:reset": "dotenv -e .env.local -- yarn prisma migrate reset && yarn migrate:data",
     "docker:dev": "docker compose -f docker-compose.dev.yml up -d --build",
     "docker:logs": "docker compose -f docker-compose.dev.yml logs -f",
     "docker:stop": "docker compose -f docker-compose.dev.yml down",

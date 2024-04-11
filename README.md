@@ -27,3 +27,8 @@ Generate ERD:
 
 - will automatically generate when generating prisma client
 - disable with env variable `DISABLE_ERD=true`
+
+Resetting DB:
+
+- `yarn prisma migrate reset`
+- `yarn migrate:data`
