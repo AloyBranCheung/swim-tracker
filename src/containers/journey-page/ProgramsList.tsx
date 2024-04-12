@@ -31,8 +31,6 @@ export default function ProgramsList({ programs }: ProgramsListProps) {
       [key: number]: Program & { swimExercise: SwimExercise[] };
     } = {};
 
-    console.log(hash);
-
     if (!programs) return hash;
 
     for (const program of programs) {
