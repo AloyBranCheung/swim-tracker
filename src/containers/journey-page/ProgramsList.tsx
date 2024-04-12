@@ -21,11 +21,13 @@ type ProgramPayload = Prisma.JourneyGetPayload<{
 interface ProgramsListProps {
   programs: ProgramPayload | null;
   currActiveProgramRep: number;
+  currActiveProgramId: number | null;
 }
 
 export default function ProgramsList({
   programs,
   currActiveProgramRep,
+  currActiveProgramId,
 }: ProgramsListProps) {
   const [currSelectedId, setCurrSelectedId] = useState<number | null>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -70,12 +72,17 @@ export default function ProgramsList({
     return sections;
   }, [exerciseMap]);
 
+  console.log(programs, selectedProgram);
+
   const menuItems = programs
     ? programs.map((program) => (
         // TODO: currActiveProgramId primary color; rest are not the
         <InteractiveCardAnimation key={program.id}>
           <Card
+            className={`${program.id === currActiveProgramId ? "bg-gray-50" : "bg-[dimgrey] disabled:cursor-not-allowed"}`}
             onClick={() => {
+              if (!currActiveProgramId || !(program.id === currActiveProgramId))
+                return;
               setCurrSelectedId(program.id);
               setIsOpen(true);
             }}

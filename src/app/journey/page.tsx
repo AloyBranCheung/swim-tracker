@@ -52,6 +52,7 @@ export default async function JourneyPage() {
           <ProgramsList
             programs={activeJourney?.swimCategory.programs}
             currActiveProgramRep={currActiveProgramRep}
+            currActiveProgramId={activeJourney?.currActiveProgramId}
           />
         </>
       )}
