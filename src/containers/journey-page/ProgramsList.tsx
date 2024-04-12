@@ -20,9 +20,13 @@ type ProgramPayload = Prisma.JourneyGetPayload<{
 
 interface ProgramsListProps {
   programs: ProgramPayload | null;
+  currActiveProgramRep: number;
 }
 
-export default function ProgramsList({ programs }: ProgramsListProps) {
+export default function ProgramsList({
+  programs,
+  currActiveProgramRep,
+}: ProgramsListProps) {
   const [currSelectedId, setCurrSelectedId] = useState<number | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -109,9 +113,7 @@ export default function ProgramsList({ programs }: ProgramsListProps) {
                 new Array(selectedProgram.reps).fill(0).map((_, i) => (
                   <div
                     key={i * Math.random()}
-                    // bg-gray-400 for not done; bg-gray-50 for done
-                    // TODO: change color based on journey.currActiveProgramRep vs program.reps
-                    className={`flex h-8 w-8 items-center justify-center rounded-full p-1`}
+                    className={`flex h-8 w-8 items-center justify-center rounded-full p-1 ${i + 1 <= currActiveProgramRep ? "bg-gray-50" : "bg-gray-400"}`}
                   >
                     <p className="text-center">{i + 1}</p>
                   </div>
