@@ -36,6 +36,8 @@ export default async function JourneyPage() {
   const programTotal =
     activeJourney && activeJourney?.swimCategory.programs.length;
 
+  const currActiveProgramRep = activeJourney?.currActiveProgramRep || 0;
+
   return (
     <div className="flex flex-col gap-2">
       {!activeJourney ? (
@@ -47,7 +49,10 @@ export default async function JourneyPage() {
             url={activeJourney?.swimCategory.url}
             programTotal={programTotal}
           />
-          <ProgramsList programs={activeJourney?.swimCategory.programs} />
+          <ProgramsList
+            programs={activeJourney?.swimCategory.programs}
+            currActiveProgramRep={currActiveProgramRep}
+          />
         </>
       )}
     </div>
