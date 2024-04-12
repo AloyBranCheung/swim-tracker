@@ -23,7 +23,11 @@ export default async function JourneyPage() {
     include: {
       swimCategory: {
         include: {
-          programs: true,
+          programs: {
+            include: {
+              swimExercise: true,
+            },
+          },
         },
       },
     },

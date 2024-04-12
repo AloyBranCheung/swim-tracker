@@ -50,7 +50,9 @@ export default function Modal({ children, isOpen, onClose }: ModalProps) {
                 }}
               />
             </div>
-            {children}
+            <div className="h-full overflow-y-hidden rounded-2xl">
+              {children}
+            </div>
           </Card>
         </StyledDialog>
       )}
