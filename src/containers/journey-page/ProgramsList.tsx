@@ -4,9 +4,11 @@ import React, { useMemo, useState } from "react";
 import orderSwimExercises from "@/utils/swim-exercises";
 // components
 import Card from "@/components/Card";
-import { Prisma } from "@prisma/client";
+import { Prisma, Program, SwimExercise } from "@prisma/client";
 import InteractiveCardAnimation from "@/animations/InteractiveCardAnimation";
 import Modal from "@/components/Modal";
+import ExerciseSection from "../plans-page/ExerciseSection";
+import Button from "@/components/Button";
 
 type ProgramPayload = Prisma.JourneyGetPayload<{
   include: {
@@ -26,10 +28,10 @@ export default function ProgramsList({ programs }: ProgramsListProps) {
 
   const programsHash = useMemo(() => {
     const hash: {
-      [key: number]: Prisma.ProgramGetPayload<{
-        include: { swimExercise: true };
-      }>;
+      [key: number]: Program & { swimExercise: SwimExercise[] };
     } = {};
+
+    console.log(hash);
 
     if (!programs) return hash;
 
@@ -44,15 +46,31 @@ export default function ProgramsList({ programs }: ProgramsListProps) {
 
   const selectedProgram = currSelectedId && programsHash[currSelectedId];
 
-  const exercises = useMemo(() => {
-    if (!selectedProgram) return {};
+  const { exerciseMap, totalDistance, unit } = useMemo(() => {
+    if (!selectedProgram)
+      return { exerciseMap: new Map(), totalDistance: 0, unit: "" };
     return orderSwimExercises(selectedProgram.swimExercise);
   }, [selectedProgram]);
 
-  console.log(exercises);
+  const exerciseSections = useMemo(() => {
+    const sections: JSX.Element[] = [];
+    // es2015
+    // for (const [type, exercises] of exerciseMap) {
+    //   sections.push(
+    //     <ExerciseSection key={type} type={type} exercises={exercises} />,
+    //   );
+    // }
+    exerciseMap.forEach((exercises, type) => {
+      sections.push(
+        <ExerciseSection key={type} type={type} exercises={exercises} />,
+      );
+    });
+    return sections;
+  }, [exerciseMap]);
 
   const menuItems = programs
     ? programs.map((program) => (
+        // TODO: currActiveProgramId primary color; rest are not the
         <InteractiveCardAnimation key={program.id}>
           <Card
             onClick={() => {
@@ -66,8 +84,7 @@ export default function ProgramsList({ programs }: ProgramsListProps) {
       ))
     : [];
 
-  // TODO: make picture background component
-  // TODO: modal for 'done'
+  // TODO: fix overflow problem beginner week 2
 
   return (
     <Card className="flex flex-col gap-2">
@@ -76,9 +93,35 @@ export default function ProgramsList({ programs }: ProgramsListProps) {
         isOpen={isOpen}
         onClose={() => {
           setIsOpen(false);
+          setCurrSelectedId(null);
         }}
       >
-        <div>helloworld</div>
+        <Card className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">{exerciseSections}</div>
+          <h3 className="text-lg font-semibold">
+            Total: {totalDistance}
+            {unit}
+          </h3>
+          <Card className="flex flex-col items-center justify-center gap-2">
+            <p>
+              Do it {selectedProgram && selectedProgram.reps} times to complete
+            </p>
+            <div className="flex items-center justify-center gap-2">
+              {selectedProgram &&
+                new Array(selectedProgram.reps).fill(0).map((_, i) => (
+                  <div
+                    key={i * Math.random()}
+                    // bg-gray-400 for not done; bg-gray-50 for done
+                    // TODO: change color based on journey.currActiveProgramRep vs program.reps
+                    className={`flex h-8 w-8 items-center justify-center rounded-full p-1`}
+                  >
+                    <p className="text-center">{i + 1}</p>
+                  </div>
+                ))}
+            </div>
+          </Card>
+          <Button className="w-full">I have done this today!</Button>
+        </Card>
       </Modal>
     </Card>
   );

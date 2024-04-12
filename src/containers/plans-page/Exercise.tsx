@@ -10,6 +10,7 @@ export default function Exercise({ swimExercise }: ExerciseProps) {
     <div>
       <h3 className="text-lg font-medium">
         {swimExercise.sets} x {swimExercise.distance}
+        {swimExercise.unit}
       </h3>
       <p className="text-sm">
         {swimExercise.accessory &&
