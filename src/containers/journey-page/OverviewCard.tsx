@@ -4,12 +4,14 @@ interface OverviewCardProps {
   url: string | undefined;
   title: string | undefined;
   programTotal: number | null;
+  completedCount: number;
 }
 
 export default function OverviewCard({
   url,
   title,
   programTotal,
+  completedCount,
 }: OverviewCardProps) {
   return (
     <div
@@ -20,8 +22,10 @@ export default function OverviewCard({
     >
       <h1 className="text-lg font-semibold text-header-font">{title}</h1>
       <div className="flex flex-col items-end gap-2">
-        <p className="text-header-font">{`completed/${programTotal}`}</p>
-        <p className="text-header-font">completed%</p>
+        <p className="text-header-font">{`${completedCount}/${programTotal}`}</p>
+        <p className="text-header-font">
+          {programTotal && ((completedCount / programTotal) * 100).toFixed(0)}%
+        </p>
       </div>
     </div>
   );
