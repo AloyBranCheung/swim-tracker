@@ -37,6 +37,7 @@ const progressJourney = async () => {
     const goalRep = currJourney.program.reps
     const currRep = currJourney.currActiveProgramRep
 
+    // user has a 1 day timeout before they can complete the next swim (assumes swimming once a day)
     if (!isNextDay(currJourney.timeRepLastCompleted)) return
 
     // e.g. 1 < 3 but on completion will be 2/3 but not 3/3
