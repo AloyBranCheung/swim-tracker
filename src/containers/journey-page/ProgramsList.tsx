@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import classNames from "classnames";
 // util
 import orderSwimExercises from "@/utils/swim-exercises";
@@ -39,6 +39,7 @@ export default function ProgramsList({
 }: ProgramsListProps) {
   const [currSelectedId, setCurrSelectedId] = useState<number | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [currentRep, setCurrentRep] = useState(currActiveProgramRep);
 
   // convert array to hashmap for easy access data
   const programsHash = useMemo(() => {
@@ -141,6 +142,17 @@ export default function ProgramsList({
       ))
     : [];
 
+  const handleClickProgressJourney = () => {
+    setCurrentRep(currentRep + 1);
+    progressJourney();
+  };
+
+  useEffect(() => {
+    if (currActiveProgramRep === 0) {
+      setCurrentRep(0);
+    }
+  }, [currActiveProgramRep]);
+
   return (
     <Card className="flex flex-col gap-2">
       {menuItems}
@@ -179,7 +191,7 @@ export default function ProgramsList({
                     // show completed icon if the current iteration is less than
                     // the user's current program rep and the selected program
                     // is the same as the active program
-                    (i + 1 <= currActiveProgramRep &&
+                    (i + 1 <= currentRep &&
                       currActiveProgramId === selectedProgram.id) ||
                     // or is completed program
                     isSelectedACompletedProgram;
@@ -203,7 +215,7 @@ export default function ProgramsList({
               // disable if the selected program is the same as the active program AND the current program reps done is the same as the goal/total program reps
               (currSelectedId === currActiveProgramId &&
                 selectedProgram &&
-                selectedProgram.reps === currActiveProgramRep) ||
+                selectedProgram.reps === currentRep) ||
               // or disable if the selected program is a completed program (included in the completed programs array from the DB)
               isSelectedACompletedProgram ||
               // or disable if the current active program is not the same as the
@@ -213,15 +225,13 @@ export default function ProgramsList({
               currActiveProgramId !== (selectedProgram && selectedProgram.id)
             }
             className="h-16 w-full"
-            onClick={() => {
-              progressJourney();
-            }}
+            onClick={handleClickProgressJourney}
           >
             {
               // show completed if the selected program is the active program and the completed reps is the same as the goal reps
               (currSelectedId === currActiveProgramId &&
                 selectedProgram &&
-                selectedProgram.reps === currActiveProgramRep) ||
+                selectedProgram.reps === currentRep) ||
               // or show completed if the active program is not the same as the selected program and the selected program is a completed program
               (currActiveProgramId !==
                 (selectedProgram && selectedProgram.id) &&
