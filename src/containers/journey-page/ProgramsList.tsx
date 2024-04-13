@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 import classNames from "classnames";
+import { twMerge } from "tailwind-merge";
 // util
 import orderSwimExercises from "@/utils/swim-exercises";
 // actions
@@ -120,23 +121,30 @@ export default function ProgramsList({
           key={program.id}
         >
           <Card
-            className={classNames({
-              // show active style if the program is the current active program and not a completed program
-              "bg-gray-50":
-                program.id === currActiveProgramId &&
-                !isActiveACompletedProgram,
-              // show disable style if program is not the active program or is a completed program
-              "bg-[dimgrey]":
-                program.id !== currActiveProgramId || isActiveACompletedProgram,
-              // show disable style if program is ahead (order) of the active program
-              "cursor-default":
-                currActiveProgramId &&
-                programsHash[program.id].order >
-                  programsHash[currActiveProgramId].order,
-            })}
+            className={twMerge(
+              classNames({
+                // show active style if the program is the current active program and not a completed program
+                "bg-gray-50":
+                  program.id === currActiveProgramId &&
+                  !isActiveACompletedProgram,
+                // show disable style if program is not the active program or is a completed program
+                "bg-[dimgrey]":
+                  program.id !== currActiveProgramId ||
+                  isActiveACompletedProgram,
+                // show disable style if program is ahead (order) of the active program
+                "cursor-default":
+                  currActiveProgramId &&
+                  programsHash[program.id].order >
+                    programsHash[currActiveProgramId].order,
+              }),
+              "space-between flex w-full items-center",
+            )}
             onClick={() => handleClickOpenProgram(program)}
           >
-            <p className="font-semibold text-header-font">{program.name}</p>
+            <p className="w-full font-semibold text-header-font">
+              {program.name}
+            </p>
+            {completedProgramIds.includes(program.id) && <p>✅</p>}
           </Card>
         </InteractiveCardAnimation>
       ))
