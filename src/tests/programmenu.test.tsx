@@ -9,12 +9,17 @@ import { Programs } from "@/containers/plans-page/SwimCategory";
 
 const user = userEvent.setup();
 
+vi.mock("@/actions/start-journey");
+
 describe("test ProgramMenu component", () => {
   beforeAll(() => {
     // https://github.com/jsdom/jsdom/issues/3294 not implemented by jsdom
     HTMLDialogElement.prototype.show = vi.fn();
     HTMLDialogElement.prototype.showModal = vi.fn();
     HTMLDialogElement.prototype.close = vi.fn();
+
+    // @ts-expect-error - not implemented by jsdom
+    window.scrollTo = vi.fn();
   });
 
   afterEach(() => {
@@ -28,12 +33,33 @@ describe("test ProgramMenu component", () => {
         categoryName={"BEGINNER"}
         isOpen
         onClose={() => {}}
+        categoryId={0}
+        isActiveJourney={false}
+        isJourneyCompleted={undefined}
       />,
     );
 
     expect(screen.queryByText("BEGINNER")).not.toBeNull();
     expect(screen.queryByText("Week 1")).not.toBeNull();
     expect(screen.queryByText("Start Journey")).not.toBeNull();
+  });
+
+  it("should show journey in progress", () => {
+    render(
+      <ProgramMenu
+        programs={MOCK_PROGRAM_MENU as unknown as Programs["programs"]}
+        categoryName={"BEGINNER"}
+        isOpen
+        onClose={() => {}}
+        categoryId={0}
+        isActiveJourney={true}
+        isJourneyCompleted={undefined}
+      />,
+    );
+
+    expect(screen.queryByText("BEGINNER")).not.toBeNull();
+    expect(screen.queryByText("Week 1")).not.toBeNull();
+    expect(screen.queryByText("Journey in progress...")).not.toBeNull();
   });
 
   it("should not show programs", () => {
@@ -43,6 +69,9 @@ describe("test ProgramMenu component", () => {
         categoryName={"BEGINNER"}
         isOpen={false}
         onClose={() => {}}
+        categoryId={0}
+        isActiveJourney={false}
+        isJourneyCompleted={undefined}
       />,
     );
 
@@ -58,6 +87,9 @@ describe("test ProgramMenu component", () => {
         categoryName={"BEGINNER"}
         isOpen
         onClose={() => {}}
+        categoryId={0}
+        isActiveJourney={false}
+        isJourneyCompleted={undefined}
       />,
     );
 
@@ -67,6 +99,27 @@ describe("test ProgramMenu component", () => {
     expect(screen.queryByText("Total: 525m")).not.toBeNull();
   });
 
+  it("should fire start journey function once", async () => {
+    const mockedFn = vi.fn();
+    const mockStartJourney = await import("@/actions/start-journey");
+    mockStartJourney.default = mockedFn;
+    render(
+      <ProgramMenu
+        programs={MOCK_PROGRAM_MENU as unknown as Programs["programs"]}
+        categoryName={"BEGINNER"}
+        isOpen
+        onClose={() => {}}
+        categoryId={0}
+        isActiveJourney={false}
+        isJourneyCompleted={undefined}
+      />,
+    );
+
+    await user.click(screen.getByText("Start Journey"));
+
+    expect(mockedFn).toHaveBeenCalledOnce();
+  });
+
   it("should go back to main menu", async () => {
     render(
       <ProgramMenu
@@ -74,6 +127,9 @@ describe("test ProgramMenu component", () => {
         categoryName={"BEGINNER"}
         isOpen
         onClose={() => {}}
+        categoryId={0}
+        isActiveJourney={false}
+        isJourneyCompleted={undefined}
       />,
     );
 
