@@ -59,7 +59,8 @@ const progressJourney = async () => {
                     },
                     data: {
                         currActiveProgramRep: currJourney.currActiveProgramRep + 1,
-                        completedProgramIds: currJourney.completedProgramIds
+                        completedProgramIds: currJourney.completedProgramIds,
+                        isCompleted: true,
                     }
                 })
                 revalidatePath('/journey')

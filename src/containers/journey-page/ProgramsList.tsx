@@ -27,6 +27,7 @@ interface ProgramsListProps {
   currActiveProgramRep: number;
   currActiveProgramId: number | null;
   completedProgramIds: number[];
+  isJourneyCompleted: boolean;
 }
 
 export default function ProgramsList({
@@ -34,6 +35,7 @@ export default function ProgramsList({
   currActiveProgramRep,
   currActiveProgramId,
   completedProgramIds,
+  isJourneyCompleted,
 }: ProgramsListProps) {
   const [currSelectedId, setCurrSelectedId] = useState<number | null>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -142,12 +144,15 @@ export default function ProgramsList({
   return (
     <Card className="flex flex-col gap-2">
       {menuItems}
-      <Card className="flex flex-col items-center justify-center gap-2">
-        <p className="font-bold text-header-font">
-          Congrats on finishing your swim journey!
-        </p>
-        <ApplauseButton />
-      </Card>
+      {isJourneyCompleted && (
+        <Card className="flex flex-col items-center justify-center gap-2">
+          <p className="font-bold text-header-font">
+            Congrats on finishing your swim journey!
+          </p>
+          <ApplauseButton />
+        </Card>
+      )}
+
       <Modal
         isOpen={isOpen}
         onClose={() => {
