@@ -120,6 +120,7 @@ export default async function JourneyPage() {
             currActiveProgramRep={currActiveProgramRep}
             currActiveProgramId={activeJourney?.currActiveProgramId}
             completedProgramIds={activeJourney?.completedProgramIds}
+            isJourneyCompleted={activeJourney?.isCompleted}
           />
         </>
       )}
