@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import classNames from "classnames";
 // action
 import startJourney from "@/actions/start-journey";
 // types
@@ -18,6 +19,7 @@ interface ProgramMenuProps {
   onClose: () => void;
   categoryId: number;
   isActiveJourney: boolean | null;
+  isJourneyCompleted: boolean | undefined;
 }
 
 export default function ProgramMenu({
@@ -27,6 +29,7 @@ export default function ProgramMenu({
   categoryName,
   categoryId,
   isActiveJourney,
+  isJourneyCompleted,
 }: ProgramMenuProps) {
   const [selectedProgramId, setSelectedProgramId] = useState<number | null>(
     null,
@@ -81,7 +84,11 @@ export default function ProgramMenu({
               startJourney(categoryId);
             }}
           >
-            {isActive ? "Journey in progress..." : "Start Journey"}
+            {classNames({
+              "Journey in progress...": isActive && !isJourneyCompleted,
+              "Start Journey": !isActive && !isJourneyCompleted,
+              "Journey completed!": isJourneyCompleted,
+            })}
           </Button>
         )}
       </div>

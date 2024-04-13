@@ -52,6 +52,7 @@ export default function SwimCategory({
         </ul>
       </Card>
       <ProgramMenu
+        isJourneyCompleted={currActiveJourney?.isCompleted}
         isActiveJourney={isActiveJourney}
         categoryId={categoryId}
         programs={programs}
