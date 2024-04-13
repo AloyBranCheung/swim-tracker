@@ -120,12 +120,14 @@ export default function ProgramsList({
           setCurrSelectedId(null);
         }}
       >
-        <Card className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">{exerciseSections}</div>
-          <h3 className="text-lg font-semibold">
-            Total: {totalDistance}
-            {unit}
-          </h3>
+        <Card className="flex h-full flex-col gap-4">
+          <div className="h-full overflow-y-scroll">
+            <div className="flex flex-col gap-2">{exerciseSections}</div>
+            <h3 className="text-lg font-semibold">
+              Total: {totalDistance}
+              {unit}
+            </h3>
+          </div>
           <Card className="flex flex-col items-center justify-center gap-2">
             <p>
               Do it {selectedProgram && selectedProgram.reps} times to complete
@@ -159,7 +161,7 @@ export default function ProgramsList({
               isCompletedProgram ||
               currActiveProgramId !== (selectedProgram && selectedProgram.id)
             }
-            className="w-full"
+            className="h-16 w-full"
             onClick={() => {
               progressJourney();
             }}
