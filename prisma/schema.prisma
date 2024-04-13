@@ -137,4 +137,5 @@ model UserSwimActivityLog {
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
   totalDistanceSwam Int
+  unit              Unit
 }
