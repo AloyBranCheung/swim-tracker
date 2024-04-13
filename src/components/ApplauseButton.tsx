@@ -23,6 +23,17 @@ export default function ApplauseButton() {
       },
     });
 
+    const ground = Bodies.rectangle(cw / 2, ch, cw, 64 * 2, {
+      isStatic: true,
+      render: {
+        fillStyle: "transparent",
+        strokeStyle: "transparent",
+        lineWidth: 0,
+      },
+    });
+
+    Composite.add(engine.current.world, [ground]);
+
     Render.run(render);
 
     const runner = Runner.create();
@@ -65,7 +76,7 @@ export default function ApplauseButton() {
   return (
     <>
       <div
-        className="pointer-events-none absolute h-full w-full pb-20"
+        className="pointer-events-none fixed top-0 h-full w-full pb-20"
         ref={scene}
       ></div>
       <Button onClick={testAdd}>applause 👏</Button>
