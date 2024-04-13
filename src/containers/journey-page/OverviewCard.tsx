@@ -22,9 +22,12 @@ export default function OverviewCard({
     >
       <h1 className="text-lg font-semibold text-header-font">{title}</h1>
       <div className="flex flex-col items-end gap-2">
-        <p className="text-header-font">{`${completedCount}/${programTotal}`}</p>
+        <p className="text-header-font">
+          {`${completedCount}/${programTotal}`} swims
+        </p>
         <p className="text-header-font">
           {programTotal && ((completedCount / programTotal) * 100).toFixed(0)}%
+          completion
         </p>
       </div>
     </div>
