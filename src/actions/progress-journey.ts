@@ -6,6 +6,7 @@ import getUserAction from "@/auth/get-user-action";
 import prisma from "@/libs/prisma-client";
 // utils
 import { calculateTotalDistanceSwam } from "@/utils/swim-exercises";
+import { isNextDay } from "@/utils/dayjs";
 
 const progressJourney = async () => {
     const user = await getUserAction();
@@ -36,6 +37,8 @@ const progressJourney = async () => {
     const goalRep = currJourney.program.reps
     const currRep = currJourney.currActiveProgramRep
 
+    if (!isNextDay(currJourney.timeRepLastCompleted)) return
+
     // e.g. 1 < 3 but on completion will be 2/3 but not 3/3
     if ((currRep < goalRep) && (currRep !== goalRep - 1)) {
         // +1 to curr program rep 
@@ -44,7 +47,8 @@ const progressJourney = async () => {
                 id: currJourney.id,
             },
             data: {
-                currActiveProgramRep: currRep + 1
+                currActiveProgramRep: currRep + 1,
+                timeRepLastCompleted: new Date().toISOString()
             }
         })
 
@@ -78,6 +82,7 @@ const progressJourney = async () => {
                         currActiveProgramRep: currJourney.currActiveProgramRep + 1,
                         completedProgramIds: currJourney.completedProgramIds,
                         isCompleted: true,
+                        timeRepLastCompleted: new Date().toISOString()
                     }
                 })
                 // add activity log for distance swam 
@@ -105,7 +110,8 @@ const progressJourney = async () => {
             data: {
                 currActiveProgramId: nextProgram.id,
                 currActiveProgramRep: 0,
-                completedProgramIds: currJourney.completedProgramIds
+                completedProgramIds: currJourney.completedProgramIds,
+                timeRepLastCompleted: new Date().toISOString()
             }
         })
         // add activity log for distance swam 

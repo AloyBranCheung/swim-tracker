@@ -1,4 +1,5 @@
 'use server'
+import dayjs from 'dayjs'
 import prisma from '@/libs/prisma-client'
 import getUserAction from '@/auth/get-user-action'
 import { redirect } from 'next/navigation'
@@ -58,7 +59,8 @@ const startJourney = async (swimCategoryId: number) => {
                 swimCategoryId,
                 userId: Number(userId),
                 isActive: true,
-                currActiveProgramId: program.id
+                currActiveProgramId: program.id,
+                timeRepLastCompleted: dayjs(new Date()).subtract(2, 'day').toISOString()
             }
         })
     }
