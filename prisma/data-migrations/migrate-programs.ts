@@ -21,7 +21,7 @@ const main = async () => {
     // populate swim program categories
     const categories = await prisma.swimCategory.findMany();
     if (categories.length < 1) {
-        const programLevels = Object.values(ProgramLevel).map((level) => ({ category: level }))
+        const programLevels = Object.values(ProgramLevel).map((level) => ({ category: level, url: '' }))
         await prisma.swimCategory.createMany({
             data: programLevels
         })

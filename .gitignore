@@ -39,4 +39,12 @@ next-env.d.ts
 
 # databases
 databases/
+
+# storybook
 *storybook.log
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

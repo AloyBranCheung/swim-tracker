@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
+    "test:e2e": "npx playwright test",
     "test:dev": "vitest --watch",
     "generate-client": "yarn prisma generate",
     "db:push": "dotenv -e .env.local -- yarn prisma db push",
@@ -47,6 +48,7 @@
   "devDependencies": {
     "@chromatic-com/storybook": "1.2.25",
     "@mermaid-js/mermaid-cli": "^10.8.0",
+    "@playwright/test": "^1.43.1",
     "@storybook/addon-essentials": "^8.0.4",
     "@storybook/addon-interactions": "^8.0.4",
     "@storybook/addon-links": "^8.0.4",
