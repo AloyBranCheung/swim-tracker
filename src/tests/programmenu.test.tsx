@@ -143,4 +143,18 @@ describe("test ProgramMenu component", () => {
     expect(screen.queryByText("Week 1")).not.toBeNull();
     expect(screen.queryByText("Start Journey")).not.toBeNull();
   });
+
+  it("should render Journey completed!", async () => {
+    render(
+      <ProgramMenu
+        programs={MOCK_PROGRAM_MENU as unknown as Programs["programs"]}
+        categoryName={"BEGINNER"}
+        isOpen
+        onClose={() => {}}
+        categoryId={0}
+        isActiveJourney={false}
+        isJourneyCompleted={true}
+      />,
+    );
+  });
 });

@@ -6,9 +6,10 @@
     "plugin:storybook/recommended"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "testing-library"],
   "root": true,
   "rules": {
-    "no-console": "warn"
+    "no-console": "warn",
+    "testing-library/no-debugging-utils": "error"
   }
 }
