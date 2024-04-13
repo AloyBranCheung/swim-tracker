@@ -53,6 +53,7 @@ export default async function JourneyPage() {
             programs={activeJourney?.swimCategory.programs}
             currActiveProgramRep={currActiveProgramRep}
             currActiveProgramId={activeJourney?.currActiveProgramId}
+            completedProgramIds={activeJourney?.completedProgramIds}
           />
         </>
       )}

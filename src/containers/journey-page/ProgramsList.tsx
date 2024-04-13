@@ -2,6 +2,8 @@
 import React, { useMemo, useState } from "react";
 // util
 import orderSwimExercises from "@/utils/swim-exercises";
+// actions
+import progressJourney from "@/actions/progress-journey";
 // components
 import Card from "@/components/Card";
 import { Prisma, Program, SwimExercise } from "@prisma/client";
@@ -22,12 +24,14 @@ interface ProgramsListProps {
   programs: ProgramPayload | null;
   currActiveProgramRep: number;
   currActiveProgramId: number | null;
+  completedProgramIds: number[];
 }
 
 export default function ProgramsList({
   programs,
   currActiveProgramRep,
   currActiveProgramId,
+  completedProgramIds,
 }: ProgramsListProps) {
   const [currSelectedId, setCurrSelectedId] = useState<number | null>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -56,6 +60,11 @@ export default function ProgramsList({
     return orderSwimExercises(selectedProgram.swimExercise);
   }, [selectedProgram]);
 
+  const isCompletedProgram = useMemo(
+    () => completedProgramIds.includes(currSelectedId as number),
+    [completedProgramIds, currSelectedId],
+  );
+
   const exerciseSections = useMemo(() => {
     const sections: JSX.Element[] = [];
     // es2015
@@ -72,28 +81,34 @@ export default function ProgramsList({
     return sections;
   }, [exerciseMap]);
 
-  console.log(programs, selectedProgram);
+  const handleClickOpenProgram = (program: Program) => {
+    if (
+      !currActiveProgramId ||
+      program.order > programsHash[currActiveProgramId].order
+    )
+      return;
+    setCurrSelectedId(program.id);
+    setIsOpen(true);
+  };
 
   const menuItems = programs
     ? programs.map((program) => (
-        // TODO: currActiveProgramId primary color; rest are not the
-        <InteractiveCardAnimation key={program.id}>
+        <InteractiveCardAnimation
+          isDisabled={
+            !currActiveProgramId ||
+            program.order > programsHash[currActiveProgramId].order
+          }
+          key={program.id}
+        >
           <Card
             className={`${program.id === currActiveProgramId ? "bg-gray-50" : "bg-[dimgrey] disabled:cursor-not-allowed"}`}
-            onClick={() => {
-              if (!currActiveProgramId || !(program.id === currActiveProgramId))
-                return;
-              setCurrSelectedId(program.id);
-              setIsOpen(true);
-            }}
+            onClick={() => handleClickOpenProgram(program)}
           >
             <p className="font-semibold text-header-font">{program.name}</p>
           </Card>
         </InteractiveCardAnimation>
       ))
     : [];
-
-  // TODO: fix overflow problem beginner week 2
 
   return (
     <Card className="flex flex-col gap-2">
@@ -117,17 +132,46 @@ export default function ProgramsList({
             </p>
             <div className="flex items-center justify-center gap-2">
               {selectedProgram &&
-                new Array(selectedProgram.reps).fill(0).map((_, i) => (
-                  <div
-                    key={i * Math.random()}
-                    className={`flex h-8 w-8 items-center justify-center rounded-full p-1 ${i + 1 <= currActiveProgramRep ? "bg-gray-50" : "bg-gray-400"}`}
-                  >
-                    <p className="text-center">{i + 1}</p>
-                  </div>
-                ))}
+                new Array(selectedProgram.reps).fill(0).map((_, i) => {
+                  const isRepCompleted =
+                    (i + 1 <= currActiveProgramRep &&
+                      currActiveProgramId === selectedProgram.id) ||
+                    isCompletedProgram;
+
+                  return (
+                    <div
+                      key={i * Math.random()}
+                      className={`flex h-8 w-8 items-center justify-center rounded-full p-1 ${isRepCompleted ? "bg-gray-50" : "bg-gray-400"}`}
+                    >
+                      <p className="text-center">
+                        {isRepCompleted ? "✔️" : i + 1}
+                      </p>
+                    </div>
+                  );
+                })}
             </div>
           </Card>
-          <Button className="w-full">I have done this today!</Button>
+          <Button
+            isDisabled={
+              (currSelectedId === currActiveProgramId &&
+                selectedProgram &&
+                selectedProgram.reps === currActiveProgramRep) ||
+              isCompletedProgram ||
+              currActiveProgramId !== (selectedProgram && selectedProgram.id)
+            }
+            className="w-full"
+            onClick={() => {
+              progressJourney();
+            }}
+          >
+            {(currSelectedId === currActiveProgramId &&
+              selectedProgram &&
+              selectedProgram.reps === currActiveProgramRep) ||
+            (currActiveProgramId !== (selectedProgram && selectedProgram.id) &&
+              isCompletedProgram)
+              ? "Completed"
+              : "I have done this today!"}
+          </Button>
         </Card>
       </Modal>
     </Card>
