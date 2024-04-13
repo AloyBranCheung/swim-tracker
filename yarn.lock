@@ -2812,6 +2812,11 @@
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.17.0.tgz#d774355e41f372d5350a4d0714abb48194a489c3"
   integrity sha512-t7dhREVv6dbNj0q17X12j7yDG4bD/DHYX7o5/DbDxobP0HnGPgpRz2Ej77aL7TZT3DSw13fqUTj8J4mMnqa7WA==
 
+"@types/matter-js@^0.19.6":
+  version "0.19.6"
+  resolved "https://registry.yarnpkg.com/@types/matter-js/-/matter-js-0.19.6.tgz#2fe5f3702573365272419c69f30c64158c5309ec"
+  integrity sha512-ffk6tqJM5scla+ThXmnox+mdfCo3qYk6yMjQsNcrbo6eQ5DqorVdtnaL+1agCoYzxUjmHeiNB7poBMAmhuLY7w==
+
 "@types/mdx@^2.0.0":
   version "2.0.12"
   resolved "https://registry.yarnpkg.com/@types/mdx/-/mdx-2.0.12.tgz#38db34cc8999b982beaec01399620bee6c65ef2e"
@@ -7321,6 +7326,11 @@ markdown-to-jsx@7.3.2:
   version "7.3.2"
   resolved "https://registry.yarnpkg.com/markdown-to-jsx/-/markdown-to-jsx-7.3.2.tgz#f286b4d112dad3028acc1e77dfe1f653b347e131"
   integrity sha512-B+28F5ucp83aQm+OxNrPkS8z0tMKaeHiy0lHJs3LqCyDQFtWuenaIrkaVTgAm1pf1AU85LXltva86hlaT17i8Q==
+
+matter-js@^0.19.0:
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/matter-js/-/matter-js-0.19.0.tgz#185e518146ae4fa20c33826ebc7e6e42685e3642"
+  integrity sha512-v2huwvQGOHTGOkMqtHd2hercCG3f6QAObTisPPHg8TZqq2lz7eIY/5i/5YUV8Ibf3mEioFEmwibcPUF2/fnKKQ==
 
 md5.js@^1.3.4:
   version "1.3.5"

@@ -12,6 +12,7 @@ import InteractiveCardAnimation from "@/animations/InteractiveCardAnimation";
 import Modal from "@/components/Modal";
 import ExerciseSection from "../plans-page/ExerciseSection";
 import Button from "@/components/Button";
+import ApplauseButton from "@/components/ApplauseButton";
 
 type ProgramPayload = Prisma.JourneyGetPayload<{
   include: {
@@ -141,6 +142,12 @@ export default function ProgramsList({
   return (
     <Card className="flex flex-col gap-2">
       {menuItems}
+      <Card className="flex flex-col items-center justify-center gap-2">
+        <p className="font-bold text-header-font">
+          Congrats on finishing your swim journey!
+        </p>
+        <ApplauseButton />
+      </Card>
       <Modal
         isOpen={isOpen}
         onClose={() => {
