@@ -1,7 +1,10 @@
 import { expect, afterEach, describe, it, vi, beforeAll } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 // components
 import Modal from "@/components/Modal";
+
+const user = userEvent.setup();
 
 describe("test Modal component", () => {
   beforeAll(() => {
@@ -10,6 +13,9 @@ describe("test Modal component", () => {
     HTMLDialogElement.prototype.show = vi.fn();
     HTMLDialogElement.prototype.showModal = vi.fn();
     HTMLDialogElement.prototype.close = vi.fn();
+
+    // @ts-expect-error - not implemented by jsdom
+    window.scrollTo = vi.fn();
   });
 
   afterEach(() => {
@@ -38,5 +44,20 @@ describe("test Modal component", () => {
     );
 
     expect(screen.queryByText("helloworld")).toBeNull();
+  });
+
+  it("should fire the onClose once", async () => {
+    const mockClose = vi.fn();
+    render(
+      <div>
+        <Modal isOpen={true} onClose={mockClose}>
+          <div>helloworld</div>
+        </Modal>
+      </div>,
+    );
+
+    await user.click(screen.getByAltText("exit icon"));
+
+    expect(mockClose).toHaveBeenCalledOnce();
   });
 });
