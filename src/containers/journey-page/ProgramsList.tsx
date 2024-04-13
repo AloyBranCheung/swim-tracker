@@ -14,6 +14,7 @@ import Modal from "@/components/Modal";
 import ExerciseSection from "../plans-page/ExerciseSection";
 import Button from "@/components/Button";
 import ApplauseButton from "@/components/ApplauseButton";
+import { isNextDay } from "@/utils/dayjs";
 
 type ProgramPayload = Prisma.JourneyGetPayload<{
   include: {
@@ -29,6 +30,7 @@ interface ProgramsListProps {
   currActiveProgramId: number | null;
   completedProgramIds: number[];
   isJourneyCompleted: boolean;
+  timeLastCompleted: Date;
 }
 
 export default function ProgramsList({
@@ -37,10 +39,12 @@ export default function ProgramsList({
   currActiveProgramId,
   completedProgramIds,
   isJourneyCompleted,
+  timeLastCompleted,
 }: ProgramsListProps) {
   const [currSelectedId, setCurrSelectedId] = useState<number | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [currentRep, setCurrentRep] = useState(currActiveProgramRep);
+  const [lastCompleted, setLastCompleted] = useState(timeLastCompleted);
 
   // convert array to hashmap for easy access data
   const programsHash = useMemo(() => {
@@ -151,6 +155,8 @@ export default function ProgramsList({
     : [];
 
   const handleClickProgressJourney = () => {
+    if (!isNextDay(lastCompleted)) return;
+    setLastCompleted(new Date());
     setCurrentRep(currentRep + 1);
     progressJourney();
   };
@@ -230,14 +236,15 @@ export default function ProgramsList({
               // selected program (since we don't want the user to trigger
               // future progress from previous states e.g. (week 1 button could
               // progress week 3))
-              currActiveProgramId !== (selectedProgram && selectedProgram.id)
+              currActiveProgramId !== (selectedProgram && selectedProgram.id) ||
+              !isNextDay(lastCompleted)
             }
             className="h-16 w-full"
             onClick={handleClickProgressJourney}
           >
-            {
-              // show completed if the selected program is the active program and the completed reps is the same as the goal reps
-              (currSelectedId === currActiveProgramId &&
+            {!isNextDay(lastCompleted) && "Today's goal completed :)"}
+            {isNextDay(lastCompleted) && // show completed if the selected program is the active program and the completed reps is the same as the goal reps
+              ((currSelectedId === currActiveProgramId &&
                 selectedProgram &&
                 selectedProgram.reps === currentRep) ||
               // or show completed if the active program is not the same as the selected program and the selected program is a completed program
@@ -245,8 +252,7 @@ export default function ProgramsList({
                 (selectedProgram && selectedProgram.id) &&
                 isSelectedACompletedProgram)
                 ? "Completed"
-                : "I have done this today!"
-            }
+                : "I have done this today!")}
           </Button>
         </Card>
       </Modal>
