@@ -1,7 +1,11 @@
 'use server'
-import getUserAction from "@/auth/get-user-action";
-import prisma from "@/libs/prisma-client";
 import { revalidatePath } from "next/cache";
+// auth
+import getUserAction from "@/auth/get-user-action";
+// prisma 
+import prisma from "@/libs/prisma-client";
+// utils
+import { calculateTotalDistanceSwam } from "@/utils/swim-exercises";
 
 const progressJourney = async () => {
     const user = await getUserAction();
@@ -14,7 +18,11 @@ const progressJourney = async () => {
             isActive: true,
         },
         include: {
-            program: true,
+            program: {
+                include: {
+                    swimExercise: true,
+                }
+            },
             swimCategory: true,
         }
     })
@@ -37,6 +45,15 @@ const progressJourney = async () => {
             },
             data: {
                 currActiveProgramRep: currRep + 1
+            }
+        })
+
+        // add activity log for distance swam 
+        await prisma.userSwimActivityLog.create({
+            data: {
+                totalDistanceSwam: calculateTotalDistanceSwam(currJourney.program.swimExercise),
+                unit: currJourney.program.swimExercise[0].unit,
+                userId: user.dbUsr.id
             }
         })
     } else {
@@ -63,6 +80,14 @@ const progressJourney = async () => {
                         isCompleted: true,
                     }
                 })
+                // add activity log for distance swam 
+                await prisma.userSwimActivityLog.create({
+                    data: {
+                        totalDistanceSwam: calculateTotalDistanceSwam(currJourney.program.swimExercise),
+                        unit: currJourney.program.swimExercise[0].unit,
+                        userId: user.dbUsr.id
+                    }
+                })
                 revalidatePath('/journey')
                 return
             }
@@ -81,6 +106,14 @@ const progressJourney = async () => {
                 currActiveProgramId: nextProgram.id,
                 currActiveProgramRep: 0,
                 completedProgramIds: currJourney.completedProgramIds
+            }
+        })
+        // add activity log for distance swam 
+        await prisma.userSwimActivityLog.create({
+            data: {
+                totalDistanceSwam: calculateTotalDistanceSwam(currJourney.program.swimExercise),
+                unit: currJourney.program.swimExercise[0].unit,
+                userId: user.dbUsr.id
             }
         })
     }
