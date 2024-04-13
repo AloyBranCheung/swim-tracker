@@ -1,5 +1,6 @@
 "use client";
 import React, { useMemo, useState } from "react";
+import classNames from "classnames";
 // util
 import orderSwimExercises from "@/utils/swim-exercises";
 // actions
@@ -64,9 +65,15 @@ export default function ProgramsList({
   }, [selectedProgram]);
 
   // program is completed if it is included in the completed programs array from the DB
-  const isCompletedProgram = useMemo(
+  const isSelectedACompletedProgram = useMemo(
     () => completedProgramIds.includes(currSelectedId as number),
     [completedProgramIds, currSelectedId],
+  );
+
+  const isActiveACompletedProgram = useMemo(
+    () =>
+      currActiveProgramId && completedProgramIds.includes(currActiveProgramId),
+    [completedProgramIds, currActiveProgramId],
   );
 
   const exerciseSections = useMemo(() => {
@@ -109,8 +116,20 @@ export default function ProgramsList({
           key={program.id}
         >
           <Card
-            // show disable style if not the current active program
-            className={`${program.id === currActiveProgramId ? "bg-gray-50" : "bg-[dimgrey] disabled:cursor-not-allowed"}`}
+            className={classNames({
+              // show active style if the program is the current active program and not a completed program
+              "bg-gray-50":
+                program.id === currActiveProgramId &&
+                !isActiveACompletedProgram,
+              // show disable style if program is not the active program or is a completed program
+              "bg-[dimgrey]":
+                program.id !== currActiveProgramId || isActiveACompletedProgram,
+              // show disable style if program is ahead (order) of the active program
+              "cursor-default":
+                currActiveProgramId &&
+                programsHash[program.id].order >
+                  programsHash[currActiveProgramId].order,
+            })}
             onClick={() => handleClickOpenProgram(program)}
           >
             <p className="font-semibold text-header-font">{program.name}</p>
@@ -151,7 +170,7 @@ export default function ProgramsList({
                     (i + 1 <= currActiveProgramRep &&
                       currActiveProgramId === selectedProgram.id) ||
                     // or is completed program
-                    isCompletedProgram;
+                    isSelectedACompletedProgram;
 
                   return (
                     <div
@@ -174,7 +193,7 @@ export default function ProgramsList({
                 selectedProgram &&
                 selectedProgram.reps === currActiveProgramRep) ||
               // or disable if the selected program is a completed program (included in the completed programs array from the DB)
-              isCompletedProgram ||
+              isSelectedACompletedProgram ||
               // or disable if the current active program is not the same as the
               // selected program (since we don't want the user to trigger
               // future progress from previous states e.g. (week 1 button could
@@ -194,7 +213,7 @@ export default function ProgramsList({
               // or show completed if the active program is not the same as the selected program and the selected program is a completed program
               (currActiveProgramId !==
                 (selectedProgram && selectedProgram.id) &&
-                isCompletedProgram)
+                isSelectedACompletedProgram)
                 ? "Completed"
                 : "I have done this today!"
             }
