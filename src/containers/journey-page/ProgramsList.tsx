@@ -36,6 +36,7 @@ export default function ProgramsList({
   const [currSelectedId, setCurrSelectedId] = useState<number | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
+  // convert array to hashmap for easy access data
   const programsHash = useMemo(() => {
     const hash: {
       [key: number]: Program & { swimExercise: SwimExercise[] };
@@ -52,14 +53,17 @@ export default function ProgramsList({
     return hash;
   }, [programs]);
 
+  // selected program from user selected (clicked) menu item
   const selectedProgram = currSelectedId && programsHash[currSelectedId];
 
+  // using Map because it can be ordered (by order of entry insertion) to render the workouts in order
   const { exerciseMap, totalDistance, unit } = useMemo(() => {
     if (!selectedProgram)
       return { exerciseMap: new Map(), totalDistance: 0, unit: "" };
     return orderSwimExercises(selectedProgram.swimExercise);
   }, [selectedProgram]);
 
+  // program is completed if it is included in the completed programs array from the DB
   const isCompletedProgram = useMemo(
     () => completedProgramIds.includes(currSelectedId as number),
     [completedProgramIds, currSelectedId],
@@ -83,7 +87,9 @@ export default function ProgramsList({
 
   const handleClickOpenProgram = (program: Program) => {
     if (
+      // disable if the clicked program is not the current active program
       !currActiveProgramId ||
+      //  or disable if is a future program
       program.order > programsHash[currActiveProgramId].order
     )
       return;
@@ -95,12 +101,15 @@ export default function ProgramsList({
     ? programs.map((program) => (
         <InteractiveCardAnimation
           isDisabled={
+            // disable previewing future programs if not the current active program
             !currActiveProgramId ||
+            // or disable if it is a future program (order is higher)
             program.order > programsHash[currActiveProgramId].order
           }
           key={program.id}
         >
           <Card
+            // show disable style if not the current active program
             className={`${program.id === currActiveProgramId ? "bg-gray-50" : "bg-[dimgrey] disabled:cursor-not-allowed"}`}
             onClick={() => handleClickOpenProgram(program)}
           >
@@ -136,8 +145,12 @@ export default function ProgramsList({
               {selectedProgram &&
                 new Array(selectedProgram.reps).fill(0).map((_, i) => {
                   const isRepCompleted =
+                    // show completed icon if the current iteration is less than
+                    // the user's current program rep and the selected program
+                    // is the same as the active program
                     (i + 1 <= currActiveProgramRep &&
                       currActiveProgramId === selectedProgram.id) ||
+                    // or is completed program
                     isCompletedProgram;
 
                   return (
@@ -154,11 +167,18 @@ export default function ProgramsList({
             </div>
           </Card>
           <Button
+            // when modal is open
             isDisabled={
+              // disable if the selected program is the same as the active program AND the current program reps done is the same as the goal/total program reps
               (currSelectedId === currActiveProgramId &&
                 selectedProgram &&
                 selectedProgram.reps === currActiveProgramRep) ||
+              // or disable if the selected program is a completed program (included in the completed programs array from the DB)
               isCompletedProgram ||
+              // or disable if the current active program is not the same as the
+              // selected program (since we don't want the user to trigger
+              // future progress from previous states e.g. (week 1 button could
+              // progress week 3))
               currActiveProgramId !== (selectedProgram && selectedProgram.id)
             }
             className="h-16 w-full"
@@ -166,13 +186,18 @@ export default function ProgramsList({
               progressJourney();
             }}
           >
-            {(currSelectedId === currActiveProgramId &&
-              selectedProgram &&
-              selectedProgram.reps === currActiveProgramRep) ||
-            (currActiveProgramId !== (selectedProgram && selectedProgram.id) &&
-              isCompletedProgram)
-              ? "Completed"
-              : "I have done this today!"}
+            {
+              // show completed if the selected program is the active program and the completed reps is the same as the goal reps
+              (currSelectedId === currActiveProgramId &&
+                selectedProgram &&
+                selectedProgram.reps === currActiveProgramRep) ||
+              // or show completed if the active program is not the same as the selected program and the selected program is a completed program
+              (currActiveProgramId !==
+                (selectedProgram && selectedProgram.id) &&
+                isCompletedProgram)
+                ? "Completed"
+                : "I have done this today!"
+            }
           </Button>
         </Card>
       </Modal>
