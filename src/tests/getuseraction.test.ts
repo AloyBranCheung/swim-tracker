@@ -45,6 +45,6 @@ describe("test get user server action", () => {
             }
         }
 
-        expect(getUserAction()).resolves.toBeUndefined()
+        await expect(getUserAction()).resolves.toBeUndefined()
     })
 });
