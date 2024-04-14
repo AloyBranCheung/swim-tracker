@@ -65,6 +65,9 @@ describe("test create post action", () => {
         expect(result.errors).toEqual({})
         expect(result.success).toBe(true)
         expect(mockNextCache.revalidatePath).toHaveBeenCalledOnce()
+        expect(mockNextCache.revalidatePath).toHaveBeenCalledWith('/circle')
+
+        expect.assertions(8)
     });
     it("should return success false and unauthorized", async () => {
         // arrange
@@ -81,6 +84,7 @@ describe("test create post action", () => {
         expect(mockPrismaClient.default.user.findUnique).not.toHaveBeenCalled()
         expect(mockPrismaClient.default.statusPost.create).not.toHaveBeenCalled()
         expect(mockNextCache.revalidatePath).not.toHaveBeenCalled()
+        expect.assertions(7)
     })
     it("should return success false and error finding user", async () => {
         // arrange
@@ -97,6 +101,7 @@ describe("test create post action", () => {
         expect(mockPrismaClient.default.user.findUnique).toHaveBeenCalledOnce()
         expect(mockPrismaClient.default.statusPost.create).not.toHaveBeenCalled()
         expect(mockNextCache.revalidatePath).not.toHaveBeenCalled()
+        expect.assertions(7)
     })
     it("should return success false and validation error", async () => {
         // arrange
@@ -114,5 +119,6 @@ describe("test create post action", () => {
         expect(mockPrismaClient.default.user.findUnique).not.toHaveBeenCalled()
         expect(mockPrismaClient.default.statusPost.create).not.toHaveBeenCalled()
         expect(mockNextCache.revalidatePath).not.toHaveBeenCalled()
+        expect.assertions(7)
     })
 });

@@ -68,7 +68,7 @@ describe("test progress journey server action", () => {
         prismaMock.journey.findFirst.mockResolvedValue({ ...mockCurrJourneyResponse, timeRepLastCompleted: dayjs(new Date()).subtract(7, 'day').toDate() })
 
         await expect(progressJourney()).resolves.toBeUndefined()
-        expect(mockNextCache.revalidatePath).toHaveBeenCalled()
+        expect(mockNextCache.revalidatePath).toHaveBeenCalledWith('/journey')
 
         expect(prismaMock.journey.findFirst).toHaveBeenCalledOnce()
 
@@ -92,8 +92,10 @@ describe("test progress journey server action", () => {
         expect(prismaMock.journey.update).toHaveBeenCalledOnce()
         expect(prismaMock.userSwimActivityLog.create).toHaveBeenCalledOnce()
         expect(mockNextCache.revalidatePath).toHaveBeenCalledOnce()
+        expect(mockNextCache.revalidatePath).toHaveBeenCalledWith('/journey')
 
-        expect.assertions(6)
+
+        expect.assertions(7)
     })
     it("should complete program, add to completed programs, and start next program and add swim activity log", async () => {
         getUserActionMock.mockResolvedValue(mockGetUserAction)
@@ -107,8 +109,10 @@ describe("test progress journey server action", () => {
 
         expect(prismaMock.userSwimActivityLog.create).toHaveBeenCalledOnce()
         expect(mockNextCache.revalidatePath).toHaveBeenCalledOnce()
+        expect(mockNextCache.revalidatePath).toHaveBeenCalledWith('/journey')
 
-        expect.assertions(6)
+
+        expect.assertions(7)
     })
     it("should complete journey and do nothing if somehow function is triggered again", async () => {
         getUserActionMock.mockResolvedValue(mockGetUserAction)
@@ -123,6 +127,8 @@ describe("test progress journey server action", () => {
         expect(prismaMock.journey.update).toHaveBeenCalledOnce()
         expect(prismaMock.userSwimActivityLog.create).toHaveBeenCalledOnce()
         expect(mockNextCache.revalidatePath).toHaveBeenCalledOnce()
+        expect(mockNextCache.revalidatePath).toHaveBeenCalledWith('/journey')
+
 
         prismaMock.journey.findFirst.mockResolvedValueOnce({ ...mockCurrJourneyResponse, timeRepLastCompleted: dayjs(new Date()).subtract(7, 'day').toDate(), currActiveProgramRep: 2 })
         prismaMock.program.findFirst.mockResolvedValueOnce(null)
@@ -136,5 +142,9 @@ describe("test progress journey server action", () => {
         expect(prismaMock.journey.update).toHaveBeenCalledOnce()
         expect(prismaMock.userSwimActivityLog.create).toHaveBeenCalledOnce()
         expect(mockNextCache.revalidatePath).toHaveBeenCalledOnce()
+        expect(mockNextCache.revalidatePath).toHaveBeenCalledWith('/journey')
+
+        expect.assertions(14)
+
     })
 })
