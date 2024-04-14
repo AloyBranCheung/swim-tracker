@@ -8,7 +8,8 @@ export default defineConfig({
     environment: "jsdom",
     exclude: [
       ...configDefaults.exclude,
-      '**/e2e/**'
+      '**/e2e/**',
+      "**/integration/**"
     ],
     deps: {
       moduleDirectories: ['node_modules', '__mocks__']

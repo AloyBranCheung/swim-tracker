@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+# Exit script
+handle_sigint() {
+    echo "Script interrupted by Ctrl+C"
+    yarn docker:stop test-db
+    exit 1
+}
+
+# Set the trap to call handle_sigint when SIGINT is received
+trap handle_sigint SIGINT
+
 # get current dir e.g. executed in root but get {{root}}/scripts
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
@@ -16,10 +26,10 @@ $DIR/wait_for_it.sh "${DATABASE_URL}" -- echo '🟢 - Database ready!'
 
 # add tables + migrate data
 yarn prisma migrate dev 
-yarn migrate:data 
+yarn migrate:data "test"
 
 # # run tests
-vitest -c vitest.config.integration.ts 
+vitest -c vitest.config.integration.ts --run
 
 # # stop db
 yarn docker:stop test-db
