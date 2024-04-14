@@ -11,7 +11,7 @@
     "test:unit": "vitest -c ./vitest.config.ts",
     "test:int": "bash ./scripts/test_integration.sh",
     "test:e2e": "npx playwright test",
-    "test:all": "yarn test:unit && yarn test:int",
+    "test:all": "yarn test:unit --run && yarn test:int",
     "test:dev": "vitest --watch",
     "generate-client": "yarn prisma generate",
     "db:push": "dotenv -e .env.local -- yarn prisma db push",
