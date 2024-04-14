@@ -1,12 +1,12 @@
-Development Notes:
+## Development Notes:
 
 - Use `yarn` for package management
 
-Figma:
+### Figma:
 
 https://www.figma.com/file/o6hY8o9AzbYe5jtQ11tQga/Untitled?type=design&node-id=0%3A1&mode=design&t=OprzFzjgrOzk9cpn-1
 
-To run in development:
+### To run in development:
 
 1. `yarn install`
 2. Setup `.env.local` per `.env.local.example`
@@ -16,23 +16,29 @@ To run in development:
 6. `yarn migrate:dev`
 7. `yarn docker:dev-stop` to stop containers
 
-What to do when you update the prisma schema:
+### What to do when you update the prisma schema:
 
 1. Run `yarn migrate:dev {commit name here}` creates a migration file
 2. Run `yarn generate-client` re-generate api client
 3. Restart containers
 
-To add users (for now):
+### To add users (for now):
 
 1. Add in Auth0 Dashboard
 2. Run `yarn migrate:data`
 
-Generate ERD:
+### Generate ERD:
 
 - will automatically generate when generating prisma client
 - disable with env variable `DISABLE_ERD=true`
 
-Resetting DB:
+### Resetting DB:
 
 - `yarn prisma migrate reset`
 - `yarn migrate:data`
+
+## Learning Resources
+
+Testing:
+
+- https://www.prisma.io/blog/testing-series-1-8eRB5p0Y8o

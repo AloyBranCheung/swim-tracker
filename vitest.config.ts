@@ -9,7 +9,10 @@ export default defineConfig({
     exclude: [
       ...configDefaults.exclude,
       '**/e2e/**'
-    ]
+    ],
+    deps: {
+      moduleDirectories: ['node_modules', '__mocks__']
+    }
   },
   resolve: {
     alias: {
