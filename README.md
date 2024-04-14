@@ -37,6 +37,12 @@ https://www.figma.com/file/o6hY8o9AzbYe5jtQ11tQga/Untitled?type=design&node-id=0
 - `yarn prisma migrate reset`
 - `yarn migrate:data`
 
+### Testing:
+
+- Three different environments, `unit`, `integration`, `e2e`
+- separate `.env.test` env file and `test-db` docker service
+- make sure when setting up the test env files not to target your local db/any live dbs
+
 ## Learning Resources
 
 Testing:
