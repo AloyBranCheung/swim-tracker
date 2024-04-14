@@ -1,13 +1,31 @@
 # !/usr/bin/env bash
 
+# flags
+skip=true
+migrations_to_skip=[]
+while getopts 's:' OPTION; do
+    case "$OPTION" in
+        s)
+            IFS=',' read -ra tmp <<< "$OPTARG"
+            migrations_to_skip=("${tmp[@]}")
+            echo "Skipping migrations: $OPTARG"
+            ;;
+        *)
+            echo "Invalid flag"
+            exit 1
+            ;;
+    esac
+done
+
 # to be run in root
 yarn run generate-client
 
-if [[ "$1" != "test" ]]
+# data migrations must be in order
+if [[ ${migrations_to_skip[@]} =~ "users" ]]
 then
-    npx tsx ./prisma/data-migrations/migrate-users.ts
-else
     echo "Skipping user migration..."
+else
+    npx tsx ./prisma/data-migrations/migrate-users.ts
 fi
 
 npx tsx ./prisma/data-migrations/migrate-programs.ts
