@@ -1,5 +1,6 @@
 // vitest.config.integration.ts
 import { defineConfig } from 'vitest/config'
+import { fileURLToPath } from 'url'
 
 export default defineConfig({
     test: {
@@ -10,9 +11,7 @@ export default defineConfig({
     },
     resolve: {
         alias: {
-            auth: '/src/auth',
-            quotes: '/src/quotes',
-            lib: '/src/lib'
+            "@": fileURLToPath(new URL("./src", import.meta.url))
         }
     }
 })
