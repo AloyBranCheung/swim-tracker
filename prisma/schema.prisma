@@ -107,7 +107,7 @@ model SwimExercise {
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
 
-  program   Program @relation(fields: [programId], references: [id])
+  program   Program @relation(fields: [programId], references: [id], onDelete: Cascade)
   programId Int
 }
 
