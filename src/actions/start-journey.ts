@@ -6,7 +6,9 @@ import { redirect } from 'next/navigation'
 
 const startJourney = async (swimCategoryId: number) => {
     const userData = await getUserAction()
-    const userId = userData?.dbUsr.id
+    if (!userData || !userData.dbUsr) throw Error("Unauthorized")
+
+    const userId = userData.dbUsr.id
     // check to see if there is an active journey for user and toggle isActive to false
     const activeJourney = await prisma.journey.findFirst({
         where: {
