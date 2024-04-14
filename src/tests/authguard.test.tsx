@@ -2,13 +2,13 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 // components
 import AuthGuard from "@/auth/AuthGuard";
+import { auth } from "@/auth/__mocks__/auth-helper";
 
 vi.mock("../auth/auth-helper.ts");
 
 describe("helloworld test", () => {
   it("should render helloworld", async () => {
-    const authHelper = await import("../auth/auth-helper");
-    authHelper.auth = vi.fn().mockReturnValue({
+    auth.mockReturnValue({
       user: {
         email: "test@test.com",
       },
@@ -25,8 +25,7 @@ describe("helloworld test", () => {
   });
 
   it("should NOT render helloworld", async () => {
-    const authHelper = await import("../auth/auth-helper");
-    authHelper.auth = vi.fn().mockReturnValue(null);
+    auth.mockReturnValue(null);
 
     render(
       await AuthGuard({
