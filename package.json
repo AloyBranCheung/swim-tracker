@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "test:unit": "vitest -c ./vitest.config.ts",
-    "test:int": "bash ./scripts/test_integration.sh -t -w",
+    "test:int": "bash ./scripts/test_integration.sh -t",
     "test:e2e": "npx playwright test",
     "test:all": "yarn test:unit --run && yarn test:int -t",
     "test:dev": "vitest --watch",
