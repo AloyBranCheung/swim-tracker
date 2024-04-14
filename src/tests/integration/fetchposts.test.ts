@@ -43,6 +43,7 @@ describe('test fetch posts server action interaction with db', () => {
         expect(posts.some((post) => post.msg === 'msg 10')).toBe(true)
         expect(posts.some((post) => post.msg === 'msg 11')).not.toBe(true)
     })
+
     it('should skip first 10 posts', async () => {
         // act
         const posts = await fetchPosts(1)
