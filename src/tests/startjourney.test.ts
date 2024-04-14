@@ -56,6 +56,7 @@ describe("test start joureny server action", () => {
         expect(mockPrisma.journey.create).not.toHaveBeenCalled()
         expect(mockRedirect.redirect).toHaveBeenCalledOnce()
         expect(mockRedirect.redirect).toHaveBeenCalledWith('/journey')
+        expect.assertions(7)
     })
 
     it("should not find an active journey or existing journey and create a new journey", async () => {
@@ -81,6 +82,8 @@ describe("test start joureny server action", () => {
         expect(mockPrisma.journey.update).not.toHaveBeenCalled()
         expect(mockRedirect.redirect).toHaveBeenCalledOnce()
         expect(mockRedirect.redirect).toHaveBeenCalledWith('/journey')
+        expect.assertions(7)
+
     })
 
 })
