@@ -1,17 +1,43 @@
 import type { Page } from '@playwright/test'
 
+type BrowserName = 'chromium' | 'firefox' | 'webkit';
+
 export class LoginPage {
     readonly page: Page
+    public url = 'http://localhost:3000'
+    public browserName: BrowserName | undefined = undefined
 
-    constructor(page: Page) {
+    constructor(page: Page, browserName: BrowserName, url?: string) {
         this.page = page
+        this.browserName = browserName
+        if (url) {
+            this.url = url
+        }
     }
 
     async gotoLogin() {
-        await this.page.goto('http://localhost:3000/')
-        await this.page.waitForURL('http://localhost:3000/')
+        // https://github.com/alexdeathway/Gecom/issues/49 - tl;dr swallow the error for firefox
+        try {
+            await this.page.goto(this.url)
+            if (this.browserName === 'firefox') {
+                await this.page.waitForTimeout(3000)
+            } else {
+                await this.page.waitForURL(this.url)
+            }
+        } catch (error) {
+            if (error instanceof Error && !error.message.includes('NS_BINDING_ABORTED')) {
+                throw error;
+            }
+        }
+
+        // navigate to auth0 login flow
         const login = await this.page.getByText("Login")
         await login.click()
+        if (this.browserName === 'firefox') {
+            await this.page.waitForTimeout(3000)
+        } else {
+            await this.page.waitForURL(url => url !== new URL(this.url))
+        }
     }
 
     async login(user: string, pass: string) {
@@ -24,6 +50,8 @@ export class LoginPage {
         await passwordInput.click()
         await passwordInput.fill(pass)
 
+        // navigate back to localhost:3000/
         await this.page.getByRole('button', { name: 'Continue' }).click();
+        await this.page.waitForURL(this.url)
     }
 }

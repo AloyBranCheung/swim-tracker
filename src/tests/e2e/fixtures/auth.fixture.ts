@@ -1,6 +1,7 @@
 import { test as base, expect } from '@playwright/test'
 import { LoginPage } from '../pages/login.page'
 
+
 interface UserDetails {
     email: string;
     password: string;
@@ -12,8 +13,8 @@ interface AuthFixtures {
 }
 
 export const test = base.extend<AuthFixtures>({
-    loginPage: async ({ page }, use) => {
-        const loginPage = new LoginPage(page)
+    loginPage: async ({ page, browserName }, use) => {
+        const loginPage = new LoginPage(page, browserName)
         await loginPage.gotoLogin()
         await use(loginPage)
     },

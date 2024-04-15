@@ -2,11 +2,15 @@
 
 # flags
 headed_flag=false
-while getopts 'h' OPTION; do
+with_reports=false
+while getopts 'hr' OPTION; do
     case "$OPTION" in
         h)
             echo "headless mode off flag detected"
             headed_flag=true
+            ;;
+        r)  echo "show reports on"
+            with_reports=true
             ;;
         *)
             echo "invalid flag"
@@ -14,6 +18,8 @@ while getopts 'h' OPTION; do
             ;;
     esac
 done
+
+echo -e "settings:\n headed_flag=$headed_flag\n with_reports=$with_reports\n"
 
 # Exit script early 
 handle_sigint() {
@@ -40,7 +46,11 @@ else
     npx playwright test
 fi
 
-npx playwright show-report
+if [[ $with_reports == true ]]
+then
+    echo "Showing reports..."
+    npx playwright show-report
+fi
 
 # close db
 yarn docker:stop test-db
