@@ -5,8 +5,24 @@ on:
 jobs:
   Test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: local
+          POSTGRES_DB: local
+          PGPORT: 6543
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6543:6543
     env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DATABASE_URL: postgresql://local:local@localhost:6543/local
+      DISABLE_ERD: true
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -17,4 +33,4 @@ jobs:
       - name: Build + Generate API Client
         run: yarn build
       - name: Test
-        run: yarn vitest
+        run: yarn test:all
