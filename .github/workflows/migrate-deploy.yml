@@ -19,6 +19,6 @@ jobs:
       - name: Prisma Migrate Deploy
         run: yarn prisma migrate deploy
       - name: Allow sh execute
-        run: chmod +x ./prisma/data-migrations/migrate.sh
+        run: chmod +x ./scripts/migrate.sh
       - name: Migrate Data
         run: yarn migrate:data
