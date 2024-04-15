@@ -141,6 +141,6 @@ model UserSwimActivityLog {
   totalDistanceSwam Int
   unit              Unit
 
-  user   User @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
 }
