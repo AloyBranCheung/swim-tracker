@@ -20,7 +20,7 @@ export class LoginPage {
         try {
             await this.page.goto(this.url)
             if (this.browserName === 'firefox') {
-                await this.page.waitForTimeout(3000)
+                await this.page.waitForTimeout(1000)
             } else {
                 await this.page.waitForURL(this.url)
             }
