@@ -40,7 +40,7 @@ export class LoginPage {
         }
     }
 
-    async login(user: string, pass: string) {
+    async login(user: string, pass: string, isSuccess = true) {
         const emailInput = await this.page.getByLabel('Email address')
         await emailInput.click()
         await emailInput.fill(user)
@@ -52,6 +52,8 @@ export class LoginPage {
 
         // navigate back to localhost:3000/
         await this.page.getByRole('button', { name: 'Continue' }).click();
-        await this.page.waitForURL(this.url)
+        if (isSuccess) {
+            await this.page.waitForURL(this.url)
+        }
     }
 }
