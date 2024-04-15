@@ -1,17 +1,12 @@
 #!/usr/bin/env bash
 
-test_flag=false
-watch_mode_flag=false
 # flags
+watch_mode_flag=false
 while getopts 'tw' OPTION; do
 # The colon after an option indicates that the option requires an argument. Each
 # parsed option is stored in the $OPTION variable, and an argument, if present,
 # is stored in the $OPTARG variable.
   case "$OPTION" in
-    t)
-      echo "Test mode turned on..."
-      test_flag=true
-      ;;
     w)
       echo "Watch mode turned on..."
       watch_mode_flag=true

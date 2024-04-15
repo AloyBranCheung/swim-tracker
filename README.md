@@ -44,6 +44,7 @@ https://www.figma.com/file/o6hY8o9AzbYe5jtQ11tQga/Untitled?type=design&node-id=0
 - Three different environments, `unit`, `integration`, `e2e`
 - separate `.env.test` env file and `test-db` docker service
 - make sure when setting up the test env files not to target your local db/any live dbs
+- to test the whole app use run `yarn test:all`
 
   #### Unit
 
@@ -59,7 +60,10 @@ https://www.figma.com/file/o6hY8o9AzbYe5jtQ11tQga/Untitled?type=design&node-id=0
 
   #### E2E
 
-  - wip
+  - to run e2e tests run `yarn test:e2e`
+  - with head (e.g. browsers popup) use the `-h` flag
+  - to generate reports use the `-r` flag
+  - note: it is running 1 at a time (not parallel) because of the way nextauth/nextjs bugs out when multiple logins happen concurrently (hitting localhost)... will probably need to setup multiple test accounts or look into other solutions like saving authentication (which may still need multiple accounts)
 
 ## Learning Resources
 
