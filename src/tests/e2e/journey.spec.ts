@@ -11,6 +11,8 @@ test.describe("test journey flow from login to completing one swim", () => {
     await loginPage.login(userCredentials.email, userCredentials.password)
 
     await page.getByRole('link', { name: 'journey-icon Journey' }).click();
+    await page.waitForURL(`${loginPage.url}/journey`)
+
     // await page.getByRole('button', { name: 'Let\'s go' }).click();
     // await page.getByRole('heading', { name: 'BEGINNER' }).click();
     // await page.getByRole('button', { name: 'Start Journey' }).click();

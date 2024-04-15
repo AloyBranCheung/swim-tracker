@@ -17,8 +17,16 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  /* 
+  Workers Option:
+  https://playwright.dev/docs/test-parallel#disable-parallelism 
+
+  opt out of parallel tests since throwing errors when navigating concurrently
+
+  Error: page.goto: Navigation to "http://localhost:3000/" is interrupted by
+  another navigation to "http://localhost:3000/api/auth/error" 
+   */
+  workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */

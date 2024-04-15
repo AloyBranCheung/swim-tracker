@@ -1,7 +1,6 @@
 # !/usr/bin/env bash
 
 # flags
-skip=true
 migrations_to_skip=[]
 while getopts 's:' OPTION; do
     case "$OPTION" in
@@ -27,6 +26,7 @@ if [[ ${migrations_to_skip[@]} =~ "users" ]]
 then
     echo "Skipping user migration..."
 else
+    
     npx tsx ./prisma/data-migrations/migrate-users.ts
 fi
 
