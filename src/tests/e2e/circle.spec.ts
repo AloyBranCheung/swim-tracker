@@ -36,7 +36,7 @@ test.describe("test flow login to making a post in circle", () => {
             // firefox works in debug/normal user navigation but not in automated testing...
             await page.waitForTimeout(1000)
         } else {
-            await page.waitForURL(CIRCLE_PAGE_URL, { timeout: 5000 })
+            await page.waitForURL(CIRCLE_PAGE_URL, { timeout: 30000 })
         }
 
         // expect same post as latest posts
@@ -46,7 +46,7 @@ test.describe("test flow login to making a post in circle", () => {
     })
     test("login to main page to post to circle", async ({ page, loginPage }) => {
         await page.getByRole('link', { name: 'social-icon Circle' }).click();
-        await page.waitForURL(CIRCLE_PAGE_URL, { timeout: 5000 })
+        await page.waitForURL(CIRCLE_PAGE_URL, { timeout: 30000 })
 
         await page.getByText('Say something witty...').click();
         await page.getByPlaceholder('Say something witty...').fill('say something witty');

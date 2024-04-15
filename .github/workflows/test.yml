@@ -4,7 +4,6 @@ on:
     branches: [main, master]
 jobs:
   Test:
-    runs-on: ubuntu-latest
     services:
       postgres:
         image: postgres
@@ -20,6 +19,7 @@ jobs:
           --health-retries 5
         ports:
           - 6543:6543
+    runs-on: ubuntu-latest
     env:
       DATABASE_URL: postgresql://local:local@localhost:6543/local
       DISABLE_ERD: true
@@ -38,8 +38,9 @@ jobs:
         run: |
           echo "Enabling script to execute"
           chmod +x ./scripts/migrate.sh
-          echo "Running migrations..."
-          ./scripts/migrate.sh -s users
+          echo "Migrating static data..."
+          echo "Skipping user migration..."
+          yarn migrate:data -s users
       - name: Unit Test
         run: yarn test:unit --run
       - name: Integration Test
