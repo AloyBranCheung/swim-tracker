@@ -15,7 +15,6 @@ interface AuthFixtures {
 export const test = base.extend<AuthFixtures>({
     loginPage: async ({ page, browserName }, use) => {
         const loginPage = new LoginPage(page, browserName)
-        await loginPage.gotoLogin()
         await use(loginPage)
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

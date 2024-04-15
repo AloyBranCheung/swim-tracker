@@ -31,11 +31,11 @@ test.describe("test journey flow from login to completing one swim", () => {
 
     await page.locator('div').filter({ hasText: /^Week 1$/ }).nth(1).click();
 
-    expect(page.getByText("Today's goal completed :)")).toBeDefined()
-    expect(page.getByText("✔️")).toBeDefined()
-    expect(page.getByText("2")).toBeDefined()
-    expect(page.getByText("Warmup")).toBeDefined()
-    expect(page.getByText("Total: 525m")).toBeDefined()
+    await expect(page.getByText("Today's goal completed :)")).toBeDefined()
+    await expect(page.getByText("✔️")).toBeDefined()
+    await expect(page.getByText("2")).toBeDefined()
+    await expect(page.getByText("Warmup")).toBeDefined()
+    await expect(page.getByText("Total: 525m")).toBeDefined()
   })
 })
 
