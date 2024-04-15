@@ -65,6 +65,11 @@ https://www.figma.com/file/o6hY8o9AzbYe5jtQ11tQga/Untitled?type=design&node-id=0
   - to generate reports use the `-r` flag
   - note: it is running 1 at a time (not parallel) because of the way nextauth/nextjs bugs out when multiple logins happen concurrently (hitting localhost)... will probably need to setup multiple test accounts or look into other solutions like saving authentication (which may still need multiple accounts)
 
+### Running Github Actions Locally
+
+- https://github.com/nektos/act
+- Workaround for `no space left on device` is `docker volume prune --force`
+
 ## Learning Resources
 
 Testing:
