@@ -39,8 +39,8 @@ jobs:
           echo "Enabling script to execute"
           chmod +x ./scripts/migrate.sh
           echo "Running migrations..."
-          ./scripts/migrate.sh
+          ./scripts/migrate.sh -s users
       - name: Unit Test
         run: yarn test:unit --run
       - name: Integration Test
-        run: vitest -c vitest.config.integration.ts --run
+        run: yarn vitest -c vitest.config.integration.ts --run
