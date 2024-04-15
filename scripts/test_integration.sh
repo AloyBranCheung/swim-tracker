@@ -36,29 +36,10 @@ trap handle_sigint SIGINT
 # get current dir e.g. executed in root but get {{root}}/scripts
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
-# export envs within context of scripts
-export $(grep -v '^#' .env.test | xargs)
-echo "Database connection: $DATABASE_URL"
+# set envs and setup test db
+source $DIR/setup_test_db.sh
 
-# # startup test-db 
-yarn docker:only test-db 
-
-# wait for db ready
-echo '🟡 - Waiting for database to be ready...'
-$DIR/wait_for_it.sh "${DATABASE_URL}" -- echo '🟢 - Database ready!'
-
-# add tables + migrate data
-yarn prisma migrate dev 
-
-if [[ $test_flag == true ]]
-then
-  echo "Test mode=$test_flag, skipping user migration..."
-  yarn migrate:data -s users
-else
-  yarn migrate:data
-fi
-
-# # run tests
+# run tests
 if [[ $watch_mode_flag == true ]]
 then
   vitest -c vitest.config.integration.ts
@@ -66,5 +47,5 @@ else
   vitest -c vitest.config.integration.ts --run
 fi
 
-# # stop db
+# stop db
 yarn docker:stop test-db
