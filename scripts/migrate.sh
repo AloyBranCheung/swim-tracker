@@ -20,6 +20,8 @@ done
 # to be run in root
 yarn run generate-client
 
+echo "Begin migrations..."
+
 # data migrations must be in order
 if [[ ${migrations_to_skip[@]} =~ "users" ]]
 then
