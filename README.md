@@ -64,6 +64,11 @@ https://www.figma.com/file/o6hY8o9AzbYe5jtQ11tQga/Untitled?type=design&node-id=0
   - with head (e.g. browsers popup) use the `-h` flag
   - to generate reports use the `-r` flag
   - note: it is running 1 at a time (not parallel) because of the way nextauth/nextjs bugs out when multiple logins happen concurrently (hitting localhost)... will probably need to setup multiple test accounts or look into other solutions like saving authentication (which may still need multiple accounts)
+  - debug tests with `npx playwright test {{test file}} --project={{specific browser if interested}} --debug`
+    - or `npx playwright test --ui`
+    - Resources:
+      - https://playwright.dev/docs/debug#stepping-through-your-tests
+      - https://playwright.dev/docs/running-tests
 
 ### Running Github Actions Locally
 

@@ -1,3 +1,4 @@
+// this reset db function is specifically for e2e tests since user is dynamic external data 
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();

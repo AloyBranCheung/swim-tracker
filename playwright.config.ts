@@ -10,7 +10,7 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  timeout: 5 * 60 * 1000, // 5 minutes to run one test 
+  timeout: 1 * 60 * 1000, // 1 minutes max to run one test 
   testDir: './src/tests/e2e',
   /* Run tests in files in parallel */
   fullyParallel: true,
