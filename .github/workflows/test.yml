@@ -32,5 +32,15 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Build + Generate API Client
         run: yarn build
-      - name: Test
-        run: yarn test:all
+      - name: Create tables
+        run: yarn prisma migrate deploy
+      - name: Migrate Static Data
+        run: |
+          echo "Enabling script to execute"
+          chmod +x ./scripts/migrate.sh
+          echo "Running migrations..."
+          ./scripts/migrate.sh
+      - name: Unit Test
+        run: yarn test:unit --run
+      - name: Integration Test
+        run: vitest -c vitest.config.integration.ts --run
