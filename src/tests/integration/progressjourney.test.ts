@@ -15,7 +15,7 @@ vi.mock('next/cache')
 describe("test progress journey server action interaction with db", () => {
     let mockNextCache: typeof import('next/cache');
     let dbUsr: User | null;
-    let programId: number | undefined;
+    let programId: string | undefined;
     let swimCategory: Prisma.SwimCategoryGetPayload<{
         include: {
             programs: true

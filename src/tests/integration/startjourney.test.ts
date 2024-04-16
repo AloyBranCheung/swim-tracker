@@ -63,26 +63,38 @@ describe("test start journey server action interaction with db", () => {
 
     it("should toggle an existing journey on from off", async () => {
         // arrange
-        await prisma.journey.create({
+        const swimCategoryRes = await prisma.swimCategory.findFirst({
+            include: {
+                programs: {
+                    orderBy: {
+                        order: 'asc'
+                    }
+                }
+            }
+        })
+        if (!swimCategoryRes) throw new Error("Swim category not found, test setup problem?")
+
+        const newJourney = await prisma.journey.create({
             data: {
                 isActive: true,
                 timeRepLastCompleted: new Date(),
                 completedProgramIds: [],
-                currActiveProgramId: 1,
-                swimCategoryId: 1,
+                currActiveProgramId: swimCategoryRes.programs[0].id,
+                swimCategoryId: swimCategoryRes.id,
                 userId: testDbUsr.id,
                 currActiveProgramRep: 0,
                 isCompleted: false,
             }
         })
-        const swimCategory = await prisma.swimCategory.findFirst({
-            where: {
-                id: 2,
-            }
-        })
-        if (!swimCategory) throw new Error('Error finding swim category in db. Test setup error?')
+        if (!newJourney) throw new Error("Something went wrong creating mock journey.")
 
-        await expect(startJourney(swimCategory.id)).resolves.toBeUndefined()
+        const swimCategories = await prisma.swimCategory.findMany()
+        if (!swimCategories) throw new Error('Error finding swim category in db. Test setup error?')
+
+        const differentSwimCategory = await swimCategories.find((category) => category.id !== newJourney.swimCategoryId)
+        if (!differentSwimCategory) throw new Error("Error finding a different swim category, check test db setup?")
+
+        await expect(startJourney(differentSwimCategory.id)).resolves.toBeUndefined()
 
         const journeys = await prisma.journey.findMany()
 

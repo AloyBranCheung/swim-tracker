@@ -47,6 +47,7 @@
 - Three different environments, `unit`, `integration`, `e2e`
 - Separate `.env.test` env file and `test-db` docker service
 - Make sure when setting up the test env files not to target your local db/any live dbs
+- make sure to install playwright `npx playwright install` (should also install the browsers)
 - To test the whole app use run `yarn test:all`
 
 #### Unit

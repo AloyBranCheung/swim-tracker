@@ -4,7 +4,7 @@ import prisma from '@/libs/prisma-client'
 import getUserAction from '@/auth/get-user-action'
 import { redirect } from 'next/navigation'
 
-const startJourney = async (swimCategoryId: number) => {
+const startJourney = async (swimCategoryId: string) => {
     const userData = await getUserAction()
     if (!userData || !userData.dbUsr) throw Error("Unauthorized")
 
@@ -59,7 +59,7 @@ const startJourney = async (swimCategoryId: number) => {
         await prisma.journey.create({
             data: {
                 swimCategoryId,
-                userId: Number(userId),
+                userId: userId,
                 isActive: true,
                 currActiveProgramId: program.id,
                 timeRepLastCompleted: dayjs(new Date()).subtract(2, 'day').toISOString()
