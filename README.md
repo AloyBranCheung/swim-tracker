@@ -78,6 +78,7 @@ https://www.figma.com/file/o6hY8o9AzbYe5jtQ11tQga/Untitled?type=design&node-id=0
 ### Infrastructure
 
 - `Auth0` managed with terraform (view read me in `/terraform` for more info)
+- For now when making infrastructure changes, need to manually call `terraform plan` and `terraform approve` to apply changes to `TST` (maybe automate this later)
 
 ## Learning Resources
 
