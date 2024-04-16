@@ -1,5 +1,7 @@
 # Auth0 Infrastructure
 
+This IaC setups the local development and TST applications for the swim tracker in Auth0.
+
 ## To run terraform commands:
 
 - export envs vars to shell by running `source ./terraform/scripts/export_envs.sh` from root dir
