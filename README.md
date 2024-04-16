@@ -74,6 +74,53 @@ https://www.figma.com/file/o6hY8o9AzbYe5jtQ11tQga/Untitled?type=design&node-id=0
 - https://github.com/nektos/act
 - Workaround for `no space left on device` is `docker volume prune --force`
 
+### Scripts (`.sh`)
+
+#### `migrate.sh (yarn migrate:data)`
+
+> Migrates static data and users from auth0 user database (if enabled)
+
+- use `-s` flag to skip options, comma-separated no space
+- the only option available right now is `users`
+- to add another option see how the `users` option is done in the script
+
+e.g. `yarn migrate:data -s users`
+
+#### `test_integration.sh (yarn test:int)`
+
+> Builds and runs a dummy test db in docker, runs integration tests via `vitest` and then tears it down when done
+
+- use the `-w` flag to enter `watch mode`
+
+#### `test_e2e.sh (yarn test:e2e)`
+
+> Builds and runs a test-db in docker, runs e2e tests via `playwright` and then tears down when complete
+
+- use the `-h` option to turn on headed mode (see the browsers open) or `yarn test:e2e:headed`
+
+#### `test_all.sh (yarn test:all)`
+
+> Runs all unit, integration and e2e tests, basically runs the specific test commands sequentially
+
+#### `setup_db.sh`
+
+> Loads envs into the shell and sets up the test database
+
+- useful to run separately for debugging tests
+
+Example usage: Running the nextjs app with test envs and the test database
+
+```
+export NODE_ENV=true && yarn dev (run the nextjs app in test mode using .env.test envs)
+bash ./scripts/setup_db.sh
+```
+
+#### `wait_for_it.sh`
+
+> pauses script
+
+- See https://github.com/vishnubob/wait-for-it
+
 ### Infrastructure
 
 - `Auth0` managed with terraform (view read me in `/terraform` for more info)
