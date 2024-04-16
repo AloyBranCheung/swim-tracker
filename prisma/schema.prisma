@@ -116,7 +116,7 @@ model Journey {
   isActive             Boolean
   isCompleted          Boolean  @default(false)
   // completed steps (programIds) of swimCategoryId (swim plan/program)
-  completedProgramIds  Int[]    @default([]) // put id of Program (get all Programs related to the SwimCategory for progress (amount in completed/total; calculate at runtime)
+  completedProgramIds  String[] @default([]) // put id of Program (get all Programs related to the SwimCategory for progress (amount in completed/total; calculate at runtime)
   currActiveProgramRep Int      @default(0)
   timeRepLastCompleted DateTime
   createdAt            DateTime @default(now())
