@@ -75,6 +75,10 @@ https://www.figma.com/file/o6hY8o9AzbYe5jtQ11tQga/Untitled?type=design&node-id=0
 - https://github.com/nektos/act
 - Workaround for `no space left on device` is `docker volume prune --force`
 
+### Infrastructure
+
+- `Auth0` managed with terraform (view read me in `/terraform` for more info)
+
 ## Learning Resources
 
 Testing:
