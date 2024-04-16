@@ -1,6 +1,6 @@
 # Auth0 Infrastructure
 
-This IaC setups the local development and TST applications for the swim tracker in Auth0.
+This IaC setups the local development and TST applications for the swim tracker in Auth0 (one tenant).
 
 ## To run terraform commands:
 
