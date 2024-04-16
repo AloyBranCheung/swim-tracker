@@ -48,3 +48,8 @@ databases/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# terraform
+/terraform/terraform.tfstate
+/terraform/terraform.tfstate.*
+/terraform/.terraform/*
