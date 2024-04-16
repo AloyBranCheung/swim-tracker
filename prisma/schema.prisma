@@ -44,7 +44,7 @@ enum Accessory {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   email     String   @unique
   name      String?
   auth0Id   String   @unique
@@ -57,18 +57,18 @@ model User {
 }
 
 model StatusPost {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   msg       String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId Int
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
 }
 
 // essentially swim programs (with weeks of programs)
 model SwimCategory {
-  id           Int          @id @default(autoincrement())
+  id           String       @id @default(uuid())
   category     ProgramLevel
   descriptions String[]
   url          String
@@ -81,7 +81,7 @@ model SwimCategory {
 
 // week plans inside the swim program 
 model Program {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   name      String
   order     Int // e.g. week 1, 2, 3 etc.
   reps      Int      @default(2)
@@ -89,7 +89,7 @@ model Program {
   updatedAt DateTime @updatedAt
 
   swimCategory   SwimCategory @relation(fields: [swimCategoryId], references: [id])
-  swimCategoryId Int
+  swimCategoryId String
 
   swimExercise SwimExercise[]
   Journey      Journey[]
@@ -97,7 +97,7 @@ model Program {
 
 // exercises within each program/week of the week plan 
 model SwimExercise {
-  id           Int          @id @default(autoincrement())
+  id           String       @id @default(uuid())
   exerciseType ExerciseType
   sets         Int
   distance     Int
@@ -108,11 +108,11 @@ model SwimExercise {
   updatedAt    DateTime     @updatedAt
 
   program   Program @relation(fields: [programId], references: [id], onDelete: Cascade)
-  programId Int
+  programId String
 }
 
 model Journey {
-  id                   Int      @id @default(autoincrement())
+  id                   String   @id @default(uuid())
   isActive             Boolean
   isCompleted          Boolean  @default(false)
   // completed steps (programIds) of swimCategoryId (swim plan/program)
@@ -124,23 +124,23 @@ model Journey {
 
   // current program/plan user is following
   swimCategory   SwimCategory @relation(fields: [swimCategoryId], references: [id], onDelete: Cascade)
-  swimCategoryId Int
+  swimCategoryId String
 
   // current step in the program/plan user is at 
   program             Program @relation(fields: [currActiveProgramId], references: [id], onDelete: Cascade)
-  currActiveProgramId Int
+  currActiveProgramId String
 
-  user   User @relation(fields: [userId], references: [id])
-  userId Int
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
 }
 
 model UserSwimActivityLog {
-  id                Int      @id @default(autoincrement())
+  id                String   @id @default(uuid())
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
   totalDistanceSwam Int
   unit              Unit
 
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId Int
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
 }
