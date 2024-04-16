@@ -26,8 +26,7 @@ https://www.figma.com/file/o6hY8o9AzbYe5jtQ11tQga/Untitled?type=design&node-id=0
 ### To add users (for now):
 
 1. Add user in Auth0 Dashboard
-2. Get 24h `AUTH0_TMP_API_TOKEN` from `Application` > `APIs` > `Auth0 Management API` > `API Explorer` > copy the `Token`
-3. Run `yarn migrate:data`
+2. Run `yarn migrate:data` to sync auth0 user database with your `local` (or `TST`)
 
 ### Generate ERD:
 
