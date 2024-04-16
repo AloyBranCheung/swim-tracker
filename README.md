@@ -12,9 +12,9 @@ https://www.figma.com/file/o6hY8o9AzbYe5jtQ11tQga/Untitled?type=design&node-id=0
 2. Setup `.env.local` per `.env.local.example`
 3. `yarn generate-client`
 4. `yarn docker:dev`
-5. Go to `http://localhost:3000/`
-6. `yarn migrate:dev`
-7. `yarn migrate:data`
+5. `yarn migrate:dev`
+6. `yarn migrate:data`
+7. Go to `http://localhost:3000/`
 8. `yarn docker:dev-stop` to stop containers
 
 ### What to do when you update the prisma schema:
