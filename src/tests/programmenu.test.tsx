@@ -33,7 +33,7 @@ describe("test ProgramMenu component", () => {
         categoryName={"BEGINNER"}
         isOpen
         onClose={() => {}}
-        categoryId={0}
+        categoryId="0"
         isActiveJourney={false}
         isJourneyCompleted={undefined}
       />,
@@ -51,7 +51,7 @@ describe("test ProgramMenu component", () => {
         categoryName={"BEGINNER"}
         isOpen
         onClose={() => {}}
-        categoryId={0}
+        categoryId="0"
         isActiveJourney={true}
         isJourneyCompleted={undefined}
       />,
@@ -69,7 +69,7 @@ describe("test ProgramMenu component", () => {
         categoryName={"BEGINNER"}
         isOpen={false}
         onClose={() => {}}
-        categoryId={0}
+        categoryId="0"
         isActiveJourney={false}
         isJourneyCompleted={undefined}
       />,
@@ -87,7 +87,7 @@ describe("test ProgramMenu component", () => {
         categoryName={"BEGINNER"}
         isOpen
         onClose={() => {}}
-        categoryId={0}
+        categoryId="0"
         isActiveJourney={false}
         isJourneyCompleted={undefined}
       />,
@@ -109,7 +109,7 @@ describe("test ProgramMenu component", () => {
         categoryName={"BEGINNER"}
         isOpen
         onClose={() => {}}
-        categoryId={0}
+        categoryId="0"
         isActiveJourney={false}
         isJourneyCompleted={undefined}
       />,
@@ -127,7 +127,7 @@ describe("test ProgramMenu component", () => {
         categoryName={"BEGINNER"}
         isOpen
         onClose={() => {}}
-        categoryId={0}
+        categoryId="0"
         isActiveJourney={false}
         isJourneyCompleted={undefined}
       />,
@@ -144,17 +144,37 @@ describe("test ProgramMenu component", () => {
     expect(screen.queryByText("Start Journey")).not.toBeNull();
   });
 
-  it("should render Journey completed!", async () => {
+  it("should render Journey completed! when journey is completed and not active", () => {
     render(
       <ProgramMenu
         programs={MOCK_PROGRAM_MENU as unknown as Programs["programs"]}
-        categoryName={"BEGINNER"}
+        categoryName="BEGINNER"
         isOpen
         onClose={() => {}}
-        categoryId={0}
+        categoryId="0"
         isActiveJourney={false}
         isJourneyCompleted={true}
       />,
     );
+
+    expect(screen.queryByText("Journey completed!")).not.toBeNull();
+    expect(screen.queryByText("Start Journey")).toBeNull();
+  });
+
+  it("should not render Journey is completed if journey is not completed and is not active journey", () => {
+    render(
+      <ProgramMenu
+        programs={MOCK_PROGRAM_MENU as unknown as Programs["programs"]}
+        categoryName="BEGINNER"
+        isOpen
+        onClose={() => {}}
+        categoryId="0"
+        isActiveJourney={false}
+        isJourneyCompleted={false}
+      />,
+    );
+
+    expect(screen.queryByText("Journey completed!")).toBeNull();
+    expect(screen.queryByText("Start Journey")).toBeDefined();
   });
 });
