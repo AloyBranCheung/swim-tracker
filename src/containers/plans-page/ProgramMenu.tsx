@@ -11,6 +11,8 @@ import Modal from "@/components/Modal";
 import { SwimExercise } from "@prisma/client";
 import ProgramDetails from "./ProgramDetails";
 import Button from "@/components/Button";
+import ApplauseButton from "@/components/ApplauseButton";
+import Card from "@/components/Card";
 
 interface ProgramMenuProps {
   programs: Programs["programs"];
@@ -75,7 +77,7 @@ export default function ProgramMenu({
             )}
           </div>
         </div>
-        {swimExercises.length < 1 && (
+        {!isJourneyCompleted && swimExercises.length < 1 && (
           <Button
             isDisabled={Boolean(isActive)}
             className="w-full"
@@ -87,9 +89,14 @@ export default function ProgramMenu({
             {classNames({
               "Journey in progress...": isActive && !isJourneyCompleted,
               "Start Journey": !isActive && !isJourneyCompleted,
-              "Journey completed!": isJourneyCompleted,
             })}
           </Button>
+        )}
+        {isJourneyCompleted && (
+          <Card className="flex flex-col items-center justify-center gap-2">
+            <p>You&apos;ve already finished this!</p>
+            <ApplauseButton withScreenAsBase withNavbarAsBase={false} />
+          </Card>
         )}
       </div>
     </Modal>
