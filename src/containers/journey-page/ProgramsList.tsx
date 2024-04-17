@@ -25,8 +25,8 @@ export type ProgramPayload = Prisma.JourneyGetPayload<{
 interface ProgramsListProps {
   programs: ProgramPayload | null;
   currActiveProgramRep: number;
-  currActiveProgramId: number | null;
-  completedProgramIds: number[];
+  currActiveProgramId: string | null;
+  completedProgramIds: string[];
   isJourneyCompleted: boolean;
   timeLastCompleted: Date;
 }
@@ -39,7 +39,7 @@ export default function ProgramsList({
   isJourneyCompleted,
   timeLastCompleted,
 }: ProgramsListProps) {
-  const [currSelectedId, setCurrSelectedId] = useState<number | null>(null);
+  const [currSelectedId, setCurrSelectedId] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [currentRep, setCurrentRep] = useState(currActiveProgramRep);
   const [lastCompleted, setLastCompleted] = useState(timeLastCompleted);
@@ -47,7 +47,7 @@ export default function ProgramsList({
   // convert array to hashmap for easy access data
   const programsHash = useMemo(() => {
     const hash: {
-      [key: number]: Program & { swimExercise: SwimExercise[] };
+      [key: string]: Program & { swimExercise: SwimExercise[] };
     } = {};
 
     if (!programs) return hash;
@@ -73,7 +73,7 @@ export default function ProgramsList({
 
   // program is completed if it is included in the completed programs array from the DB
   const isSelectedACompletedProgram = useMemo(
-    () => completedProgramIds.includes(currSelectedId as number),
+    () => completedProgramIds.includes(currSelectedId as string),
     [completedProgramIds, currSelectedId],
   );
 

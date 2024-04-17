@@ -17,7 +17,7 @@ interface ProgramMenuProps {
   categoryName: Programs["category"];
   isOpen: boolean;
   onClose: () => void;
-  categoryId: number;
+  categoryId: string;
   isActiveJourney: boolean | null;
   isJourneyCompleted: boolean | undefined;
 }
@@ -31,7 +31,7 @@ export default function ProgramMenu({
   isActiveJourney,
   isJourneyCompleted,
 }: ProgramMenuProps) {
-  const [selectedProgramId, setSelectedProgramId] = useState<number | null>(
+  const [selectedProgramId, setSelectedProgramId] = useState<string | null>(
     null,
   );
   const [swimExercises, setSwimExercises] = useState<SwimExercise[]>([]);

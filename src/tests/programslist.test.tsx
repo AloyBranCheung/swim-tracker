@@ -30,7 +30,7 @@ describe("test ProgramsList component", () => {
       <ProgramsList
         programs={mockProgramMenu}
         currActiveProgramRep={1}
-        currActiveProgramId={1}
+        currActiveProgramId="1"
         completedProgramIds={[]}
         isJourneyCompleted={false}
         timeLastCompleted={new Date()}
@@ -45,7 +45,7 @@ describe("test ProgramsList component", () => {
   it("should render swim plan, show today's swim completed", async () => {
     const selectedProgram = mockProgramMenu[0];
     const currentRep = 1;
-    const currentActiveProgramId = 1;
+    const currentActiveProgramId = "1";
     const mockJourneyButton = vi.fn();
     const lastCompleted = new Date();
 
@@ -82,7 +82,7 @@ describe("test ProgramsList component", () => {
   it("should fire complete journey", async () => {
     const selectedProgram = mockProgramMenu[0];
     const currentRep = 1;
-    const currentActiveProgramId = 1;
+    const currentActiveProgramId = "1";
     const mockJourneyButton = vi.fn();
     const lastCompleted = dayjs(new Date()).subtract(1, "day").toDate();
 

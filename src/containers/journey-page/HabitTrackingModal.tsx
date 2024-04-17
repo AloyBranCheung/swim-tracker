@@ -14,11 +14,11 @@ interface HabitTrackingModalProps {
   exerciseMap: Map<ExerciseType, Array<SwimExercise>>;
   totalDistance: number;
   unit: string;
-  selectedProgram: (Program & { swimExercise: SwimExercise[] }) | 0 | null;
+  selectedProgram: (Program & { swimExercise: SwimExercise[] }) | "" | null;
   currentRep: number;
-  currActiveProgramId: number | null;
+  currActiveProgramId: string | null;
   isSelectedACompletedProgram: boolean;
-  currSelectedId: number | null;
+  currSelectedId: string | null;
   lastCompleted: Date;
   onClickJourneyButton: () => void;
 }
