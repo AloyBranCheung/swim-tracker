@@ -17,6 +17,7 @@ interface SwimCategoryProps {
   categoryId: string;
   currActiveJourney: Journey | null;
   url: string;
+  currJourney: Journey | undefined;
 }
 
 export default function SwimCategory({
@@ -26,6 +27,7 @@ export default function SwimCategory({
   categoryId,
   currActiveJourney,
   url,
+  currJourney,
 }: SwimCategoryProps) {
   const [isOpen, setIsOpen] = useState(false);
   const isActiveJourney =
@@ -52,7 +54,7 @@ export default function SwimCategory({
         </ul>
       </Card>
       <ProgramMenu
-        isJourneyCompleted={currActiveJourney?.isCompleted}
+        isJourneyCompleted={currJourney?.isCompleted}
         isActiveJourney={isActiveJourney}
         categoryId={categoryId}
         programs={programs}
