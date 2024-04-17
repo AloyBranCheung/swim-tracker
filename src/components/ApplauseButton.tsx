@@ -3,7 +3,15 @@ import { Bodies, Composite, Engine, Render, Runner, Body } from "matter-js";
 // components
 import Button from "./Button";
 
-export default function ApplauseButton() {
+interface ApplauseButtonProps {
+  withNavbarAsBase?: boolean;
+  withScreenAsBase?: boolean;
+}
+
+export default function ApplauseButton({
+  withNavbarAsBase = true,
+  withScreenAsBase = false,
+}: ApplauseButtonProps) {
   const scene = useRef(null);
   const engine = useRef(Engine.create());
 
@@ -23,16 +31,31 @@ export default function ApplauseButton() {
       },
     });
 
-    const ground = Bodies.rectangle(cw / 2, ch, cw, 64 * 2, {
-      isStatic: true,
-      render: {
-        fillStyle: "transparent",
-        strokeStyle: "transparent",
-        lineWidth: 0,
-      },
-    });
+    if (withNavbarAsBase && !withScreenAsBase) {
+      const ground = Bodies.rectangle(cw / 2, ch, cw, 64 * 2, {
+        isStatic: true,
+        render: {
+          fillStyle: "transparent",
+          strokeStyle: "transparent",
+          lineWidth: 0,
+        },
+      });
 
-    Composite.add(engine.current.world, [ground]);
+      Composite.add(engine.current.world, [ground]);
+    }
+
+    if (!withNavbarAsBase && withScreenAsBase) {
+      const ground = Bodies.rectangle(cw / 2, ch, cw, 25, {
+        isStatic: true,
+        render: {
+          fillStyle: "transparent",
+          strokeStyle: "transparent",
+          lineWidth: 0,
+        },
+      });
+
+      Composite.add(engine.current.world, [ground]);
+    }
 
     Render.run(render);
 
