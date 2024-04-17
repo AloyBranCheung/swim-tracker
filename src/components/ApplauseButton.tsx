@@ -31,31 +31,26 @@ export default function ApplauseButton({
       },
     });
 
-    if (withNavbarAsBase && !withScreenAsBase) {
-      const ground = Bodies.rectangle(cw / 2, ch, cw, 64 * 2, {
-        isStatic: true,
-        render: {
-          fillStyle: "transparent",
-          strokeStyle: "transparent",
-          lineWidth: 0,
-        },
-      });
+    const rectHeight = (() => {
+      if (withNavbarAsBase && !withScreenAsBase) {
+        return 64 * 2;
+      }
+      if (!withNavbarAsBase && withScreenAsBase) {
+        return 25;
+      }
+      return 0;
+    })();
 
-      Composite.add(engine.current.world, [ground]);
-    }
+    const ground = Bodies.rectangle(cw / 2, ch, cw, rectHeight, {
+      isStatic: true,
+      render: {
+        fillStyle: "transparent",
+        strokeStyle: "transparent",
+        lineWidth: 0,
+      },
+    });
 
-    if (!withNavbarAsBase && withScreenAsBase) {
-      const ground = Bodies.rectangle(cw / 2, ch, cw, 25, {
-        isStatic: true,
-        render: {
-          fillStyle: "transparent",
-          strokeStyle: "transparent",
-          lineWidth: 0,
-        },
-      });
-
-      Composite.add(engine.current.world, [ground]);
-    }
+    Composite.add(engine.current.world, [ground]);
 
     Render.run(render);
 
@@ -73,7 +68,7 @@ export default function ApplauseButton({
       Composite.clear(engine.current.world, false);
       Runner.stop(runner); // again, to double-check
     };
-  }, []);
+  }, [withNavbarAsBase, withScreenAsBase]);
 
   const testAdd = () => {
     const x = Math.random() * document.body.clientWidth;
@@ -96,7 +91,9 @@ export default function ApplauseButton({
     Composite.add(engine.current.world, [emoji]);
   };
 
-  return (
+  return process.env.NODE_ENV === "test" ? (
+    <></>
+  ) : (
     <>
       <div
         className="pointer-events-none fixed top-0 h-full w-full pb-20"
