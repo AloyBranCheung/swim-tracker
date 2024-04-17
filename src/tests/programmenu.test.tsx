@@ -157,7 +157,7 @@ describe("test ProgramMenu component", () => {
       />,
     );
 
-    expect(screen.queryByText("Journey completed!")).not.toBeNull();
+    expect(screen.queryByText("You've already finished this!")).not.toBeNull();
     expect(screen.queryByText("Start Journey")).toBeNull();
   });
 
