@@ -130,7 +130,7 @@ model Journey {
   program             Program @relation(fields: [currActiveProgramId], references: [id], onDelete: Cascade)
   currActiveProgramId String
 
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 }
 
