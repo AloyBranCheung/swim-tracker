@@ -2,7 +2,7 @@
 
 # flags
 watch_mode_flag=false
-while getopts 'tw' OPTION; do
+while getopts 'w' OPTION; do
 # The colon after an option indicates that the option requires an argument. Each
 # parsed option is stored in the $OPTION variable, and an argument, if present,
 # is stored in the $OPTARG variable.
@@ -13,7 +13,7 @@ while getopts 'tw' OPTION; do
       ;;
     *)
       echo "Error flag not found"
-      exit1
+      exit 1
       ;;
   esac
 done

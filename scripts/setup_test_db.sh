@@ -5,11 +5,14 @@ OPTIND=1
 
 # set envs and setup test db 
 migrate_users=false
-while getopts "h" OPTION; do
+while getopts "hw" OPTION; do
     case "$OPTION" in
         h)
             echo "migrate auth0 users option detected"
             migrate_users=true
+            ;;
+        w)  echo "setup_test_db.sh received -w flag from another script..."
+            echo "doing nothing..."
             ;;
         *)
             echo "invalid flag"
