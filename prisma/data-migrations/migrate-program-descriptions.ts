@@ -28,7 +28,7 @@ const main = async () => {
         }
     })
 
-    const updateSwimCategory = async (descriptions: string[], id: number) => {
+    const updateSwimCategory = async (descriptions: string[], id: string) => {
         await prisma.swimCategory.update({
             data: {
                 descriptions

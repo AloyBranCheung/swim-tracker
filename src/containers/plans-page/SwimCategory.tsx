@@ -14,7 +14,7 @@ interface SwimCategoryProps {
   categoryName: Programs["category"];
   programs: Programs["programs"];
   categoryDescriptions: Programs["descriptions"];
-  categoryId: number;
+  categoryId: string;
   currActiveJourney: Journey | null;
   url: string;
 }

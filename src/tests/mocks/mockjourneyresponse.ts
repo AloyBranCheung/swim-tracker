@@ -10,7 +10,7 @@ const mockJourney: Prisma.JourneyGetPayload<{
         swimCategory: true,
     }
 }> = {
-    id: 4,
+    id: '4',
     isActive: true,
     isCompleted: false,
     completedProgramIds: [],
@@ -18,11 +18,11 @@ const mockJourney: Prisma.JourneyGetPayload<{
     timeRepLastCompleted: new Date('2024-04-12T16:46:19.538Z'),
     createdAt: new Date('2024-04-14T16:46:19.540Z'),
     updatedAt: new Date('2024-04-14T16:46:19.540Z'),
-    swimCategoryId: 1,
-    currActiveProgramId: 1,
-    userId: 2,
+    swimCategoryId: '1',
+    currActiveProgramId: '1',
+    userId: '2',
     swimCategory: {
-        id: 1,
+        id: '1',
         category: 'BEGINNER',
         descriptions: [
             "I'm getting back into it",
@@ -41,7 +41,7 @@ const mockJourney: Prisma.JourneyGetPayload<{
                 reps: 2,
                 createdAt: new Date('2024-04-13T19:54:22.700Z'),
                 updatedAt: new Date('2024-04-13T19:54:22.700Z'),
-                swimCategoryId: 1,
+                swimCategoryId: '1',
                 swimExercise: [
                     {
                         id: 1,
@@ -112,7 +112,7 @@ const mockJourney: Prisma.JourneyGetPayload<{
                 reps: 2,
                 createdAt: new Date('2024-04-13T19:54:32.223Z'),
                 updatedAt: new Date('2024-04-13T19:54:32.223Z'),
-                swimCategoryId: 1,
+                swimCategoryId: '1',
                 swimExercise: [
                     {
                         id: 14,
@@ -183,7 +183,7 @@ const mockJourney: Prisma.JourneyGetPayload<{
                 reps: 2,
                 createdAt: new Date('2024-04-13T19:54:34.652Z'),
                 updatedAt: new Date('2024-04-13T19:54:34.652Z'),
-                swimCategoryId: 1,
+                swimCategoryId: '1',
                 swimExercise: [
                     {
                         id: 19,
