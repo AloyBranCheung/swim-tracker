@@ -27,7 +27,7 @@ export default function ProfileCard({
   return (
     <Card className="flex items-center gap-4">
       <div className="flex h-full w-full flex-col gap-2">
-        <h2 className="w-full text-sm font-semibold text-header-font">
+        <h2 className="w-full text-base font-semibold text-header-font">
           Hello, {auth0Usr?.name ?? "Err: Not found."}
         </h2>
         <p className="w-full text-xs text-header-font">
