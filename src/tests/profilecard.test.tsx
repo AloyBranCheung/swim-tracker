@@ -1,5 +1,5 @@
-import { describe, it, expect, vi } from "vitest";
-import { screen, render } from "@testing-library/react";
+import { describe, it, expect, vi, afterEach } from "vitest";
+import { screen, render, cleanup } from "@testing-library/react";
 // mocks
 import mockSession from "./mocks/mocksession";
 import mockCurrJourneyResponse from "./mocks/mockcurrjourneyresponse";
@@ -9,6 +9,10 @@ import ProfileCard from "@/containers/profile-page/ProfileCard";
 vi.mock("next/image");
 
 describe("test ProfileCard component", () => {
+  afterEach(() => {
+    cleanup();
+  });
+
   it("should render no active journey text", () => {
     render(
       <ProfileCard auth0Usr={mockSession.user} currActiveJourney={null} />,
