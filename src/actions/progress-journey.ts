@@ -8,7 +8,7 @@ import prisma from "@/libs/prisma-client";
 import { calculateTotalDistanceSwam } from "@/utils/swim-exercises";
 import { isNextDay } from "@/utils/dayjs";
 
-const progressJourney = async (userLocalTimezone: string) => {
+const progressJourney = async (userLocalTimezone?: string) => {
     const user = await getUserAction();
     if (!(user?.dbUsr)) throw new Error("User not found.")
 
