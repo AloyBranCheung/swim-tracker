@@ -8,7 +8,7 @@ import prisma from "@/libs/prisma-client";
 import { calculateTotalDistanceSwam } from "@/utils/swim-exercises";
 import { isNextDay } from "@/utils/dayjs";
 
-const progressJourney = async () => {
+const progressJourney = async (userLocalTimezone: string) => {
     const user = await getUserAction();
     if (!(user?.dbUsr)) throw new Error("User not found.")
 
@@ -38,7 +38,7 @@ const progressJourney = async () => {
     const currRep = currJourney.currActiveProgramRep
 
     // user has a 1 day timeout before they can complete the next swim (assumes swimming once a day)
-    if (!isNextDay(currJourney.timeRepLastCompleted)) throw new Error("Not the next day.")
+    if (!isNextDay(currJourney.timeRepLastCompleted, userLocalTimezone)) throw new Error("Not the next day.")
 
     // e.g. 1 < 3 but on completion will be 2/3 but not 3/3
     if ((currRep < goalRep) && (currRep !== goalRep - 1)) {
