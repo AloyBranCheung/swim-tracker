@@ -140,7 +140,7 @@ export default function ProgramsList({
     if (!isNextDay(lastCompleted)) return;
     setLastCompleted(new Date());
     setCurrentRep(currentRep + 1);
-    progressJourney();
+    progressJourney(Intl.DateTimeFormat().resolvedOptions().timeZone);
   };
 
   const handleCloseModal = () => {
