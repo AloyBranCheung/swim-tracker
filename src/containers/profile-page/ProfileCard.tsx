@@ -11,7 +11,15 @@ interface ProfileCardProps {
 
 export default function ProfileCard({ auth0Usr }: ProfileCardProps) {
   return (
-    <Card className="flex gap-6">
+    <Card className="flex items-center gap-6">
+      <div className="flex h-full w-full flex-col gap-2">
+        <h2 className="text-sm font-semibold text-header-font">
+          Hello, {auth0Usr?.name ?? "Err: Not found."}
+        </h2>
+        <p className="text-xs text-header-font">
+          You have x swims left in xWeek yx of your xIntermediatex Journey
+        </p>
+      </div>
       <div className="w-fit overflow-hidden rounded-full">
         <Image
           src={auth0Usr?.image ?? ""}
@@ -19,11 +27,6 @@ export default function ProfileCard({ auth0Usr }: ProfileCardProps) {
           width={75}
           height={75}
         />
-      </div>
-      <div className="h-full w-full">
-        <h2 className="font-semibold text-header-font">
-          {auth0Usr?.name ?? "Err: Not found."}
-        </h2>
       </div>
     </Card>
   );
