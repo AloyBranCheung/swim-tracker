@@ -168,4 +168,30 @@ describe("test progress journey server action interaction with db", () => {
 
         expect.assertions(4)
     })
+
+    it("should not throw an error when user marked completed at 23h, but database stores as UTC-0 resulting in fronted allowing progress but backend throws an error", async () => {
+        if (!swimCategory) throw new Error("Swim category not found in db. Test setup error?")
+        if (!dbUsr) throw new Error("User not found in db. Test setup error?")
+        if (!programId) throw new Error("Program not found in db. Test setup error?")
+
+        const lastProgram = swimCategory.programs.pop()
+        if (!lastProgram) throw new Error("Last program not found in db.")
+        const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+        // set up active journey
+        await prisma.journey.create({
+            data: {
+                isActive: true,
+                timeRepLastCompleted: dayjs(new Date).endOf('day').subtract(1, 'day').toDate(),
+                completedProgramIds: [],
+                currActiveProgramId: lastProgram.id,
+                swimCategoryId: swimCategory.id,
+                userId: dbUsr.id,
+                currActiveProgramRep: lastProgram.reps - 1,
+                isCompleted: false,
+            }
+        })
+
+        await expect(progressJourney(localTimezone)).resolves.toBeUndefined()
+
+    })
 })
