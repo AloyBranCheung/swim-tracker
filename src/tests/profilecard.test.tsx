@@ -33,7 +33,7 @@ describe("test ProfileCard component", () => {
     );
 
     expect(
-      screen.queryByText("You have 2 swims in Week 1 BEGINNER journey."),
+      screen.queryByText("You have 2 swims left in Week 1 BEGINNER journey."),
     ).not.toBeNull();
     expect(screen.queryByText("Hello, Test User")).not.toBeNull();
   });
