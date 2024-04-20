@@ -2,12 +2,13 @@ import React from "react";
 import getUserAction from "@/auth/get-user-action";
 import prisma from "@/libs/prisma-client";
 import dayjs from "dayjs";
+import { redirect } from "next/navigation";
 // components
 import ProfileCard from "@/containers/profile-page/ProfileCard";
 import SignoutButton from "@/components/SignoutButton";
 import LifeSwimTotal from "@/containers/profile-page/LifeSwimTotal";
-import { redirect } from "next/navigation";
 import WorkoutsThisWeek from "@/containers/profile-page/WorkoutsThisWeek";
+import Activities from "@/containers/profile-page/Activities";
 
 export default async function ProfilePage() {
   const user = await getUserAction();
@@ -50,7 +51,7 @@ export default async function ProfilePage() {
       />
       <LifeSwimTotal total={totalDistanceSwam} />
       <WorkoutsThisWeek swimsThisWeek={swimsThisWeek} />
-      <div className="text-header-font">last workout</div>
+      <Activities allSwimActivities={allSwimActivities} />
       <SignoutButton />
     </div>
   );

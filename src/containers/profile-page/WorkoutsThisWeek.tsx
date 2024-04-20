@@ -15,7 +15,7 @@ export default function WorkoutsThisWeek({
   swimsThisWeek,
 }: WorkoutsThisWeekProps) {
   return (
-    <Card className="text-header-font">
+    <Card className="flex flex-col gap-4 text-header-font">
       <h1 className="text-lg font-semibold text-header-font">
         Swims this week
       </h1>
