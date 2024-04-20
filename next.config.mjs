@@ -28,6 +28,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "www.nbc.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

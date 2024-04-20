@@ -7,7 +7,12 @@ import Button from "./Button";
 
 export default function SignoutButton() {
   return (
-    <Button className="h-12 w-full" onClick={() => signOut()}>
+    <Button
+      className="h-12 w-full"
+      onClick={() =>
+        signOut({ callbackUrl: process.env.NEXT_PUBLIC_SIGNOUT_URL })
+      }
+    >
       Signout
     </Button>
   );
