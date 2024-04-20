@@ -50,9 +50,7 @@ export default async function ProfilePage() {
       />
       <LifeSwimTotal total={totalDistanceSwam} />
       <WorkoutsThisWeek swimsThisWeek={swimsThisWeek} />
-      <div className="text-header-font">
-        workout frequency: week calendar sunday monday tuesday etc...
-      </div>
+      <div className="text-header-font">last workout</div>
       <SignoutButton />
     </div>
   );
