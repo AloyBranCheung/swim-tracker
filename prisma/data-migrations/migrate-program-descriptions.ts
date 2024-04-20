@@ -41,7 +41,7 @@ const main = async () => {
 
     const tasksArr = []
     for (const { id, category, descriptions } of levels) {
-        if (descriptions.length > 0) return logger.error('Description exists. Exiting...')
+        if (descriptions.length > 0) return logger.info('Description exists. Exiting...')
         switch (category) {
             case ProgramLevel.BEGINNER:
                 tasksArr.push(updateSwimCategory(BEGINNER, id))

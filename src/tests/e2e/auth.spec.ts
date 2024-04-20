@@ -27,10 +27,7 @@ test.describe("test auth flow", () => {
         await page.getByRole('link', { name: 'profile-icon Me' }).click();
         await page.waitForURL(`${loginPage.url}/profile`)
 
-        await page.getByRole('link', { name: 'tmp signout btn' }).click();
-        await page.waitForURL(`${loginPage.url}/api/auth/signout`)
-
-        await page.getByRole('button', { name: 'Sign out' }).click();
+        await page.getByRole('button', { name: 'Signout' }).click();
         await page.waitForURL(loginPage.url)
 
         await expect(page.getByText('Login')).toBeDefined()
