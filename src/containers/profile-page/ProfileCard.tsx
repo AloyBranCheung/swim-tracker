@@ -33,7 +33,10 @@ export default function ProfileCard({
         <p className="w-full text-xs text-header-font">
           {!currActiveJourney && "Head to the Journey page to get swimming :)"}
           {currActiveJourney &&
-            `You have ${swimsLeft} swim${swimsLeft > 1 ? "s" : ""} left in ${currActiveJourney.program.name} ${currActiveJourney.swimCategory.category} journey.`}
+            !currActiveJourney.isCompleted &&
+            `You have ${swimsLeft} swim${swimsLeft > 1 ? "s" : ""} left in the ${currActiveJourney.program.name} ${currActiveJourney.swimCategory.category} plan.`}
+          {currActiveJourney?.isCompleted &&
+            `You finished the ${currActiveJourney.swimCategory.category} plan. Congratulations! 👏`}
         </p>
       </div>
       <div className="w-fit overflow-hidden rounded-full">

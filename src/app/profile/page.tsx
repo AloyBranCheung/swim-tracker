@@ -28,6 +28,9 @@ export default async function ProfilePage() {
     where: {
       userId: user.dbUsr.id,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   const totalDistanceSwam = allSwimActivities.reduce(
