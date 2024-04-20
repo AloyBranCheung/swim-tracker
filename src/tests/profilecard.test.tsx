@@ -33,8 +33,21 @@ describe("test ProfileCard component", () => {
     );
 
     expect(
-      screen.queryByText("You have 2 swims left in Week 1 BEGINNER journey."),
+      screen.queryByText("You have 2 swims left in the Week 1 BEGINNER plan."),
     ).not.toBeNull();
     expect(screen.queryByText("Hello, Test User")).not.toBeNull();
+  });
+
+  it("should render finished text", () => {
+    render(
+      <ProfileCard
+        auth0Usr={mockSession.user}
+        currActiveJourney={{ ...mockCurrJourneyResponse, isCompleted: true }}
+      />,
+    );
+
+    expect(
+      screen.queryByText("You finished the BEGINNER plan. Congratulations! 👏"),
+    ).not.toBeNull();
   });
 });
