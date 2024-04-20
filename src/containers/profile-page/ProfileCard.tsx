@@ -33,7 +33,7 @@ export default function ProfileCard({
         <p className="w-full text-xs text-header-font">
           {!currActiveJourney && "Head to the Journey page to get swimming :)"}
           {currActiveJourney &&
-            `You have ${swimsLeft} swim${swimsLeft > 1 ? "s" : ""} in ${currActiveJourney.program.name} ${currActiveJourney.swimCategory.category} journey.`}
+            `You have ${swimsLeft} swim${swimsLeft > 1 ? "s" : ""} left in ${currActiveJourney.program.name} ${currActiveJourney.swimCategory.category} journey.`}
         </p>
       </div>
       <div className="w-fit overflow-hidden rounded-full">

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import StatusUpdate from "../components/StatusUpdate";
 import RecentFeed from "../containers/main-page/RecentFeed";
 
@@ -7,10 +6,9 @@ export default function HomePage() {
     <div className="flex w-full flex-col gap-2">
       <StatusUpdate />
       <RecentFeed />
-      <p>main page here</p>
-      <Link href="/profile" className="border-2 border-solid border-black">
-        Navigate to Profile Page
-      </Link>
+      <div className="text-header-font">swims this week</div>
+      <div className="text-header-font">Journey progress</div>
+      <div className="text-header-font">latest activity</div>
     </div>
   );
 }
