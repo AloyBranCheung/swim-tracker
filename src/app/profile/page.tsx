@@ -1,11 +1,13 @@
 import React from "react";
 import getUserAction from "@/auth/get-user-action";
 import prisma from "@/libs/prisma-client";
+import dayjs from "dayjs";
 // components
 import ProfileCard from "@/containers/profile-page/ProfileCard";
 import SignoutButton from "@/components/SignoutButton";
 import LifeSwimTotal from "@/containers/profile-page/LifeSwimTotal";
 import { redirect } from "next/navigation";
+import WorkoutsThisWeek from "@/containers/profile-page/WorkoutsThisWeek";
 
 export default async function ProfilePage() {
   const user = await getUserAction();
@@ -32,6 +34,14 @@ export default async function ProfilePage() {
     0,
   );
 
+  const swimsThisWeek = await prisma.userSwimActivityLog.findMany({
+    where: {
+      createdAt: {
+        gte: dayjs().startOf("week").toDate(),
+      },
+    },
+  });
+
   return (
     <div className="flex flex-col gap-4">
       <ProfileCard
@@ -39,9 +49,7 @@ export default async function ProfilePage() {
         currActiveJourney={currActiveJourney}
       />
       <LifeSwimTotal total={totalDistanceSwam} />
-      <div className="text-header-font">
-        activity log here: title, last swim
-      </div>
+      <WorkoutsThisWeek swimsThisWeek={swimsThisWeek} />
       <div className="text-header-font">
         workout frequency: week calendar sunday monday tuesday etc...
       </div>
