@@ -17,7 +17,7 @@ export default function WorkoutsThisWeek({
   return (
     <Card className="flex flex-col gap-4 text-header-font">
       <h1 className="text-lg font-semibold text-header-font">
-        Swims this week
+        Swims Completed This Week
       </h1>
       <div className="space-between flex h-full max-w-full items-start gap-2 overflow-auto">
         {daysOfWeek.map((day, i) => {
@@ -31,16 +31,19 @@ export default function WorkoutsThisWeek({
             >
               <Card
                 className={classNames(
-                  "flex flex-col items-center justify-center",
+                  "flex flex-col items-center justify-center gap-1",
                   {
                     "bg-secondary-ui": isToday, // if is today
                   },
                 )}
               >
                 <h2
-                  className={classNames({
-                    "text-black": isToday, // if is today
-                  })}
+                  className={classNames(
+                    "flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 bg-opacity-35 p-1 text-center",
+                    {
+                      "bg-gray-400 text-black": isToday, // if is today
+                    },
+                  )}
                 >
                   {day}
                 </h2>
