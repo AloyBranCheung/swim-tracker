@@ -45,9 +45,11 @@ export default function SwimCategory({
           backgroundImage: `url(${url})`,
         }}
       >
-        <h2 className="text-2xl">{categoryName}</h2>
+        <h2 className="text-lg font-semibold text-header-font">
+          {categoryName}
+        </h2>
 
-        <ul className="list-disc pl-4">
+        <ul className="list-disc pl-4 text-header-font">
           {categoryDescriptions.map((description) => (
             <li key={`${description}-${Math.random()}`}>{description}</li>
           ))}
