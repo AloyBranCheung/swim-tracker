@@ -1,10 +1,9 @@
 "use client";
 import React from "react";
-// utils
-import dayjs from "dayjs";
 // components
 import Card from "@/components/Card";
 import { UserSwimActivityLog } from "@prisma/client";
+import ActivityLog from "@/components/ActivityLog";
 
 interface ActivitiesProps {
   allSwimActivities: UserSwimActivityLog[];
@@ -19,15 +18,7 @@ export default function Activities({ allSwimActivities }: ActivitiesProps) {
       <div className="flex max-h-[300px] flex-col gap-2 overflow-auto">
         {allSwimActivities.length > 0 ? (
           allSwimActivities.map((activity) => (
-            <Card key={activity.id}>
-              <h3 suppressHydrationWarning>
-                {dayjs(activity.createdAt).format("YYYY-MM-DD hh:mma")}
-              </h3>
-              <p>
-                Distance Swam: {activity.totalDistanceSwam}
-                {activity.unit}
-              </p>
-            </Card>
+            <ActivityLog key={activity.id} activity={activity} />
           ))
         ) : (
           <p>Start swimming :&#41;</p>
