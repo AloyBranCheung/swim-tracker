@@ -34,6 +34,7 @@ jobs:
       AUTH0_MANAGEMENT_API_CLIENT_SECRET: ${{ secrets.AUTH0_MANAGEMENT_API_CLIENT_SECRET }}
       TEST_USER: ${{ secrets.TEST_USER }}
       TEST_PASS: ${{ secrets.TEST_PASS }}
+      NEXT_PUBLIC_SIGNOUT_URL: ${{ secrets.NEXT_PUBLIC_SIGNOUT_URL }}
       DISABLE_ERD: true
     steps:
       - uses: actions/checkout@v4
