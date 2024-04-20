@@ -17,17 +17,21 @@ export default function Activities({ allSwimActivities }: ActivitiesProps) {
         Your Swim Activity
       </h1>
       <div className="flex max-h-[300px] flex-col gap-2 overflow-auto">
-        {allSwimActivities.map((activity) => (
-          <Card key={activity.id}>
-            <h3 suppressHydrationWarning>
-              {dayjs(activity.createdAt).format("YYYY-MM-DD hh:mma")}
-            </h3>
-            <p>
-              Distance Swam: {activity.totalDistanceSwam}
-              {activity.unit}
-            </p>
-          </Card>
-        ))}
+        {allSwimActivities.length > 0 ? (
+          allSwimActivities.map((activity) => (
+            <Card key={activity.id}>
+              <h3 suppressHydrationWarning>
+                {dayjs(activity.createdAt).format("YYYY-MM-DD hh:mma")}
+              </h3>
+              <p>
+                Distance Swam: {activity.totalDistanceSwam}
+                {activity.unit}
+              </p>
+            </Card>
+          ))
+        ) : (
+          <p>Start swimming :&#41;</p>
+        )}
       </div>
     </Card>
   );
