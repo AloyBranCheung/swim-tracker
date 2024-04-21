@@ -133,7 +133,7 @@ bash ./scripts/setup_db.sh
 
 ### Adding a swim program (to static migrations)
 
-1. Run `yarn migrate:create`
+1. Run `yarn migrate:create {{filename}}` (preferred filename format is `{{category}}{{week}}` e.g. `beginner1` for beginner week 1 )
    - This will create a new `.ts` file located in `prisma/data-migrations`
    - Also appends the file run command to `migrate.sh`
    - Creates a `.ts` file in `prisma/data-migrations/swim-programs` for you to add the swim program
