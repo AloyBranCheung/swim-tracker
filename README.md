@@ -139,7 +139,7 @@ bash ./scripts/setup_db.sh
    - Creates a `.ts` file in `prisma/data-migrations/swim-programs` for you to add the swim program
 2. Edit the swim program file to add one week e.g. (Week 1 of beginner program)
 3. Double-check the `.ts` file in `prisma/data-migrations`
-4. Test with `setup_db.sh` or run in your local db
+4. Test with `yarn migrate:data` and check the UI on your local (may need to run `export DATABASE_URL={{URL HERE}}` beforehand)
 
 ## Learning Resources
 
