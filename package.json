@@ -20,6 +20,7 @@
     "migrate:deploy": "dotenv -e .env.local -- yarn prisma migrate deploy",
     "migrate:data": "bash ./scripts/migrate.sh",
     "migrate:reset": "dotenv -e .env.local -- yarn prisma migrate reset && yarn migrate:data",
+    "migrate:create": "bash ./scripts/create_new_data_migration.sh",
     "docker:dev": "docker compose -f docker-compose.dev.yml up swim-app -d --build",
     "docker:logs": "docker compose -f docker-compose.dev.yml logs -f",
     "docker:stop": "docker compose -f docker-compose.dev.yml down",

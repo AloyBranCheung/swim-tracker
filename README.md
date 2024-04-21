@@ -131,6 +131,12 @@ bash ./scripts/setup_db.sh
 - `Auth0` managed with terraform (view read me in `/terraform` for more info)
 - For now when making infrastructure changes, need to manually call `terraform plan` and `terraform approve` to apply changes to `TST` (maybe automate this later)
 
+### Adding Data (to migrations)
+
+1. Run `yarn migrate:create`
+   - This will create a new `.ts` file located in `prisma/data-migrations` for you to add the logic to
+   - Also appends the file run command to `migrate.sh`
+
 ## Learning Resources
 
 Testing:
