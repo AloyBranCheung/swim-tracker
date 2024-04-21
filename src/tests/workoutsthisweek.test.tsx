@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { vi, describe, it, expect, beforeEach, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 // mocks
 import mockSwimActivity from "./mocks/mockswimactivity";
@@ -6,6 +6,14 @@ import mockSwimActivity from "./mocks/mockswimactivity";
 import WorkoutsThisWeek from "@/containers/profile-page/WorkoutsThisWeek";
 
 describe("test WorkoutsThisWeek component", () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it("should not show any 🏊‍♀️ emoji", () => {
     render(<WorkoutsThisWeek swimsThisWeek={[]} />);
 
@@ -13,8 +21,9 @@ describe("test WorkoutsThisWeek component", () => {
   });
 
   it("should show two 🏊‍♀️ emoji", () => {
-    render(<WorkoutsThisWeek swimsThisWeek={mockSwimActivity} />);
+    vi.setSystemTime(new Date("2024-03-20"));
 
+    render(<WorkoutsThisWeek swimsThisWeek={mockSwimActivity} />);
     expect(screen.queryAllByText("🏊‍♀️").length).toBe(2);
   });
 });
