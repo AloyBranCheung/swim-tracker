@@ -40,3 +40,5 @@ npx tsx ./prisma/data-migrations/migrate-add-beginner2.ts
 npx tsx ./prisma/data-migrations/migrate-add-beginner3.ts
 npx tsx ./prisma/data-migrations/migrate-add-urls.ts
 npx tsx ./prisma/data-migrations/migrate-add-20240421075539_beginner4.ts
+
+npx tsx ./prisma/data-migrations/migrate-add-20240421084434_beginner5.ts

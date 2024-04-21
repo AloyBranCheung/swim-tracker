@@ -29,10 +29,12 @@ const addOneWeek = async (swimProgram: WorkoutSession, category: ProgramLevel) =
     }
 
     for (const program of swimProgram[category]) {
+        const DESCRIBE_PROGRAM = `${category}-${program.programName}`
         if (swimCategory.programs.some((swimpro) => swimpro.name === program.programName)) {
-            logger.info(`${category}-${program.programName} already exists, skipping...`)
+            logger.info(`${DESCRIBE_PROGRAM} already exists, skipping...`)
             continue
         }
+        logger.info(`Adding ${DESCRIBE_PROGRAM}`)
 
         await prisma.program.create({
             data: {
@@ -45,7 +47,7 @@ const addOneWeek = async (swimProgram: WorkoutSession, category: ProgramLevel) =
             }
         })
 
-        logger.info(`Added ${category}-${program.programName} to db.`)
+        logger.info(`Added ${DESCRIBE_PROGRAM} to db.`)
     }
 
     logger.info('Done!')
