@@ -54,3 +54,5 @@ npx tsx ./prisma/data-migrations/migrate-add-20240421091201_intermediate4.ts
 npx tsx ./prisma/data-migrations/migrate-add-20240421091509_intermediate5.ts
 
 npx tsx ./prisma/data-migrations/migrate-add-20240421092057_intermediate6.ts
+
+npx tsx ./prisma/data-migrations/migrate-add-20240421092519_advanced2.ts
