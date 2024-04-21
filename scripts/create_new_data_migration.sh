@@ -42,7 +42,7 @@ TARG_DIR="./prisma/data-migrations"
 NEW_FILE="migrate-add-$(date +%Y%m%d%H%M%S)_$1.ts"
 NEW_FILE_DIR="$TARG_DIR/$NEW_FILE"
 
-echo -e"Creating new migration file in $NEW_FILE_DIR \n"
+echo -e "\nCreating new migration file in $NEW_FILE_DIR \n"
 
 touch $NEW_FILE_DIR
 
