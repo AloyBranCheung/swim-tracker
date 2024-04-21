@@ -131,11 +131,15 @@ bash ./scripts/setup_db.sh
 - `Auth0` managed with terraform (view read me in `/terraform` for more info)
 - For now when making infrastructure changes, need to manually call `terraform plan` and `terraform approve` to apply changes to `TST` (maybe automate this later)
 
-### Adding Data (to migrations)
+### Adding a swim program (to static migrations)
 
 1. Run `yarn migrate:create`
-   - This will create a new `.ts` file located in `prisma/data-migrations` for you to add the logic to
+   - This will create a new `.ts` file located in `prisma/data-migrations`
    - Also appends the file run command to `migrate.sh`
+   - Creates a `.ts` file in `prisma/data-migrations/swim-programs` for you to add the swim program
+2. Edit the swim program file to add one week e.g. (Week 1 of beginner program)
+3. Double-check the `.ts` file in `prisma/data-migrations`
+4. Test with `setup_db.sh` or run in your local db
 
 ## Learning Resources
 

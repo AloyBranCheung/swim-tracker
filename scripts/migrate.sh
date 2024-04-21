@@ -1,5 +1,7 @@
 # !/usr/bin/env bash
 
+# DON'T MESS WITH THE ORDER OF THE STATIC DATA MIGRATIONS 
+
 # flags
 migrations_to_skip=[]
 while getopts 's:' OPTION; do
@@ -37,3 +39,4 @@ npx tsx ./prisma/data-migrations/migrate-add-advanced1.ts
 npx tsx ./prisma/data-migrations/migrate-add-beginner2.ts
 npx tsx ./prisma/data-migrations/migrate-add-beginner3.ts
 npx tsx ./prisma/data-migrations/migrate-add-urls.ts
+npx tsx ./prisma/data-migrations/migrate-add-20240421075539_beginner4.ts
