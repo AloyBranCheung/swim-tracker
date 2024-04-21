@@ -44,6 +44,8 @@ const addOneWeek = async (swimProgram: WorkoutSession, category: ProgramLevel) =
                 }
             }
         })
+
+        logger.info(`Added ${category}-${program.programName} to db.`)
     }
 
     logger.info('Done!')
