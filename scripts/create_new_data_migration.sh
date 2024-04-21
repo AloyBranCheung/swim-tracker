@@ -78,6 +78,20 @@ export const swimProgram = new SwimProgramBuilder()
         unit: "m",
         notes: "rest 30 sec.",
     })
+    .addExerciseToProgram({
+        exerciseType: ExerciseType.MAINSET,
+        sets: 3,
+        distance: 25,
+        unit: "m",
+        notes: "@30sec./25m",
+    })
+    .addExerciseToProgram({
+        exerciseType: ExerciseType.COOLDOWN,
+        sets: 3,
+        distance: 25,
+        unit: "m",
+        notes: "chill vibes only",
+    })
     .addProgramToSwimProgram($PRISMA_ENUM) // add this line once all exercises are added
     // ! END EXAMPLE
     .build();
