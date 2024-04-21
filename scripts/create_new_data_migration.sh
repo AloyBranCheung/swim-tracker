@@ -1,5 +1,10 @@
 # !/usr/bin/env bash
 
+# reading materials 
+# https://stackoverflow.com/questions/2500436/how-does-cat-eof-work-in-bash
+# https://superuser.com/questions/1003760/what-does-eof-do
+# https://www.freecodecamp.org/news/bash-commands-bash-ls-bash-head-bash-mv-and-bash-cat-explained-with-examples/
+
 if [ -z $1 ]; then
     echo "No file_name provided, exiting"
     exit 1
