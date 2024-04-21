@@ -76,6 +76,16 @@ import { Accessory, ExerciseType, ProgramLevel } from "@prisma/client";
 
 export const swimProgram = new SwimProgramBuilder()
     .startBuildingProgram("Week $PROG_WEEK", $PROG_WEEK)
+    // ! EXAMPLE 
+     .addExerciseToProgram({
+        exerciseType: ExerciseType.WARMUP,
+        sets: 4,
+        distance: 50,
+        unit: "m",
+        notes: "rest 30 sec.",
+    })
+    .addProgramToSwimProgram(ProgramLevel.BEGINNER) // add this line once all exercises are added
+    // ! END EXAMPLE
     .build();
 EOF
 
