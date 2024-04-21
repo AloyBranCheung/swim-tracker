@@ -88,7 +88,7 @@ model Program {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  swimCategory   SwimCategory @relation(fields: [swimCategoryId], references: [id])
+  swimCategory   SwimCategory @relation(fields: [swimCategoryId], references: [id], onDelete: Cascade)
   swimCategoryId String
 
   swimExercise SwimExercise[]
