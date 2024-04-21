@@ -51,6 +51,8 @@ echo -e "\nnpx tsx $NEW_FILE_DIR" >> "./scripts/migrate.sh"
 cat <<EOF > $NEW_FILE_DIR
 import { PrismaClient } from '@prisma/client';
 import Pino from 'pino';
+// utils
+import addOneWeek from "./util/addoneweek"
 
 const prisma = new PrismaClient();
 
@@ -60,7 +62,11 @@ const logger = Pino({
     }
 })
 
-const main = async () => {}
+const main = async () => {
+    // ! BEGIN EXAMPLE
+    // await addOneWeek(put swim program output here, put program category here)
+    // ! END EXAMPLE
+}
 
 main () 
 EOF
