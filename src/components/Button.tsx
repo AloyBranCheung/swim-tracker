@@ -9,6 +9,7 @@ interface ButtonProps {
   type?: HTMLButtonElement["type"];
   isDisabled?: boolean;
   isLoading?: boolean;
+  isSuccess?: boolean;
 }
 
 export default function Button({
@@ -18,6 +19,7 @@ export default function Button({
   onClick,
   type = "button",
   className,
+  isSuccess,
 }: ButtonProps) {
   return (
     <motion.button
@@ -31,7 +33,8 @@ export default function Button({
       type={type}
     >
       {isLoading && "Loading..."}
-      {!isLoading && children}
+      {!isLoading && !isSuccess && children}
+      {isSuccess && !isLoading && "Success!"}
     </motion.button>
   );
 }
