@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useMemo } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Engine,
   Render,
@@ -17,6 +17,13 @@ export default function NotFound() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const engineRef = useRef(Engine.create({ gravity: { y: 0.6 } }));
   const mouseRef = useRef<MouseConstraint>();
+
+  // nextjs server rendering issue https://stackoverflow.com/questions/75408148/referenceerror-document-is-not-defined-inside-next-js-client-component
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!containerRef?.current) return;
@@ -119,7 +126,7 @@ export default function NotFound() {
     }
   }, []);
 
-  const documentBodyheight = useMemo(() => document.body.clientHeight, []);
+  const documentBodyheight = isMounted ? document.body.clientHeight : 0;
 
   return (
     <div className="bg-bluescreen flex h-screen justify-center">
