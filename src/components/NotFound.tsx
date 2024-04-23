@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useMemo } from "react";
 import {
   Engine,
   Render,
@@ -119,7 +119,7 @@ export default function NotFound() {
     }
   }, []);
 
-  const documentBodyheight = document.body.clientHeight;
+  const documentBodyheight = useMemo(() => document.body.clientHeight, []);
 
   return (
     <div className="bg-bluescreen flex h-screen justify-center">
