@@ -47,11 +47,14 @@ export default async function HomePage() {
   return (
     <div className="flex w-full flex-col gap-2">
       <StatusUpdate />
+      <div>add a swim</div>
       <RecentFeed />
       <WorkoutsThisWeek swimsThisWeek={swimsThisWeek} />
       <Card className="flex flex-col gap-2">
         <h1 className="text-lg font-semibold text-header-font">
-          Current Journey Progress
+          Current{" "}
+          {`${currActiveJourney?.program.name} ${currActiveJourney?.swimCategory.category}`}{" "}
+          Progress
         </h1>
         {currActiveJourney ? (
           <OverviewCard
