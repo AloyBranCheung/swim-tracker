@@ -3,7 +3,7 @@ import prisma from "@/libs/prisma-client";
 // auth
 import getUserAction from "@/auth/get-user-action";
 // components
-import InfiniteFeed from "../../containers/circle-page/InfiniteFeed";
+import InfiniteFeed from "../../../containers/circle-page/InfiniteFeed";
 import StatusUpdate from "@/components/StatusUpdate";
 import { redirect } from "next/navigation";
 

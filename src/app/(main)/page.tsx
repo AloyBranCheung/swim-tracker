@@ -3,8 +3,8 @@ import dayjs from "dayjs";
 //
 import getUserAction from "@/auth/get-user-action";
 // components
-import StatusUpdate from "../components/StatusUpdate";
-import RecentFeed from "../containers/main-page/RecentFeed";
+import StatusUpdate from "../../components/StatusUpdate";
+import RecentFeed from "../../containers/main-page/RecentFeed";
 import WorkoutsThisWeek from "@/containers/profile-page/WorkoutsThisWeek";
 import Page403 from "@/containers/403";
 import OverviewCard from "@/containers/journey-page/OverviewCard";
