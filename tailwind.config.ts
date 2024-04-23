@@ -19,7 +19,8 @@ const config: Config = {
       backgroundColor: {
         "primary-ui": "rgba(39,39,42,1)",
         "app-gradient": "rgba(9,9,11,1)",
-        "secondary-ui": "rgba(250,250,250, 1)"
+        "secondary-ui": "rgba(250,250,250, 1)",
+        "bluescreen": "#003c94"
       },
       "textColor": {
         "secondary-font": "rgb(149,149,157)",
