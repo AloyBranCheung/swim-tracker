@@ -40,6 +40,7 @@ export default async function ProfilePage() {
 
   const swimsThisWeek = await prisma.userSwimActivityLog.findMany({
     where: {
+      userId: user.dbUsr.id,
       createdAt: {
         gte: dayjs().startOf("week").toDate(),
       },
