@@ -1,5 +1,5 @@
 import { test, expect } from '@/tests/e2e/fixtures/auth.fixture'
-import resetDb from './utils/resetdb'
+import resetDb from './utils/resete2edb'
 
 test.describe("test flow login to making a post in circle", () => {
     let CIRCLE_PAGE_URL: string;

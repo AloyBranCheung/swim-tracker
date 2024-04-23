@@ -1,5 +1,5 @@
 import { test, expect } from '@/tests/e2e/fixtures/auth.fixture'
-import resetDb from './utils/resetdb'
+import resetDb from './utils/resete2edb'
 
 test.describe("test journey flow from login to completing one swim", () => {
   test.afterEach(async () => {
