@@ -34,7 +34,7 @@ export default function RecordSwim() {
     } else {
       setIsLoading(false);
     }
-  }, [state?.success]);
+  }, [state]);
 
   return (
     <>
