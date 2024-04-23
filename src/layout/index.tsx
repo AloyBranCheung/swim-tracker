@@ -8,7 +8,7 @@ interface MainLayoutProps {
 }
 
 // auth guard
-export default async function MainLayout({ children }: MainLayoutProps) {
+export default function MainLayout({ children }: MainLayoutProps) {
   return (
     <div className="min-h-screen w-full bg-app-gradient pb-16">
       <Gutter>{children}</Gutter>
