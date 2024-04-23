@@ -3,6 +3,7 @@ import React from "react";
 import { auth as getServerSession } from "./auth-helper";
 // pages
 import Page403 from "@/containers/403";
+import MainLayout from "@/layout";
 // import Loading from "@/containers/Loading";
 // import Page500 from "@/containers/500";
 
@@ -17,5 +18,5 @@ export default async function AuthGuard({ children }: AuthGuardProps) {
     return <Page403 />;
   }
 
-  return <>{children}</>;
+  return <MainLayout>{children}</MainLayout>;
 }
