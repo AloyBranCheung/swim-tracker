@@ -10,6 +10,7 @@ import Page403 from "@/containers/403";
 import OverviewCard from "@/containers/journey-page/OverviewCard";
 import Card from "@/components/Card";
 import ActivityLog from "@/components/ActivityLog";
+import RecordSwim from "@/containers/main-page/RecordSwim";
 
 export default async function HomePage() {
   const user = await getUserAction();
@@ -47,7 +48,7 @@ export default async function HomePage() {
   return (
     <div className="flex w-full flex-col gap-2">
       <StatusUpdate />
-      <div>add a swim</div>
+      <RecordSwim />
       <RecentFeed />
       <WorkoutsThisWeek swimsThisWeek={swimsThisWeek} />
       <Card className="flex flex-col gap-2">
